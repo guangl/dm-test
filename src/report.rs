@@ -187,7 +187,7 @@ impl HtmlReportGenerator {
 
         for tc in test_cases {
             let (cat1, cat2) = tc.get_category_parts();
-            let cat2_set = categories.entry(cat1.clone()).or_insert_with(HashSet::new);
+            let cat2_set = categories.entry(cat1.clone()).or_default();
             if let Some(cat2_val) = cat2 {
                 cat2_set.insert(cat2_val);
             }
@@ -297,17 +297,17 @@ impl HtmlReportGenerator {
             }
 
             // 添加错误信息
-            if !tc.success {
-                if let Some(ref error_msg) = tc.error_message {
-                    test_cases_html.push_str(&format!(
-                        r#"                    <div class="error-message">
+            if !tc.success
+                && let Some(ref error_msg) = tc.error_message
+            {
+                test_cases_html.push_str(&format!(
+                    r#"                    <div class="error-message">
                         <h4>❌ 错误信息</h4>
                         <pre>{}</pre>
                     </div>
 "#,
-                        Self::html_escape(error_msg)
-                    ));
-                }
+                    Self::html_escape(error_msg)
+                ));
             }
 
             test_cases_html.push_str(

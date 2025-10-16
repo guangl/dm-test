@@ -12,3 +12,23 @@ serde_json = "1.0"
 sqllogictest = "0.28.4"
 thiserror = "2.0.17"
 tokio = { version = "1.48.0", features = ["full"] }
+
+# 优化配置
+[profile.release]
+# 启用链接时优化，减小二进制文件大小并提高性能
+lto = true
+# 减少代码生成单元，有助于优化
+codegen-units = 1
+# panic 时直接终止，减小二进制大小
+panic = "abort"
+# 优化二进制大小
+opt-level = "z"
+# 去除调试信息
+debug = false
+
+# 交叉编译特定配置
+[target.x86_64-unknown-linux-musl]
+# musl 目标的特定配置
+
+[target.i686-unknown-linux-gnu]
+# 32位目标的特定配置

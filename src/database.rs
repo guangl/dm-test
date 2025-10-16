@@ -27,7 +27,7 @@ impl DmDatabase {
     }
 
     /// 获取数据库连接
-    pub fn get_connection(&self) -> Result<Connection, DatabaseError> {
+    pub fn get_connection(&self) -> Result<Connection<'_>, DatabaseError> {
         self.environment
             .connect_with_connection_string(
                 &self.config.connection_string,

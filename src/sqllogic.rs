@@ -63,10 +63,10 @@ impl TestSummary {
     /// 保存测试结果到 JSON 文件
     pub fn save_to_json(&self, file_path: &str) -> Result<(), Box<dyn Error>> {
         // 如果目录不存在，先创建目录
-        if let Some(parent) = Path::new(file_path).parent() {
-            if !parent.exists() {
-                fs::create_dir_all(parent)?;
-            }
+        if let Some(parent) = Path::new(file_path).parent()
+            && !parent.exists()
+        {
+            fs::create_dir_all(parent)?;
         }
 
         let json = serde_json::to_string_pretty(self)?;
