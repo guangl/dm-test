@@ -1,0 +1,20 @@
+# Test Case Name: NUMERIC类型零小数位测试
+# Description: 测试小数位数为0的NUMERIC类型
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_scale0;
+
+statement ok
+CREATE TABLE test_numeric_scale0 (id INTEGER PRIMARY KEY, val NUMERIC(10,0));
+
+statement ok
+INSERT INTO test_numeric_scale0 VALUES (1, 12345);
+
+query IR
+SELECT * FROM test_numeric_scale0;
+----
+1 12345
+
+statement ok
+DROP TABLE test_numeric_scale0;

@@ -1,0 +1,23 @@
+# Test Case Name: VARCHAR类型删除操作测试
+# Description: 测试使用VARCHAR类型作为删除条件
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_delete;
+
+statement ok
+CREATE TABLE test_varchar_delete (id INTEGER PRIMARY KEY, category VARCHAR(30));
+
+statement ok
+INSERT INTO test_varchar_delete VALUES (1, 'Temporary'), (2, 'Permanent'), (3, 'Temporary');
+
+statement ok
+DELETE FROM test_varchar_delete WHERE category = 'Temporary';
+
+query IT
+SELECT * FROM test_varchar_delete;
+----
+2 Permanent
+
+statement ok
+DROP TABLE test_varchar_delete;

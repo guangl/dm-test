@@ -1,0 +1,28 @@
+# Test Case Name: DATE类型日期间隔计算测试
+# Description: 测试DATE类型之间的日期差值计算
+# Category: datatype/date
+
+statement ok
+DROP TABLE IF EXISTS test_date_interval;
+
+statement ok
+CREATE TABLE test_date_interval(
+    id INT,
+    start_date DATE,
+    end_date DATE
+);
+
+statement ok
+INSERT INTO test_date_interval VALUES(1, DATE '2023-01-01', DATE '2023-12-31');
+
+statement ok
+INSERT INTO test_date_interval VALUES(2, DATE '2020-01-01', DATE '2023-01-01');
+
+query III
+SELECT id, start_date, end_date FROM test_date_interval ORDER BY id;
+----
+1 2023-01-01 2023-12-31
+2 2020-01-01 2023-01-01
+
+statement ok
+DROP TABLE test_date_interval;

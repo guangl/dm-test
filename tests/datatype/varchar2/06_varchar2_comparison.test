@@ -1,0 +1,25 @@
+# Test Case Name: VARCHAR2类型比较测试
+# Description: 测试VARCHAR2类型在WHERE子句中的比较
+# Category: datatype/varchar2
+
+statement ok
+DROP TABLE IF EXISTS test_varchar2_comparison;
+
+statement ok
+CREATE TABLE test_varchar2_comparison (id INTEGER PRIMARY KEY, name VARCHAR2(50));
+
+statement ok
+INSERT INTO test_varchar2_comparison VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie');
+
+query IT
+SELECT * FROM test_varchar2_comparison WHERE name = 'Bob';
+----
+2 Bob
+
+query IT
+SELECT * FROM test_varchar2_comparison WHERE name LIKE 'A%';
+----
+1 Alice
+
+statement ok
+DROP TABLE test_varchar2_comparison;

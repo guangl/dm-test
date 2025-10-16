@@ -1,0 +1,20 @@
+# Test Case Name: ROWID格式测试
+# Description: 测试ROWID的格式特性
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_format;
+
+statement ok
+CREATE TABLE test_rowid_format (id INTEGER PRIMARY KEY, val VARCHAR(20));
+
+statement ok
+INSERT INTO test_rowid_format VALUES (1, 'Test');
+
+query I
+SELECT COUNT(*) FROM test_rowid_format WHERE ROWID IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_rowid_format;

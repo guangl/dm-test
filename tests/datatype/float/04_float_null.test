@@ -1,0 +1,21 @@
+# Test Case Name: FLOAT类型NULL值测试
+# Description: 测试FLOAT类型对NULL值的处理
+# Category: datatype/float
+
+statement ok
+DROP TABLE IF EXISTS test_float_null;
+
+statement ok
+CREATE TABLE test_float_null (id INTEGER PRIMARY KEY, val FLOAT);
+
+statement ok
+INSERT INTO test_float_null VALUES (1, NULL), (2, 3.14);
+
+query IF
+SELECT * FROM test_float_null ORDER BY id;
+----
+1 NULL
+2 3.14
+
+statement ok
+DROP TABLE test_float_null;

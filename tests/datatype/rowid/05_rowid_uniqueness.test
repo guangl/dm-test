@@ -1,0 +1,20 @@
+# Test Case Name: ROWID唯一性测试
+# Description: 测试ROWID在表中的唯一性
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_unique;
+
+statement ok
+CREATE TABLE test_rowid_unique (id INTEGER PRIMARY KEY, data VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_unique VALUES (1, 'A'), (2, 'B'), (3, 'C');
+
+query I
+SELECT COUNT(DISTINCT ROWID) FROM test_rowid_unique;
+----
+3
+
+statement ok
+DROP TABLE test_rowid_unique;

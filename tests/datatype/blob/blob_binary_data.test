@@ -1,0 +1,29 @@
+# Test Case Name: BLOB类型二进制数据测试
+# Description: 测试BLOB类型存储各种二进制数据
+# Category: datatype/blob
+
+statement ok
+DROP TABLE IF EXISTS test_blob_binary;
+
+statement ok
+CREATE TABLE test_blob_binary(id INT, blob_data BLOB);
+
+statement ok
+INSERT INTO test_blob_binary VALUES(1, 0x00);
+
+statement ok
+INSERT INTO test_blob_binary VALUES(2, 0xFF);
+
+statement ok
+INSERT INTO test_blob_binary VALUES(3, 0x0F);
+
+statement ok
+INSERT INTO test_blob_binary VALUES(4, 0xF0);
+
+query I
+SELECT COUNT(*) FROM test_blob_binary WHERE blob_data IS NOT NULL;
+----
+4
+
+statement ok
+DROP TABLE test_blob_binary;

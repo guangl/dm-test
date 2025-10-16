@@ -1,0 +1,22 @@
+# Test Case Name: INTEGER类型排序测试
+# Description: 测试INTEGER类型的排序操作
+# Category: datatype/integer
+
+statement ok
+DROP TABLE IF EXISTS test_integer_order;
+
+statement ok
+CREATE TABLE test_integer_order (id INTEGER PRIMARY KEY, val INTEGER);
+
+statement ok
+INSERT INTO test_integer_order VALUES (1, 50), (2, 10), (3, 30);
+
+query II
+SELECT * FROM test_integer_order ORDER BY val ASC;
+----
+2 10
+3 30
+1 50
+
+statement ok
+DROP TABLE test_integer_order;

@@ -1,0 +1,23 @@
+# Test Case Name: LONGVARBINARY类型基本操作测试
+# Description: 测试LONGVARBINARY类型的基本操作(与IMAGE相同)
+# Category: datatype/longvarbinary
+
+statement ok
+DROP TABLE IF EXISTS test_longvarbinary;
+
+statement ok
+CREATE TABLE test_longvarbinary(id INT, bin_data LONGVARBINARY);
+
+statement ok
+INSERT INTO test_longvarbinary VALUES(1, 0xDEADBEEF);
+
+statement ok
+INSERT INTO test_longvarbinary VALUES(2, 0xCAFEBABE);
+
+query I
+SELECT COUNT(*) FROM test_longvarbinary WHERE bin_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_longvarbinary;

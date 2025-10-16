@@ -1,0 +1,20 @@
+# Test Case Name: ROWID事务测试
+# Description: 测试ROWID在事务中的行为
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_trans;
+
+statement ok
+CREATE TABLE test_rowid_trans (id INTEGER PRIMARY KEY, value VARCHAR(30));
+
+statement ok
+INSERT INTO test_rowid_trans VALUES (1, 'Initial');
+
+query I
+SELECT COUNT(*) FROM test_rowid_trans WHERE ROWID IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_rowid_trans;

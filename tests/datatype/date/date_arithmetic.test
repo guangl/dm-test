@@ -1,0 +1,43 @@
+# Test Case Name: DATE类型算术运算测试
+# Description: 测试DATE类型的加减运算
+# Category: datatype/date
+
+statement ok
+DROP TABLE IF EXISTS test_date_arithmetic;
+
+statement ok
+CREATE TABLE test_date_arithmetic(
+    id INT,
+    base_date DATE
+);
+
+statement ok
+INSERT INTO test_date_arithmetic VALUES(1, DATE '2023-10-15');
+
+query II
+SELECT id, base_date + 10 FROM test_date_arithmetic;
+----
+1 2023-10-25
+
+query II
+SELECT id, base_date - 10 FROM test_date_arithmetic;
+----
+1 2023-10-05
+
+query II
+SELECT id, base_date + INTERVAL '1' YEAR FROM test_date_arithmetic;
+----
+1 2024-10-15
+
+query II
+SELECT id, base_date - INTERVAL '3' MONTH FROM test_date_arithmetic;
+----
+1 2023-07-15
+
+query II
+SELECT id, base_date + INTERVAL '15' DAY FROM test_date_arithmetic;
+----
+1 2023-10-30
+
+statement ok
+DROP TABLE test_date_arithmetic;

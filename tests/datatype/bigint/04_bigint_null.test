@@ -1,0 +1,21 @@
+# Test Case Name: BIGINT类型NULL值测试
+# Description: 测试BIGINT类型对NULL值的处理
+# Category: datatype/bigint
+
+statement ok
+DROP TABLE IF EXISTS test_bigint_null;
+
+statement ok
+CREATE TABLE test_bigint_null (id INTEGER PRIMARY KEY, val BIGINT);
+
+statement ok
+INSERT INTO test_bigint_null VALUES (1, NULL), (2, 9999999999);
+
+query II
+SELECT * FROM test_bigint_null ORDER BY id;
+----
+1 NULL
+2 9999999999
+
+statement ok
+DROP TABLE test_bigint_null;

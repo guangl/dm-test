@@ -1,0 +1,36 @@
+# Test Case Name: TIME类型比较操作测试
+# Description: 测试TIME类型的比较运算符
+# Category: datatype/time
+
+statement ok
+DROP TABLE IF EXISTS test_time_comparison;
+
+statement ok
+CREATE TABLE test_time_comparison(
+    id INT,
+    check_time TIME,
+    status VARCHAR(20)
+);
+
+statement ok
+INSERT INTO test_time_comparison VALUES(1, TIME '08:00:00', '早班');
+
+statement ok
+INSERT INTO test_time_comparison VALUES(2, TIME '14:30:00', '中班');
+
+statement ok
+INSERT INTO test_time_comparison VALUES(3, TIME '22:00:00', '晚班');
+
+query IIT
+SELECT * FROM test_time_comparison WHERE check_time >= TIME '14:00:00' ORDER BY id;
+----
+2 14:30:00 中班
+3 22:00:00 晚班
+
+query IIT
+SELECT * FROM test_time_comparison WHERE check_time < TIME '10:00:00' ORDER BY id;
+----
+1 08:00:00 早班
+
+statement ok
+DROP TABLE test_time_comparison;

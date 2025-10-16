@@ -1,0 +1,31 @@
+# Test Case Name: CHAR类型NULL值处理
+# Description: 测试CHAR类型对NULL值的处理
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_null;
+
+statement ok
+CREATE TABLE test_char_null (
+    id INTEGER PRIMARY KEY,
+    nullable_char CHAR(10),
+    not_null_char CHAR(10) NOT NULL
+);
+
+statement ok
+INSERT INTO test_char_null VALUES (1, NULL, 'Required');
+
+statement ok
+INSERT INTO test_char_null VALUES (2, 'Optional', 'Required');
+
+query ITT
+SELECT * FROM test_char_null ORDER BY id;
+----
+1 NULL Required   
+2 Optional   Required   
+
+statement error
+INSERT INTO test_char_null VALUES (3, 'Test', NULL);
+
+statement ok
+DROP TABLE test_char_null;

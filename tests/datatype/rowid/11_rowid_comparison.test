@@ -1,0 +1,20 @@
+# Test Case Name: ROWID比较测试
+# Description: 测试ROWID之间的比较操作
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_comp;
+
+statement ok
+CREATE TABLE test_rowid_comp (id INTEGER PRIMARY KEY, data VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_comp VALUES (1, 'First'), (2, 'Second');
+
+query I
+SELECT COUNT(*) FROM test_rowid_comp WHERE ROWID IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_rowid_comp;

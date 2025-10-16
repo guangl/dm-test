@@ -1,0 +1,36 @@
+# Test Case Name: CHAR类型排序测试
+# Description: 测试CHAR类型在ORDER BY子句中的排序行为
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_ordering;
+
+statement ok
+CREATE TABLE test_char_ordering (
+    id INTEGER PRIMARY KEY,
+    code CHAR(5)
+);
+
+statement ok
+INSERT INTO test_char_ordering VALUES (1, 'C'), (2, 'A'), (3, 'B'), (4, 'AA'), (5, 'AB');
+
+query IT
+SELECT * FROM test_char_ordering ORDER BY code ASC;
+----
+2 A    
+4 AA   
+5 AB   
+3 B    
+1 C    
+
+query IT
+SELECT * FROM test_char_ordering ORDER BY code DESC;
+----
+1 C    
+3 B    
+5 AB   
+4 AA   
+2 A    
+
+statement ok
+DROP TABLE test_char_ordering;

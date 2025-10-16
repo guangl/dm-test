@@ -1,0 +1,28 @@
+# Test Case Name: CLOB类型大数据测试
+# Description: 测试CLOB类型存储大量字符数据
+# Category: datatype/clob
+
+statement ok
+DROP TABLE IF EXISTS test_clob_large;
+
+statement ok
+CREATE TABLE test_clob_large(id INT, content CLOB);
+
+statement ok
+INSERT INTO test_clob_large VALUES(1, REPEAT('X', 2000));
+
+statement ok
+INSERT INTO test_clob_large VALUES(2, REPEAT('字符', 1000));
+
+query I
+SELECT id FROM test_clob_large WHERE LENGTH(content) = 2000;
+----
+1
+
+query I
+SELECT id FROM test_clob_large WHERE LENGTH(content) = 2000;
+----
+2
+
+statement ok
+DROP TABLE test_clob_large;

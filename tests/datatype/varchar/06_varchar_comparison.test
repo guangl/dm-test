@@ -1,0 +1,31 @@
+# Test Case Name: VARCHAR类型比较操作测试
+# Description: 测试VARCHAR类型在WHERE子句中的比较
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_comparison;
+
+statement ok
+CREATE TABLE test_varchar_comparison (id INTEGER PRIMARY KEY, name VARCHAR(50));
+
+statement ok
+INSERT INTO test_varchar_comparison VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie'), (4, 'David');
+
+query IT
+SELECT * FROM test_varchar_comparison WHERE name = 'Bob';
+----
+2 Bob
+
+query IT
+SELECT * FROM test_varchar_comparison WHERE name > 'Bob' ORDER BY id;
+----
+3 Charlie
+4 David
+
+query IT
+SELECT * FROM test_varchar_comparison WHERE name LIKE '%lie';
+----
+3 Charlie
+
+statement ok
+DROP TABLE test_varchar_comparison;

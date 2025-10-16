@@ -1,0 +1,27 @@
+# Test Case Name: VARCHAR类型约束测试
+# Description: 测试VARCHAR类型字段的唯一性和检查约束
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_constraints;
+
+statement ok
+CREATE TABLE test_varchar_constraints (id INTEGER PRIMARY KEY, email VARCHAR(100) UNIQUE, status VARCHAR(20) CHECK (status IN ('Active', 'Inactive', 'Pending')));
+
+statement ok
+INSERT INTO test_varchar_constraints VALUES (1, 'user1@example.com', 'Active');
+
+statement error
+INSERT INTO test_varchar_constraints VALUES (2, 'user1@example.com', 'Active');
+
+statement ok
+INSERT INTO test_varchar_constraints VALUES (4, 'user2@example.com', 'Pending');
+
+query ITT
+SELECT * FROM test_varchar_constraints ORDER BY id;
+----
+1 user1@example.com Active
+4 user2@example.com Pending
+
+statement ok
+DROP TABLE test_varchar_constraints;

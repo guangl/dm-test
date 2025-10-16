@@ -1,0 +1,31 @@
+# Test Case Name: INTERVAL MONTH类型基本操作测试
+# Description: 测试INTERVAL MONTH类型的基本功能
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_month;
+
+statement ok
+CREATE TABLE test_interval_month(
+    id INT,
+    duration INTERVAL MONTH(4)
+);
+
+statement ok
+INSERT INTO test_interval_month VALUES(1, INTERVAL '0024' MONTH(4));
+
+statement ok
+INSERT INTO test_interval_month VALUES(2, INTERVAL '0006' MONTH(4));
+
+statement ok
+INSERT INTO test_interval_month VALUES(3, INTERVAL '0001' MONTH(4));
+
+query II
+SELECT * FROM test_interval_month ORDER BY id;
+----
+1 INTERVAL '24' MONTH(4)
+2 INTERVAL '6' MONTH(4)
+3 INTERVAL '1' MONTH(4)
+
+statement ok
+DROP TABLE test_interval_month;

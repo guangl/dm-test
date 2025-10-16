@@ -3,6 +3,7 @@ pub mod codegen;
 pub mod config;
 pub mod database;
 pub mod error;
+pub mod report;
 pub mod sqllogic;
 
 #[cfg(test)]
@@ -14,4 +15,5 @@ pub use codegen::CodeGenerator;
 pub use config::DatabaseConfig;
 pub use database::DmDatabase;
 pub use error::DatabaseError;
+pub use report::HtmlReportGenerator;
 pub use sqllogic::{SqlLogicTestRunner, TestResult, TestSummary};

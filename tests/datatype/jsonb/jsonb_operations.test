@@ -1,0 +1,34 @@
+# Test Case Name: JSONB类型综合操作测试
+# Description: 测试JSONB类型的增删改查操作
+# Category: datatype/jsonb
+
+statement ok
+DROP TABLE IF EXISTS test_jsonb_ops;
+
+statement ok
+CREATE TABLE test_jsonb_ops(id INT, jsonb_data JSONB);
+
+statement ok
+INSERT INTO test_jsonb_ops VALUES(1, '{"key1": "value1"}');
+
+statement ok
+INSERT INTO test_jsonb_ops VALUES(2, '{"key2": "value2"}');
+
+statement ok
+INSERT INTO test_jsonb_ops VALUES(3, '{"key3": "value3"}');
+
+query I
+SELECT COUNT(*) FROM test_jsonb_ops;
+----
+3
+
+statement ok
+DELETE FROM test_jsonb_ops WHERE id = 2;
+
+query I
+SELECT COUNT(*) FROM test_jsonb_ops;
+----
+2
+
+statement ok
+DROP TABLE test_jsonb_ops;

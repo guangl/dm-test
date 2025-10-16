@@ -1,0 +1,33 @@
+# Test Case Name: TIME类型NULL值测试
+# Description: 测试TIME类型的NULL值处理
+# Category: datatype/time
+
+statement ok
+DROP TABLE IF EXISTS test_time_null;
+
+statement ok
+CREATE TABLE test_time_null(
+    id INT,
+    nullable_time TIME,
+    not_null_time TIME NOT NULL
+);
+
+statement ok
+INSERT INTO test_time_null VALUES(1, NULL, TIME '12:00:00');
+
+statement ok
+INSERT INTO test_time_null VALUES(2, TIME '09:30:00', TIME '17:30:00');
+
+query III
+SELECT * FROM test_time_null ORDER BY id;
+----
+1 NULL 12:00:00
+2 09:30:00 17:30:00
+
+query I
+SELECT COUNT(*) FROM test_time_null WHERE nullable_time IS NULL;
+----
+1
+
+statement ok
+DROP TABLE test_time_null;

@@ -1,0 +1,33 @@
+# Test Case Name: CLOB类型NULL值测试
+# Description: 测试CLOB类型对NULL值的处理
+# Category: datatype/clob
+
+statement ok
+DROP TABLE IF EXISTS test_clob_null;
+
+statement ok
+CREATE TABLE test_clob_null(id INT, content CLOB);
+
+statement ok
+INSERT INTO test_clob_null VALUES(1, NULL);
+
+statement ok
+INSERT INTO test_clob_null VALUES(2, '');
+
+statement ok
+INSERT INTO test_clob_null VALUES(3, 'Not NULL CLOB');
+
+query IT
+SELECT * FROM test_clob_null ORDER BY id;
+----
+1  NULL
+2  
+3  Not NULL CLOB
+
+query I
+SELECT COUNT(*) FROM test_clob_null WHERE content IS NULL;
+----
+1
+
+statement ok
+DROP TABLE test_clob_null;

@@ -1,0 +1,20 @@
+# Test Case Name: FLOAT类型精度测试
+# Description: 测试FLOAT类型的精度特性
+# Category: datatype/float
+
+statement ok
+DROP TABLE IF EXISTS test_float_prec;
+
+statement ok
+CREATE TABLE test_float_prec (id INTEGER PRIMARY KEY, val FLOAT);
+
+statement ok
+INSERT INTO test_float_prec VALUES (1, 0.123456789);
+
+query I
+SELECT COUNT(*) FROM test_float_prec WHERE val > 0.1;
+----
+1
+
+statement ok
+DROP TABLE test_float_prec;

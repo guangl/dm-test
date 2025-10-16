@@ -1,0 +1,28 @@
+# Test Case Name: CHAR类型更新操作测试
+# Description: 测试CHAR类型字段的UPDATE操作
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_update;
+
+statement ok
+CREATE TABLE test_char_update (
+    id INTEGER PRIMARY KEY,
+    status CHAR(10)
+);
+
+statement ok
+INSERT INTO test_char_update VALUES (1, 'PENDING'), (2, 'ACTIVE'), (3, 'PENDING');
+
+statement ok
+UPDATE test_char_update SET status = 'COMPLETED' WHERE status = 'PENDING   ';
+
+query IT
+SELECT * FROM test_char_update ORDER BY id;
+----
+1 COMPLETED 
+2 ACTIVE    
+3 COMPLETED 
+
+statement ok
+DROP TABLE test_char_update;

@@ -1,0 +1,21 @@
+# Test Case Name: SMALLINT类型NULL值测试
+# Description: 测试SMALLINT类型对NULL值的处理
+# Category: datatype/smallint
+
+statement ok
+DROP TABLE IF EXISTS test_smallint_null;
+
+statement ok
+CREATE TABLE test_smallint_null (id INTEGER PRIMARY KEY, val SMALLINT);
+
+statement ok
+INSERT INTO test_smallint_null VALUES (1, NULL), (2, 100);
+
+query II
+SELECT * FROM test_smallint_null ORDER BY id;
+----
+1 NULL
+2 100
+
+statement ok
+DROP TABLE test_smallint_null;

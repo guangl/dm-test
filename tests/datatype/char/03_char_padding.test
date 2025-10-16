@@ -1,0 +1,33 @@
+# Test Case Name: CHAR类型空白填充测试
+# Description: 测试CHAR类型的自动空白填充特性
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_padding;
+
+statement ok
+CREATE TABLE test_char_padding (
+    id INTEGER PRIMARY KEY,
+    fixed_char CHAR(10)
+);
+
+statement ok
+INSERT INTO test_char_padding VALUES (1, 'Hi');
+
+statement ok
+INSERT INTO test_char_padding VALUES (2, 'Hello');
+
+query IT
+SELECT id, LENGTH(fixed_char) FROM test_char_padding ORDER BY id;
+----
+1 10
+2 10
+
+query IT
+SELECT id, fixed_char FROM test_char_padding ORDER BY id;
+----
+1 Hi        
+2 Hello     
+
+statement ok
+DROP TABLE test_char_padding;

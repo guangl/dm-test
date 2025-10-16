@@ -1,0 +1,26 @@
+# Test Case Name: NUMERIC类型索引测试
+# Description: 测试在NUMERIC类型字段上创建索引
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_idx;
+
+statement ok
+CREATE TABLE test_numeric_idx (id INTEGER PRIMARY KEY, amount NUMERIC(10,2));
+
+statement ok
+CREATE INDEX idx_amount ON test_numeric_idx(amount);
+
+statement ok
+INSERT INTO test_numeric_idx VALUES (1, 100.50), (2, 200.75);
+
+query IR
+SELECT * FROM test_numeric_idx WHERE amount = 100.50;
+----
+1 100.50
+
+statement ok
+DROP INDEX idx_amount;
+
+statement ok
+DROP TABLE test_numeric_idx;

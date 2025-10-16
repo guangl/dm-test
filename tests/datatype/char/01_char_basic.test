@@ -1,0 +1,28 @@
+# Test Case Name: CHAR类型基本功能测试
+# Description: 测试CHAR类型的创建、插入、查询等基本功能
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_basic;
+
+statement ok
+CREATE TABLE test_char_basic (
+    id INTEGER PRIMARY KEY,
+    name CHAR(10),
+    code CHAR(5)
+);
+
+statement ok
+INSERT INTO test_char_basic VALUES (1, 'Alice', 'A001');
+
+statement ok
+INSERT INTO test_char_basic VALUES (2, 'Bob', 'B002');
+
+query ITT
+SELECT * FROM test_char_basic ORDER BY id;
+----
+1 Alice      A001 
+2 Bob        B002 
+
+statement ok
+DROP TABLE test_char_basic;

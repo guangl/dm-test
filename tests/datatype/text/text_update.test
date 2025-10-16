@@ -1,0 +1,31 @@
+# Test Case Name: TEXT类型更新操作测试
+# Description: 测试TEXT类型的UPDATE操作
+# Category: datatype/text
+
+statement ok
+DROP TABLE IF EXISTS test_text_update;
+
+statement ok
+CREATE TABLE test_text_update(id INT, content TEXT);
+
+statement ok
+INSERT INTO test_text_update VALUES(1, 'Original Text');
+
+statement ok
+UPDATE test_text_update SET content = 'Updated Text' WHERE id = 1;
+
+query IT
+SELECT * FROM test_text_update;
+----
+1  Updated Text
+
+statement ok
+UPDATE test_text_update SET content = content || ' - Modified';
+
+query IT
+SELECT * FROM test_text_update;
+----
+1  Updated Text - Modified
+
+statement ok
+DROP TABLE test_text_update;

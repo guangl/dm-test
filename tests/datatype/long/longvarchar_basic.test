@@ -1,0 +1,24 @@
+# Test Case Name: LONGVARCHAR类型基本操作测试
+# Description: 测试LONGVARCHAR类型的基本操作(与TEXT相同)
+# Category: datatype/long
+
+statement ok
+DROP TABLE IF EXISTS test_longvarchar;
+
+statement ok
+CREATE TABLE test_longvarchar(id INT, content LONGVARCHAR);
+
+statement ok
+INSERT INTO test_longvarchar VALUES(1, 'LongVarchar content');
+
+statement ok
+INSERT INTO test_longvarchar VALUES(2, 'LONGVARCHAR类型测试');
+
+query IT
+SELECT * FROM test_longvarchar ORDER BY id;
+----
+1  LongVarchar content
+2  LONGVARCHAR类型测试
+
+statement ok
+DROP TABLE test_longvarchar;

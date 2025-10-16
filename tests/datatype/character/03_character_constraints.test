@@ -1,0 +1,18 @@
+# Test Case Name: CHARACTER类型约束测试
+# Description: 测试CHARACTER类型的各种约束
+# Category: datatype/character
+
+statement ok
+DROP TABLE IF EXISTS test_character_constraints;
+
+statement ok
+CREATE TABLE test_character_constraints (id INTEGER PRIMARY KEY, code CHARACTER(10) UNIQUE NOT NULL, status CHARACTER(8) CHECK (status IN ('ACTIVE  ', 'INACTIVE')));
+
+statement ok
+INSERT INTO test_character_constraints VALUES (1, 'CODE001', 'ACTIVE');
+
+statement error
+INSERT INTO test_character_constraints VALUES (2, 'CODE001', 'ACTIVE');
+
+statement ok
+DROP TABLE test_character_constraints;

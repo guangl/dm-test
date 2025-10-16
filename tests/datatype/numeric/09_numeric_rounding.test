@@ -1,0 +1,20 @@
+# Test Case Name: NUMERIC类型四舍五入测试
+# Description: 测试NUMERIC类型的四舍五入行为
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_round;
+
+statement ok
+CREATE TABLE test_numeric_round (id INTEGER PRIMARY KEY, val NUMERIC(10,2));
+
+statement ok
+INSERT INTO test_numeric_round VALUES (1, 123.456);
+
+query IR
+SELECT * FROM test_numeric_round;
+----
+1 123.46
+
+statement ok
+DROP TABLE test_numeric_round;

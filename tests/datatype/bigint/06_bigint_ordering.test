@@ -1,0 +1,22 @@
+# Test Case Name: BIGINT类型排序测试
+# Description: 测试BIGINT类型的排序操作
+# Category: datatype/bigint
+
+statement ok
+DROP TABLE IF EXISTS test_bigint_order;
+
+statement ok
+CREATE TABLE test_bigint_order (id INTEGER PRIMARY KEY, val BIGINT);
+
+statement ok
+INSERT INTO test_bigint_order VALUES (1, 5000000000), (2, 1000000000), (3, 3000000000);
+
+query II
+SELECT * FROM test_bigint_order ORDER BY val ASC;
+----
+2 1000000000
+3 3000000000
+1 5000000000
+
+statement ok
+DROP TABLE test_bigint_order;

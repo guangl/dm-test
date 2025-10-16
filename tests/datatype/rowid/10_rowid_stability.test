@@ -1,0 +1,23 @@
+# Test Case Name: ROWID稳定性测试
+# Description: 测试ROWID在更新后的稳定性
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_stable;
+
+statement ok
+CREATE TABLE test_rowid_stable (id INTEGER PRIMARY KEY, val INTEGER);
+
+statement ok
+INSERT INTO test_rowid_stable VALUES (1, 100);
+
+statement ok
+UPDATE test_rowid_stable SET val = 200 WHERE id = 1;
+
+query II
+SELECT id, val FROM test_rowid_stable;
+----
+1 200
+
+statement ok
+DROP TABLE test_rowid_stable;

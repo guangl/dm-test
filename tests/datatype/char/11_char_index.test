@@ -1,0 +1,36 @@
+# Test Case Name: CHAR类型索引测试
+# Description: 测试在CHAR类型字段上创建索引
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_index;
+
+statement ok
+CREATE TABLE test_char_index (
+    id INTEGER PRIMARY KEY,
+    code CHAR(10),
+    name CHAR(50)
+);
+
+statement ok
+CREATE INDEX idx_char_code ON test_char_index(code);
+
+statement ok
+INSERT INTO test_char_index VALUES (1, 'A001', 'Product A');
+
+statement ok
+INSERT INTO test_char_index VALUES (2, 'B002', 'Product B');
+
+statement ok
+INSERT INTO test_char_index VALUES (3, 'A003', 'Product C');
+
+query ITT
+SELECT * FROM test_char_index WHERE code = 'A001      ' ORDER BY id;
+----
+1 A001       Product A                                         
+
+statement ok
+DROP INDEX idx_char_code;
+
+statement ok
+DROP TABLE test_char_index;

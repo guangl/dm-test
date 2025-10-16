@@ -1,0 +1,20 @@
+# Test Case Name: BIT类型默认值测试
+# Description: 测试BIT类型的默认值设置
+# Category: datatype/bit
+
+statement ok
+DROP TABLE IF EXISTS test_bit_default;
+
+statement ok
+CREATE TABLE test_bit_default (id INTEGER PRIMARY KEY, active BIT DEFAULT 0);
+
+statement ok
+INSERT INTO test_bit_default (id) VALUES (1);
+
+query II
+SELECT * FROM test_bit_default;
+----
+1 0
+
+statement ok
+DROP TABLE test_bit_default;

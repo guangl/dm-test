@@ -1,0 +1,25 @@
+# Test Case Name: NUMERIC类型聚合函数测试
+# Description: 测试NUMERIC类型在聚合函数中的使用
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_agg;
+
+statement ok
+CREATE TABLE test_numeric_agg (id INTEGER PRIMARY KEY, amount NUMERIC(10,2));
+
+statement ok
+INSERT INTO test_numeric_agg VALUES (1, 100.50), (2, 200.75), (3, 150.25);
+
+query R
+SELECT SUM(amount) FROM test_numeric_agg;
+----
+451.50
+
+query R
+SELECT AVG(amount) FROM test_numeric_agg;
+----
+150.50
+
+statement ok
+DROP TABLE test_numeric_agg;

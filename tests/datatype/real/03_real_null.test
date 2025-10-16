@@ -1,0 +1,21 @@
+# Test Case Name: REAL类型NULL值测试
+# Description: 测试REAL类型对NULL值的处理
+# Category: datatype/real
+
+statement ok
+DROP TABLE IF EXISTS test_real_null;
+
+statement ok
+CREATE TABLE test_real_null (id INTEGER PRIMARY KEY, val REAL);
+
+statement ok
+INSERT INTO test_real_null VALUES (1, NULL), (2, 2.5);
+
+query IF
+SELECT * FROM test_real_null ORDER BY id;
+----
+1 NULL
+2 2.5
+
+statement ok
+DROP TABLE test_real_null;

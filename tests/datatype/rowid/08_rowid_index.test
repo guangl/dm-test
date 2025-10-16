@@ -1,0 +1,20 @@
+# Test Case Name: ROWID索引测试
+# Description: 测试ROWID相关的索引操作
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_idx;
+
+statement ok
+CREATE TABLE test_rowid_idx (id INTEGER PRIMARY KEY, data VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_idx VALUES (1, 'Data1'), (2, 'Data2');
+
+query I
+SELECT COUNT(*) FROM test_rowid_idx WHERE ROWID IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_rowid_idx;

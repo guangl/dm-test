@@ -1,0 +1,28 @@
+# Test Case Name: CHAR类型默认值测试
+# Description: 测试CHAR类型的默认值设置
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_default;
+
+statement ok
+CREATE TABLE test_char_default (
+    id INTEGER PRIMARY KEY,
+    status CHAR(10) DEFAULT 'ACTIVE',
+    code CHAR(5) DEFAULT 'N/A'
+);
+
+statement ok
+INSERT INTO test_char_default (id) VALUES (1);
+
+statement ok
+INSERT INTO test_char_default VALUES (2, 'INACTIVE', 'TEST');
+
+query ITT
+SELECT * FROM test_char_default ORDER BY id;
+----
+1 ACTIVE     N/A  
+2 INACTIVE   TEST 
+
+statement ok
+DROP TABLE test_char_default;

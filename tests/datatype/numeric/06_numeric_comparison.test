@@ -1,0 +1,20 @@
+# Test Case Name: NUMERIC类型比较测试
+# Description: 测试NUMERIC类型的比较操作
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_comp;
+
+statement ok
+CREATE TABLE test_numeric_comp (id INTEGER PRIMARY KEY, val NUMERIC(10,2));
+
+statement ok
+INSERT INTO test_numeric_comp VALUES (1, 10.50), (2, 20.75), (3, 15.00);
+
+query IR
+SELECT * FROM test_numeric_comp WHERE val > 15.00 ORDER BY id;
+----
+2 20.75
+
+statement ok
+DROP TABLE test_numeric_comp;

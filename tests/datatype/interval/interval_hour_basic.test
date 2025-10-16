@@ -1,0 +1,31 @@
+# Test Case Name: INTERVAL HOUR类型基本操作测试
+# Description: 测试INTERVAL HOUR类型的基本功能
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_hour;
+
+statement ok
+CREATE TABLE test_interval_hour(
+    id INT,
+    duration INTERVAL HOUR(3)
+);
+
+statement ok
+INSERT INTO test_interval_hour VALUES(1, INTERVAL '150' HOUR(3));
+
+statement ok
+INSERT INTO test_interval_hour VALUES(2, INTERVAL '024' HOUR(3));
+
+statement ok
+INSERT INTO test_interval_hour VALUES(3, INTERVAL '008' HOUR(3));
+
+query II
+SELECT * FROM test_interval_hour ORDER BY id;
+----
+1 INTERVAL '150' HOUR(3)
+2 INTERVAL '24' HOUR(3)
+3 INTERVAL '8' HOUR(3)
+
+statement ok
+DROP TABLE test_interval_hour;

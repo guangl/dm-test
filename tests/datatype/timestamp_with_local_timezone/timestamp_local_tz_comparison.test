@@ -1,0 +1,31 @@
+# Test Case Name: TIMESTAMP WITH LOCAL TIME ZONE比较操作测试
+# Description: 测试TIMESTAMP WITH LOCAL TIME ZONE类型的比较运算
+# Category: datatype/timestamp_with_local_timezone
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_local_tz_comparison;
+
+statement ok
+CREATE TABLE test_timestamp_local_tz_comparison(
+    id INT,
+    event_time TIMESTAMP WITH LOCAL TIME ZONE,
+    event_name VARCHAR(50)
+);
+
+statement ok
+INSERT INTO test_timestamp_local_tz_comparison VALUES(1, TIMESTAMP '2023-10-15 08:00:00', '早班开始');
+
+statement ok
+INSERT INTO test_timestamp_local_tz_comparison VALUES(2, TIMESTAMP '2023-10-15 14:00:00', '下午会议');
+
+statement ok
+INSERT INTO test_timestamp_local_tz_comparison VALUES(3, TIMESTAMP '2023-10-15 20:00:00', '晚班结束');
+
+query IIT
+SELECT * FROM test_timestamp_local_tz_comparison WHERE event_time >= TIMESTAMP '2023-10-15 14:00:00' ORDER BY id;
+----
+2 2023-10-15 14:00:00.000000 下午会议
+3 2023-10-15 20:00:00.000000 晚班结束
+
+statement ok
+DROP TABLE test_timestamp_local_tz_comparison;

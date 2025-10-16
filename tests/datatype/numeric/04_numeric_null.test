@@ -1,0 +1,21 @@
+# Test Case Name: NUMERIC类型NULL值测试
+# Description: 测试NUMERIC类型对NULL值的处理
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_null;
+
+statement ok
+CREATE TABLE test_numeric_null (id INTEGER PRIMARY KEY, value NUMERIC(10,2));
+
+statement ok
+INSERT INTO test_numeric_null VALUES (1, NULL), (2, 123.45);
+
+query IR
+SELECT * FROM test_numeric_null ORDER BY id;
+----
+1 NULL
+2 123.45
+
+statement ok
+DROP TABLE test_numeric_null;

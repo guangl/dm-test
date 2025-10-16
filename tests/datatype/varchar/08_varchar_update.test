@@ -1,0 +1,25 @@
+# Test Case Name: VARCHAR类型更新操作测试
+# Description: 测试VARCHAR类型字段的UPDATE操作
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_update;
+
+statement ok
+CREATE TABLE test_varchar_update (id INTEGER PRIMARY KEY, status VARCHAR(20));
+
+statement ok
+INSERT INTO test_varchar_update VALUES (1, 'Draft'), (2, 'Published'), (3, 'Draft');
+
+statement ok
+UPDATE test_varchar_update SET status = 'Archived' WHERE status = 'Draft';
+
+query IT
+SELECT * FROM test_varchar_update ORDER BY id;
+----
+1 Archived
+2 Published
+3 Archived
+
+statement ok
+DROP TABLE test_varchar_update;

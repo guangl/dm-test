@@ -1,0 +1,32 @@
+# Test Case Name: TIME类型基本操作测试
+# Description: 测试TIME类型的创建、插入和查询基本功能
+# Category: datatype/time
+
+statement ok
+DROP TABLE IF EXISTS test_time_basic;
+
+statement ok
+CREATE TABLE test_time_basic(
+    id INT,
+    start_time TIME,
+    end_time TIME(3)
+);
+
+statement ok
+INSERT INTO test_time_basic VALUES(1, TIME '09:30:00', TIME '17:30:00.123');
+
+statement ok
+INSERT INTO test_time_basic VALUES(2, '08:00:00', '12:00:00.456');
+
+statement ok
+INSERT INTO test_time_basic VALUES(3, TIME '23:59:59', TIME '00:00:00.999');
+
+query III
+SELECT * FROM test_time_basic ORDER BY id;
+----
+1 09:30:00 17:30:00.123
+2 08:00:00 12:00:00.456
+3 23:59:59 00:00:00.999
+
+statement ok
+DROP TABLE test_time_basic;

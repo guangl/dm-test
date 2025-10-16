@@ -1,0 +1,42 @@
+# Test Case Name: DATE类型比较操作测试
+# Description: 测试DATE类型的比较运算符
+# Category: datatype/date
+
+statement ok
+DROP TABLE IF EXISTS test_date_comparison;
+
+statement ok
+CREATE TABLE test_date_comparison(
+    id INT,
+    event_date DATE,
+    event_name VARCHAR(50)
+);
+
+statement ok
+INSERT INTO test_date_comparison VALUES(1, DATE '2023-01-15', '事件A');
+
+statement ok
+INSERT INTO test_date_comparison VALUES(2, DATE '2023-06-20', '事件B');
+
+statement ok
+INSERT INTO test_date_comparison VALUES(3, DATE '2023-12-31', '事件C');
+
+query IIT
+SELECT * FROM test_date_comparison WHERE event_date > DATE '2023-05-01' ORDER BY id;
+----
+2 2023-06-20 事件B
+3 2023-12-31 事件C
+
+query IIT
+SELECT * FROM test_date_comparison WHERE event_date BETWEEN DATE '2023-01-01' AND DATE '2023-06-30' ORDER BY id;
+----
+1 2023-01-15 事件A
+2 2023-06-20 事件B
+
+query IIT
+SELECT * FROM test_date_comparison WHERE event_date = DATE '2023-01-15';
+----
+1 2023-01-15 事件A
+
+statement ok
+DROP TABLE test_date_comparison;

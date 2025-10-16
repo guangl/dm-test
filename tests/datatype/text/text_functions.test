@@ -1,0 +1,33 @@
+# Test Case Name: TEXT类型函数操作测试
+# Description: 测试TEXT类型与各种字符串函数的配合使用
+# Category: datatype/text
+
+statement ok
+DROP TABLE IF EXISTS test_text_func;
+
+statement ok
+CREATE TABLE test_text_func(id INT, content TEXT);
+
+statement ok
+INSERT INTO test_text_func VALUES(1, 'Hello World');
+
+statement ok
+INSERT INTO test_text_func VALUES(2, '达梦数据库');
+
+query IT
+SELECT id, UPPER(content) FROM test_text_func WHERE id = 1;
+----
+1  HELLO WORLD
+
+query IT
+SELECT id, SUBSTR(content, 1, 4) FROM test_text_func WHERE id = 2;
+----
+2  达梦数据
+
+query I
+SELECT COUNT(*) FROM test_text_func WHERE content LIKE '%World%';
+----
+1
+
+statement ok
+DROP TABLE test_text_func;

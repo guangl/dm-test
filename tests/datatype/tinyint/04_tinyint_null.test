@@ -1,0 +1,21 @@
+# Test Case Name: TINYINT类型NULL值测试
+# Description: 测试TINYINT类型对NULL值的处理
+# Category: datatype/tinyint
+
+statement ok
+DROP TABLE IF EXISTS test_tinyint_null;
+
+statement ok
+CREATE TABLE test_tinyint_null (id INTEGER PRIMARY KEY, val TINYINT);
+
+statement ok
+INSERT INTO test_tinyint_null VALUES (1, NULL), (2, 50);
+
+query II
+SELECT * FROM test_tinyint_null ORDER BY id;
+----
+1 NULL
+2 50
+
+statement ok
+DROP TABLE test_tinyint_null;

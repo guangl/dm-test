@@ -1,0 +1,28 @@
+# Test Case Name: TIMESTAMP类型基本操作测试
+# Description: 测试TIMESTAMP类型的创建、插入和查询基本功能
+# Category: datatype/timestamp
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_basic;
+
+statement ok
+CREATE TABLE test_timestamp_basic(
+    id INT,
+    create_time TIMESTAMP,
+    update_time DATETIME
+);
+
+statement ok
+INSERT INTO test_timestamp_basic VALUES(1, TIMESTAMP '2023-10-15 09:30:45', DATETIME '2023-10-15 10:00:00');
+
+statement ok
+INSERT INTO test_timestamp_basic VALUES(2, '2023-06-20 14:25:30', '2023-06-20 15:00:00');
+
+query III
+SELECT * FROM test_timestamp_basic ORDER BY id;
+----
+1 2023-10-15 09:30:45.000000 2023-10-15 10:00:00.000000
+2 2023-06-20 14:25:30.000000 2023-06-20 15:00:00.000000
+
+statement ok
+DROP TABLE test_timestamp_basic;

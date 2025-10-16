@@ -1,0 +1,29 @@
+# Test Case Name: INTERVAL SECOND时间运算测试
+# Description: 测试INTERVAL SECOND类型与TIME/TIMESTAMP类型的运算
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_second_time;
+
+statement ok
+CREATE TABLE test_interval_second_time(
+    id INT,
+    base_time TIME,
+    base_timestamp TIMESTAMP
+);
+
+statement ok
+INSERT INTO test_interval_second_time VALUES(1, TIME '10:00:00', TIMESTAMP '2023-10-15 10:00:00');
+
+query III
+SELECT id, base_time + INTERVAL '45.5' SECOND(2, 1), base_timestamp + INTERVAL '45.5' SECOND(2, 1) FROM test_interval_second_time;
+----
+1 10:00:45.5 2023-10-15 10:00:45.500000
+
+query III
+SELECT id, base_time - INTERVAL '30.0' SECOND(2, 1), base_timestamp - INTERVAL '30.0' SECOND(2, 1) FROM test_interval_second_time;
+----
+1 09:59:30.0 2023-10-15 09:59:30.000000
+
+statement ok
+DROP TABLE test_interval_second_time;

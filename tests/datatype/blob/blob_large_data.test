@@ -1,0 +1,23 @@
+# Test Case Name: BLOB类型大数据测试
+# Description: 测试BLOB类型存储大量二进制数据
+# Category: datatype/blob
+
+statement ok
+DROP TABLE IF EXISTS test_blob_large;
+
+statement ok
+CREATE TABLE test_blob_large(id INT, blob_data BLOB);
+
+statement ok
+INSERT INTO test_blob_large VALUES(1, 0x0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF);
+
+statement ok
+INSERT INTO test_blob_large VALUES(2, 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF);
+
+query I
+SELECT COUNT(*) FROM test_blob_large WHERE blob_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_blob_large;

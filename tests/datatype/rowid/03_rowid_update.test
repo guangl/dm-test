@@ -1,0 +1,24 @@
+# Test Case Name: ROWID类型更新测试
+# Description: 测试使用ROWID作为更新条件
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_update;
+
+statement ok
+CREATE TABLE test_rowid_update (id INTEGER PRIMARY KEY, value VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_update VALUES (1, 'Old'), (2, 'Value');
+
+statement ok
+UPDATE test_rowid_update SET value = 'New' WHERE id = 1;
+
+query IT
+SELECT * FROM test_rowid_update ORDER BY id;
+----
+1 New
+2 Value
+
+statement ok
+DROP TABLE test_rowid_update;

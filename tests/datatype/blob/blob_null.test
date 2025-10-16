@@ -1,0 +1,31 @@
+# Test Case Name: BLOB类型NULL值测试
+# Description: 测试BLOB类型对NULL值的处理
+# Category: datatype/blob
+
+statement ok
+DROP TABLE IF EXISTS test_blob_null;
+
+statement ok
+CREATE TABLE test_blob_null(id INT, blob_data BLOB);
+
+statement ok
+INSERT INTO test_blob_null VALUES(1, NULL);
+
+statement ok
+INSERT INTO test_blob_null VALUES(2, 0x424C4F42);
+
+statement ok
+INSERT INTO test_blob_null VALUES(3, NULL);
+
+query I
+SELECT COUNT(*) FROM test_blob_null WHERE blob_data IS NULL;
+----
+2
+
+query I
+SELECT COUNT(*) FROM test_blob_null WHERE blob_data IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_blob_null;

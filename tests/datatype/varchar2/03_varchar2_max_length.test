@@ -1,0 +1,20 @@
+# Test Case Name: VARCHAR2类型最大长度测试
+# Description: 测试VARCHAR2类型的最大长度限制
+# Category: datatype/varchar2
+
+statement ok
+DROP TABLE IF EXISTS test_varchar2_max_length;
+
+statement ok
+CREATE TABLE test_varchar2_max_length (id INTEGER PRIMARY KEY, long_text VARCHAR2(4000));
+
+statement ok
+INSERT INTO test_varchar2_max_length VALUES (1, REPEAT('X', 4000));
+
+query II
+SELECT id, LENGTH(long_text) FROM test_varchar2_max_length;
+----
+1 4000
+
+statement ok
+DROP TABLE test_varchar2_max_length;

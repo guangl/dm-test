@@ -1,0 +1,23 @@
+# Test Case Name: JSONB类型嵌套结构测试
+# Description: 测试JSONB类型存储嵌套的复杂数据结构
+# Category: datatype/jsonb
+
+statement ok
+DROP TABLE IF EXISTS test_jsonb_nested;
+
+statement ok
+CREATE TABLE test_jsonb_nested(id INT, jsonb_data JSONB);
+
+statement ok
+INSERT INTO test_jsonb_nested VALUES(1, '{"company": {"name": "DM", "location": {"city": "Wuhan"}}}');
+
+statement ok
+INSERT INTO test_jsonb_nested VALUES(2, '{"products": [{"id": 1, "price": 99.9}, {"id": 2, "price": 199.9}]}');
+
+query I
+SELECT COUNT(*) FROM test_jsonb_nested WHERE jsonb_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_jsonb_nested;

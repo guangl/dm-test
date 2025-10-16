@@ -1,0 +1,31 @@
+# Test Case Name: TIMESTAMP WITH TIME ZONE类型基本操作测试
+# Description: 测试TIMESTAMP WITH TIME ZONE类型的创建、插入和查询基本功能
+# Category: datatype/timestamp_with_timezone
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_tz_basic;
+
+statement ok
+CREATE TABLE test_timestamp_tz_basic(
+    id INT,
+    event_time TIMESTAMP(2) WITH TIME ZONE
+);
+
+statement ok
+INSERT INTO test_timestamp_tz_basic VALUES(1, TIMESTAMP '2023-10-15 09:30:21.12 +8:00');
+
+statement ok
+INSERT INTO test_timestamp_tz_basic VALUES(2, '2023-06-20 14:00:00 -5:00');
+
+statement ok
+INSERT INTO test_timestamp_tz_basic VALUES(3, TIMESTAMP '2023-12-31 18:45:30.50 +0:00');
+
+query II
+SELECT * FROM test_timestamp_tz_basic ORDER BY id;
+----
+1 2023-10-15 09:30:21.12 +08:00
+2 2023-06-20 14:00:00.00 -05:00
+3 2023-12-31 18:45:30.50 +00:00
+
+statement ok
+DROP TABLE test_timestamp_tz_basic;

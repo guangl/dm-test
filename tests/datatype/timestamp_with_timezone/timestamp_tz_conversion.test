@@ -1,0 +1,23 @@
+# Test Case Name: TIMESTAMP WITH TIME ZONE时区转换测试
+# Description: 测试TIMESTAMP WITH TIME ZONE的AT TIME ZONE时区转换功能
+# Category: datatype/timestamp_with_timezone
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_tz_conversion;
+
+statement ok
+CREATE TABLE test_timestamp_tz_conversion(
+    id INT,
+    original_time TIMESTAMP WITH TIME ZONE
+);
+
+statement ok
+INSERT INTO test_timestamp_tz_conversion VALUES(1, TIMESTAMP '2023-10-15 12:00:00 +8:00');
+
+query II
+SELECT id, original_time FROM test_timestamp_tz_conversion;
+----
+1 2023-10-15 12:00:00.000000 +08:00
+
+statement ok
+DROP TABLE test_timestamp_tz_conversion;

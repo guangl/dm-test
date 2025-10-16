@@ -1,0 +1,20 @@
+# Test Case Name: TINYINT类型范围测试
+# Description: 测试TINYINT类型的值范围
+# Category: datatype/tinyint
+
+statement ok
+DROP TABLE IF EXISTS test_tinyint_range;
+
+statement ok
+CREATE TABLE test_tinyint_range (id INTEGER PRIMARY KEY, min_val TINYINT, max_val TINYINT);
+
+statement ok
+INSERT INTO test_tinyint_range VALUES (1, -128, 127);
+
+query III
+SELECT * FROM test_tinyint_range;
+----
+1 -128 127
+
+statement ok
+DROP TABLE test_tinyint_range;

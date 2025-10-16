@@ -1,0 +1,25 @@
+# Test Case Name: CHAR类型不同长度测试
+# Description: 测试不同长度的CHAR类型定义和数据存储
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_lengths;
+
+statement ok
+CREATE TABLE test_char_lengths (
+    id INTEGER PRIMARY KEY,
+    short_char CHAR(1),
+    medium_char CHAR(50),
+    long_char CHAR(255)
+);
+
+statement ok
+INSERT INTO test_char_lengths VALUES (1, 'X', 'Medium length text', 'This is a longer text that should fit in CHAR(255)');
+
+query ITTT
+SELECT * FROM test_char_lengths;
+----
+1 X Medium length text                               This is a longer text that should fit in CHAR(255)                                                                                                                                                                                      
+
+statement ok
+DROP TABLE test_char_lengths;

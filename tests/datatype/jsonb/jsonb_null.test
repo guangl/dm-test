@@ -1,0 +1,31 @@
+# Test Case Name: JSONB类型NULL值测试
+# Description: 测试JSONB类型对NULL值和JSON null值的处理
+# Category: datatype/jsonb
+
+statement ok
+DROP TABLE IF EXISTS test_jsonb_null;
+
+statement ok
+CREATE TABLE test_jsonb_null(id INT, jsonb_data JSONB);
+
+statement ok
+INSERT INTO test_jsonb_null VALUES(1, NULL);
+
+statement ok
+INSERT INTO test_jsonb_null VALUES(2, 'null');
+
+statement ok
+INSERT INTO test_jsonb_null VALUES(3, '{"value": null}');
+
+query I
+SELECT COUNT(*) FROM test_jsonb_null WHERE jsonb_data IS NULL;
+----
+1
+
+query I
+SELECT COUNT(*) FROM test_jsonb_null WHERE jsonb_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_jsonb_null;

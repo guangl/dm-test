@@ -1,0 +1,20 @@
+# Test Case Name: FLOAT类型聚合函数测试
+# Description: 测试FLOAT类型在聚合函数中的使用
+# Category: datatype/float
+
+statement ok
+DROP TABLE IF EXISTS test_float_agg;
+
+statement ok
+CREATE TABLE test_float_agg (id INTEGER PRIMARY KEY, val FLOAT);
+
+statement ok
+INSERT INTO test_float_agg VALUES (1, 1.5), (2, 2.5), (3, 3.5);
+
+query F
+SELECT SUM(val) FROM test_float_agg;
+----
+7.5
+
+statement ok
+DROP TABLE test_float_agg;

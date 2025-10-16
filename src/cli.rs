@@ -23,6 +23,10 @@ pub enum Commands {
         /// 输出 HTML 报告的文件路径
         #[arg(short, long, default_value = "report.html")]
         output: String,
+
+        /// 强制重新运行测试（即使 JSON 文件已存在）
+        #[arg(short = 'f', long)]
+        force: bool,
     },
 
     /// 生成测试代码（扫描测试目录生成 tests.rs）

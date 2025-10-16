@@ -1,0 +1,20 @@
+# Test Case Name: FLOAT类型比较测试
+# Description: 测试FLOAT类型的比较操作
+# Category: datatype/float
+
+statement ok
+DROP TABLE IF EXISTS test_float_comp;
+
+statement ok
+CREATE TABLE test_float_comp (id INTEGER PRIMARY KEY, val FLOAT);
+
+statement ok
+INSERT INTO test_float_comp VALUES (1, 1.5), (2, 2.5), (3, 2.0);
+
+query IF
+SELECT * FROM test_float_comp WHERE val > 2.0 ORDER BY id;
+----
+2 2.5
+
+statement ok
+DROP TABLE test_float_comp;

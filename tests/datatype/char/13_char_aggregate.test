@@ -1,0 +1,44 @@
+# Test Case Name: CHAR类型聚合函数测试
+# Description: 测试CHAR类型在聚合函数中的使用
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_aggregate;
+
+statement ok
+CREATE TABLE test_char_aggregate (
+    id INTEGER PRIMARY KEY,
+    category CHAR(15),
+    item_code CHAR(10)
+);
+
+statement ok
+INSERT INTO test_char_aggregate VALUES (1, 'Electronics', 'E001');
+
+statement ok
+INSERT INTO test_char_aggregate VALUES (2, 'Books', 'B001');
+
+statement ok
+INSERT INTO test_char_aggregate VALUES (3, 'Electronics', 'E002');
+
+statement ok
+INSERT INTO test_char_aggregate VALUES (4, 'Books', 'B002');
+
+query TI
+SELECT category, COUNT(*) as cnt FROM test_char_aggregate GROUP BY category ORDER BY category;
+----
+Books           2
+Electronics     2
+
+query T
+SELECT MAX(item_code) FROM test_char_aggregate WHERE category = 'Electronics   ';
+----
+E002      
+
+query T
+SELECT MIN(item_code) FROM test_char_aggregate WHERE category = 'Books         ';
+----
+B001      
+
+statement ok
+DROP TABLE test_char_aggregate;

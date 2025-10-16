@@ -1,0 +1,37 @@
+# Test Case Name: TIMESTAMP类型比较操作测试
+# Description: 测试TIMESTAMP类型的比较运算符
+# Category: datatype/timestamp
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_comparison;
+
+statement ok
+CREATE TABLE test_timestamp_comparison(
+    id INT,
+    log_time TIMESTAMP,
+    log_message VARCHAR(100)
+);
+
+statement ok
+INSERT INTO test_timestamp_comparison VALUES(1, TIMESTAMP '2023-10-15 08:00:00', '系统启动');
+
+statement ok
+INSERT INTO test_timestamp_comparison VALUES(2, TIMESTAMP '2023-10-15 12:30:00', '用户登录');
+
+statement ok
+INSERT INTO test_timestamp_comparison VALUES(3, TIMESTAMP '2023-10-15 18:00:00', '系统关闭');
+
+query IIT
+SELECT * FROM test_timestamp_comparison WHERE log_time > TIMESTAMP '2023-10-15 10:00:00' ORDER BY id;
+----
+2 2023-10-15 12:30:00.000000 用户登录
+3 2023-10-15 18:00:00.000000 系统关闭
+
+query IIT
+SELECT * FROM test_timestamp_comparison WHERE log_time BETWEEN TIMESTAMP '2023-10-15 08:00:00' AND TIMESTAMP '2023-10-15 13:00:00' ORDER BY id;
+----
+1 2023-10-15 08:00:00.000000 系统启动
+2 2023-10-15 12:30:00.000000 用户登录
+
+statement ok
+DROP TABLE test_timestamp_comparison;

@@ -1,0 +1,21 @@
+# Test Case Name: REAL类型基本功能测试
+# Description: 测试REAL类型的基本功能
+# Category: datatype/real
+
+statement ok
+DROP TABLE IF EXISTS test_real_basic;
+
+statement ok
+CREATE TABLE test_real_basic (id INTEGER PRIMARY KEY, val REAL);
+
+statement ok
+INSERT INTO test_real_basic VALUES (1, 1.5), (2, 2.5);
+
+query IF
+SELECT * FROM test_real_basic ORDER BY id;
+----
+1 1.5
+2 2.5
+
+statement ok
+DROP TABLE test_real_basic;

@@ -1,0 +1,31 @@
+# Test Case Name: INTERVAL HOUR TO MINUTE类型基本操作测试
+# Description: 测试INTERVAL HOUR TO MINUTE类型的基本功能
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_hour_minute;
+
+statement ok
+CREATE TABLE test_interval_hour_minute(
+    id INT,
+    duration INTERVAL HOUR(2) TO MINUTE
+);
+
+statement ok
+INSERT INTO test_interval_hour_minute VALUES(1, INTERVAL '23:45' HOUR(2) TO MINUTE);
+
+statement ok
+INSERT INTO test_interval_hour_minute VALUES(2, INTERVAL '12:30' HOUR(2) TO MINUTE);
+
+statement ok
+INSERT INTO test_interval_hour_minute VALUES(3, INTERVAL '06:15' HOUR(2) TO MINUTE);
+
+query II
+SELECT * FROM test_interval_hour_minute ORDER BY id;
+----
+1 INTERVAL '23:45' HOUR(2) TO MINUTE
+2 INTERVAL '12:30' HOUR(2) TO MINUTE
+3 INTERVAL '6:15' HOUR(2) TO MINUTE
+
+statement ok
+DROP TABLE test_interval_hour_minute;

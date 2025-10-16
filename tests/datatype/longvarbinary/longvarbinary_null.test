@@ -1,0 +1,23 @@
+# Test Case Name: LONGVARBINARY类型NULL值测试
+# Description: 测试LONGVARBINARY类型对NULL值的处理
+# Category: datatype/longvarbinary
+
+statement ok
+DROP TABLE IF EXISTS test_longvarbinary_null;
+
+statement ok
+CREATE TABLE test_longvarbinary_null(id INT, bin_data LONGVARBINARY);
+
+statement ok
+INSERT INTO test_longvarbinary_null VALUES(1, NULL);
+
+statement ok
+INSERT INTO test_longvarbinary_null VALUES(2, 0x00);
+
+query I
+SELECT COUNT(*) FROM test_longvarbinary_null WHERE bin_data IS NULL;
+----
+1
+
+statement ok
+DROP TABLE test_longvarbinary_null;

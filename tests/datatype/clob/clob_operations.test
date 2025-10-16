@@ -1,0 +1,31 @@
+# Test Case Name: CLOB类型操作测试
+# Description: 测试CLOB类型的各种操作
+# Category: datatype/clob
+
+statement ok
+DROP TABLE IF EXISTS test_clob_ops;
+
+statement ok
+CREATE TABLE test_clob_ops(id INT, content CLOB);
+
+statement ok
+INSERT INTO test_clob_ops VALUES(1, 'Original CLOB');
+
+statement ok
+UPDATE test_clob_ops SET content = 'Updated CLOB' WHERE id = 1;
+
+query IT
+SELECT * FROM test_clob_ops;
+----
+1  Updated CLOB
+
+statement ok
+DELETE FROM test_clob_ops WHERE id = 1;
+
+query I
+SELECT COUNT(*) FROM test_clob_ops;
+----
+0
+
+statement ok
+DROP TABLE test_clob_ops;

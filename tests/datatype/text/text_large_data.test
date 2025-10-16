@@ -1,0 +1,28 @@
+# Test Case Name: TEXT类型大数据测试
+# Description: 测试TEXT类型存储大量文本数据
+# Category: datatype/text
+
+statement ok
+DROP TABLE IF EXISTS test_text_large;
+
+statement ok
+CREATE TABLE test_text_large(id INT, content TEXT);
+
+statement ok
+INSERT INTO test_text_large VALUES(1, REPEAT('A', 1000));
+
+statement ok
+INSERT INTO test_text_large VALUES(2, REPEAT('测试', 500));
+
+query I
+SELECT id FROM test_text_large WHERE LENGTH(content) = 1000;
+----
+1
+
+query I
+SELECT id FROM test_text_large WHERE LENGTH(content) = 1000;
+----
+2
+
+statement ok
+DROP TABLE test_text_large;

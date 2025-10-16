@@ -1,0 +1,20 @@
+# Test Case Name: ROWID非NULL测试
+# Description: 测试ROWID永不为NULL
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_notnull;
+
+statement ok
+CREATE TABLE test_rowid_notnull (id INTEGER PRIMARY KEY, name VARCHAR(20));
+
+statement ok
+INSERT INTO test_rowid_notnull VALUES (1, 'Test');
+
+query I
+SELECT COUNT(*) FROM test_rowid_notnull WHERE ROWID IS NULL;
+----
+0
+
+statement ok
+DROP TABLE test_rowid_notnull;

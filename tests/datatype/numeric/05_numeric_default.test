@@ -1,0 +1,20 @@
+# Test Case Name: NUMERIC类型默认值测试
+# Description: 测试NUMERIC类型的默认值
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_default;
+
+statement ok
+CREATE TABLE test_numeric_default (id INTEGER PRIMARY KEY, price NUMERIC(10,2) DEFAULT 0.00);
+
+statement ok
+INSERT INTO test_numeric_default (id) VALUES (1);
+
+query IR
+SELECT * FROM test_numeric_default;
+----
+1 0.00
+
+statement ok
+DROP TABLE test_numeric_default;

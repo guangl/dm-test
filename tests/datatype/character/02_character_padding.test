@@ -1,0 +1,20 @@
+# Test Case Name: CHARACTER类型填充测试
+# Description: 测试CHARACTER类型与CHAR相同的填充行为
+# Category: datatype/character
+
+statement ok
+DROP TABLE IF EXISTS test_character_padding;
+
+statement ok
+CREATE TABLE test_character_padding (id INTEGER PRIMARY KEY, text CHARACTER(15));
+
+statement ok
+INSERT INTO test_character_padding VALUES (1, 'Test');
+
+query II
+SELECT id, LENGTH(text) FROM test_character_padding;
+----
+1 15
+
+statement ok
+DROP TABLE test_character_padding;

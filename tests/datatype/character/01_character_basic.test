@@ -1,0 +1,20 @@
+# Test Case Name: CHARACTER类型基本功能测试
+# Description: 测试CHARACTER类型(CHAR的同义词)的基本功能
+# Category: datatype/character
+
+statement ok
+DROP TABLE IF EXISTS test_character_basic;
+
+statement ok
+CREATE TABLE test_character_basic (id INTEGER PRIMARY KEY, code CHARACTER(10), name CHARACTER(30));
+
+statement ok
+INSERT INTO test_character_basic VALUES (1, 'PROD001', 'Product One');
+
+query ITT
+SELECT * FROM test_character_basic;
+----
+1 PROD001     Product One                   
+
+statement ok
+DROP TABLE test_character_basic;

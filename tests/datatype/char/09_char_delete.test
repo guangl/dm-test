@@ -1,0 +1,26 @@
+# Test Case Name: CHAR类型删除操作测试
+# Description: 测试使用CHAR类型作为删除条件
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_delete;
+
+statement ok
+CREATE TABLE test_char_delete (
+    id INTEGER PRIMARY KEY,
+    category CHAR(15)
+);
+
+statement ok
+INSERT INTO test_char_delete VALUES (1, 'Electronics'), (2, 'Books'), (3, 'Electronics');
+
+statement ok
+DELETE FROM test_char_delete WHERE category = 'Electronics   ';
+
+query IT
+SELECT * FROM test_char_delete ORDER BY id;
+----
+2 Books          
+
+statement ok
+DROP TABLE test_char_delete;

@@ -1,0 +1,21 @@
+# Test Case Name: BIGINT类型基本功能测试
+# Description: 测试BIGINT类型的创建、插入、查询等基本功能
+# Category: datatype/bigint
+
+statement ok
+DROP TABLE IF EXISTS test_bigint_basic;
+
+statement ok
+CREATE TABLE test_bigint_basic (id INTEGER PRIMARY KEY, large_num BIGINT);
+
+statement ok
+INSERT INTO test_bigint_basic VALUES (1, 9223372036854775807), (2, -9223372036854775808);
+
+query II
+SELECT * FROM test_bigint_basic ORDER BY id;
+----
+1 9223372036854775807
+2 -9223372036854775808
+
+statement ok
+DROP TABLE test_bigint_basic;

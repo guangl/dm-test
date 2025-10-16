@@ -1,0 +1,30 @@
+# Test Case Name: NUMERIC类型算术运算测试
+# Description: 测试NUMERIC类型的算术运算
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_arithmetic;
+
+statement ok
+CREATE TABLE test_numeric_arithmetic (id INTEGER PRIMARY KEY, value1 NUMERIC(10,2), value2 NUMERIC(10,2));
+
+statement ok
+INSERT INTO test_numeric_arithmetic VALUES (1, 100.50, 50.25);
+
+query R
+SELECT value1 + value2 FROM test_numeric_arithmetic WHERE id = 1;
+----
+150.75
+
+query R
+SELECT value1 - value2 FROM test_numeric_arithmetic WHERE id = 1;
+----
+50.25
+
+query R
+SELECT value1 * value2 FROM test_numeric_arithmetic WHERE id = 1;
+----
+5050.1250
+
+statement ok
+DROP TABLE test_numeric_arithmetic;

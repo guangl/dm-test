@@ -1,0 +1,21 @@
+# Test Case Name: DOUBLE类型基本功能测试
+# Description: 测试DOUBLE类型的基本功能
+# Category: datatype/double
+
+statement ok
+DROP TABLE IF EXISTS test_double_basic;
+
+statement ok
+CREATE TABLE test_double_basic (id INTEGER PRIMARY KEY, val DOUBLE);
+
+statement ok
+INSERT INTO test_double_basic VALUES (1, 3.141592653589793), (2, 2.718281828459045);
+
+query IF
+SELECT * FROM test_double_basic ORDER BY id;
+----
+1 3.141592653589793
+2 2.718281828459045
+
+statement ok
+DROP TABLE test_double_basic;

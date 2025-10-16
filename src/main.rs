@@ -1,13 +1,17 @@
-use dm_test::{Cli, CodeGenerator, DatabaseConfig, SqlLogicTestRunner, TestSummary, cli::Commands};
+use dm_test::{
+    Cli, CodeGenerator, DatabaseConfig, HtmlReportGenerator, SqlLogicTestRunner, TestSummary,
+    cli::Commands,
+};
 use std::error::Error;
+use std::path::Path;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     let cli = Cli::parse_args();
 
     match cli.command {
-        Some(Commands::Report { output }) => {
-            generate_report(&cli.test_dir, &cli.json_output, &output).await
+        Some(Commands::Report { output, force }) => {
+            generate_report(&cli.test_dir, &cli.json_output, &output, force).await
         }
         Some(Commands::GenTests { test_dir }) => {
             let dir = test_dir.as_deref().unwrap_or(&cli.test_dir);
@@ -22,19 +26,30 @@ async fn generate_report(
     test_dir: &str,
     json_output: &str,
     html_output: &str,
+    force: bool,
 ) -> Result<(), Box<dyn Error>> {
     println!("🚀 生成 HTML 测试报告");
     println!("================================================\n");
 
-    let summary = run_tests(test_dir, json_output).await?;
+    // 检查 JSON 文件是否存在，或者强制重新运行
+    if force || !Path::new(json_output).exists() {
+        if force {
+            println!("🔄 强制重新运行测试...\n");
+        } else {
+            println!("⚠️  测试结果文件 {} 不存在", json_output);
+            println!("📝 正在运行测试生成结果...\n");
+        }
 
-    // 生成 HTML 报告（待实现）
-    println!("\n📄 HTML 报告: {}", html_output);
-    println!("⚠️ HTML 报告生成功能待实现...");
+        // 先运行测试生成 JSON
+        run_tests(test_dir, json_output).await?;
 
-    if summary.failed > 0 {
-        return Err(format!("有 {} 个测试失败", summary.failed).into());
+        println!("\n");
+    } else {
+        println!("✓ 使用现有的测试结果: {}\n", json_output);
     }
+
+    // 生成 HTML 报告
+    HtmlReportGenerator::generate(test_dir, json_output, html_output)?;
 
     Ok(())
 }

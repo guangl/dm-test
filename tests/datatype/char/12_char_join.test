@@ -1,0 +1,46 @@
+# Test Case Name: CHAR类型连接查询测试
+# Description: 测试CHAR类型字段在JOIN操作中的使用
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_customers;
+
+statement ok
+DROP TABLE IF EXISTS test_char_orders;
+
+statement ok
+CREATE TABLE test_char_orders (
+    order_id INTEGER PRIMARY KEY,
+    customer_code CHAR(10)
+);
+
+statement ok
+CREATE TABLE test_char_customers (
+    customer_code CHAR(10) PRIMARY KEY,
+    customer_name CHAR(30)
+);
+
+statement ok
+INSERT INTO test_char_customers VALUES ('CUST001', 'Alice Corp');
+
+statement ok
+INSERT INTO test_char_customers VALUES ('CUST002', 'Bob Industries');
+
+statement ok
+INSERT INTO test_char_orders VALUES (1, 'CUST001'), (2, 'CUST002'), (3, 'CUST001');
+
+query ITT
+SELECT o.order_id, o.customer_code, c.customer_name 
+FROM test_char_orders o 
+JOIN test_char_customers c ON o.customer_code = c.customer_code 
+ORDER BY o.order_id;
+----
+1 CUST001    Alice Corp                    
+2 CUST002    Bob Industries                
+3 CUST001    Alice Corp                    
+
+statement ok
+DROP TABLE test_char_orders;
+
+statement ok
+DROP TABLE test_char_customers;

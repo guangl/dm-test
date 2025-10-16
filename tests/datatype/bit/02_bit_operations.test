@@ -1,0 +1,20 @@
+# Test Case Name: BIT类型操作测试
+# Description: 测试BIT类型的布尔操作
+# Category: datatype/bit
+
+statement ok
+DROP TABLE IF EXISTS test_bit_ops;
+
+statement ok
+CREATE TABLE test_bit_ops (id INTEGER PRIMARY KEY, active BIT, verified BIT);
+
+statement ok
+INSERT INTO test_bit_ops VALUES (1, 1, 0), (2, 1, 1), (3, 0, 0);
+
+query I
+SELECT COUNT(*) FROM test_bit_ops WHERE active = 1;
+----
+2
+
+statement ok
+DROP TABLE test_bit_ops;

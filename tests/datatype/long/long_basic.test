@@ -1,0 +1,24 @@
+# Test Case Name: LONG类型基本操作测试
+# Description: 测试LONG类型的基本操作(与TEXT相同)
+# Category: datatype/long
+
+statement ok
+DROP TABLE IF EXISTS test_long;
+
+statement ok
+CREATE TABLE test_long(id INT, content LONG);
+
+statement ok
+INSERT INTO test_long VALUES(1, 'Long text content');
+
+statement ok
+INSERT INTO test_long VALUES(2, '长文本内容测试');
+
+query IT
+SELECT * FROM test_long ORDER BY id;
+----
+1  Long text content
+2  长文本内容测试
+
+statement ok
+DROP TABLE test_long;

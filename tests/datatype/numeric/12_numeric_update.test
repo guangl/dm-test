@@ -1,0 +1,24 @@
+# Test Case Name: NUMERIC类型更新测试
+# Description: 测试NUMERIC类型字段的UPDATE操作
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_upd;
+
+statement ok
+CREATE TABLE test_numeric_upd (id INTEGER PRIMARY KEY, price NUMERIC(10,2));
+
+statement ok
+INSERT INTO test_numeric_upd VALUES (1, 50.00), (2, 75.00);
+
+statement ok
+UPDATE test_numeric_upd SET price = price * 1.10 WHERE id = 1;
+
+query IR
+SELECT * FROM test_numeric_upd ORDER BY id;
+----
+1 55.00
+2 75.00
+
+statement ok
+DROP TABLE test_numeric_upd;

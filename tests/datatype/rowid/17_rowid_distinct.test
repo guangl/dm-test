@@ -1,0 +1,20 @@
+# Test Case Name: ROWID唯一值测试
+# Description: 测试ROWID的DISTINCT操作
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_dist;
+
+statement ok
+CREATE TABLE test_rowid_dist (id INTEGER PRIMARY KEY, data VARCHAR(20));
+
+statement ok
+INSERT INTO test_rowid_dist VALUES (1, 'Data'), (2, 'Data');
+
+query I
+SELECT COUNT(DISTINCT ROWID) FROM test_rowid_dist;
+----
+2
+
+statement ok
+DROP TABLE test_rowid_dist;

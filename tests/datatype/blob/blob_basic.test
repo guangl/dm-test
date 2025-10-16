@@ -1,0 +1,24 @@
+# Test Case Name: BLOB类型基本操作测试
+# Description: 测试BLOB类型的创建、插入、查询等基本操作
+# Category: datatype/blob
+
+statement ok
+DROP TABLE IF EXISTS test_blob;
+
+statement ok
+CREATE TABLE test_blob(id INT, blob_data BLOB);
+
+statement ok
+INSERT INTO test_blob VALUES(1, 0x424C4F42);
+
+statement ok
+INSERT INTO test_blob VALUES(2, 0x44415441);
+
+query I
+SELECT id FROM test_blob WHERE blob_data IS NOT NULL ORDER BY id;
+----
+1
+2
+
+statement ok
+DROP TABLE test_blob;

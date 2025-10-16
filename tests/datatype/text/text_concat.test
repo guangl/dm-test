@@ -1,0 +1,24 @@
+# Test Case Name: TEXT类型连接操作测试
+# Description: 测试TEXT类型的字符串连接操作
+# Category: datatype/text
+
+statement ok
+DROP TABLE IF EXISTS test_text_concat;
+
+statement ok
+CREATE TABLE test_text_concat(id INT, part1 TEXT, part2 TEXT);
+
+statement ok
+INSERT INTO test_text_concat VALUES(1, 'Hello', 'World');
+
+statement ok
+INSERT INTO test_text_concat VALUES(2, '达梦', '数据库');
+
+query IT
+SELECT id, part1 || ' ' || part2 FROM test_text_concat ORDER BY id;
+----
+1  Hello World
+2  达梦 数据库
+
+statement ok
+DROP TABLE test_text_concat;

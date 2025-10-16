@@ -1,0 +1,21 @@
+# Test Case Name: INTEGER类型NULL值测试
+# Description: 测试INTEGER类型对NULL值的处理
+# Category: datatype/integer
+
+statement ok
+DROP TABLE IF EXISTS test_integer_null;
+
+statement ok
+CREATE TABLE test_integer_null (id INTEGER PRIMARY KEY, val INTEGER);
+
+statement ok
+INSERT INTO test_integer_null VALUES (1, NULL), (2, 100);
+
+query II
+SELECT * FROM test_integer_null ORDER BY id;
+----
+1 NULL
+2 100
+
+statement ok
+DROP TABLE test_integer_null;

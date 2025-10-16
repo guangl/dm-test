@@ -1,0 +1,33 @@
+# Test Case Name: DATE类型函数测试
+# Description: 测试DATE类型相关的日期函数
+# Category: datatype/date
+
+statement ok
+DROP TABLE IF EXISTS test_date_functions;
+
+statement ok
+CREATE TABLE test_date_functions(
+    id INT,
+    test_date DATE
+);
+
+statement ok
+INSERT INTO test_date_functions VALUES(1, DATE '2023-10-15');
+
+query I
+SELECT YEAR(test_date) FROM test_date_functions WHERE id = 1;
+----
+2023
+
+query I
+SELECT MONTH(test_date) FROM test_date_functions WHERE id = 1;
+----
+10
+
+query I
+SELECT DAY(test_date) FROM test_date_functions WHERE id = 1;
+----
+15
+
+statement ok
+DROP TABLE test_date_functions;

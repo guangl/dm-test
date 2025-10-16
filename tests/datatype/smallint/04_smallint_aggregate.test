@@ -1,0 +1,20 @@
+# Test Case Name: SMALLINT类型聚合函数测试
+# Description: 测试SMALLINT类型在聚合函数中的使用
+# Category: datatype/smallint
+
+statement ok
+DROP TABLE IF EXISTS test_smallint_agg;
+
+statement ok
+CREATE TABLE test_smallint_agg (id INTEGER PRIMARY KEY, val SMALLINT);
+
+statement ok
+INSERT INTO test_smallint_agg VALUES (1, 10), (2, 20), (3, 30);
+
+query I
+SELECT SUM(val) FROM test_smallint_agg;
+----
+60
+
+statement ok
+DROP TABLE test_smallint_agg;

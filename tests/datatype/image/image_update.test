@@ -1,0 +1,23 @@
+# Test Case Name: IMAGE类型更新操作测试
+# Description: 测试IMAGE类型的UPDATE操作
+# Category: datatype/image
+
+statement ok
+DROP TABLE IF EXISTS test_image_update;
+
+statement ok
+CREATE TABLE test_image_update(id INT, img_data IMAGE);
+
+statement ok
+INSERT INTO test_image_update VALUES(1, 0x1234);
+
+statement ok
+UPDATE test_image_update SET img_data = 0x5678 WHERE id = 1;
+
+query I
+SELECT COUNT(*) FROM test_image_update WHERE img_data IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_image_update;

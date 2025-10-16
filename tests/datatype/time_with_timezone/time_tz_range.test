@@ -1,0 +1,36 @@
+# Test Case Name: TIME WITH TIME ZONE时区范围测试
+# Description: 测试TIME WITH TIME ZONE支持的时区范围(-12:59到+14:00)
+# Category: datatype/time_with_timezone
+
+statement ok
+DROP TABLE IF EXISTS test_time_tz_range;
+
+statement ok
+CREATE TABLE test_time_tz_range(
+    id INT,
+    test_time TIME WITH TIME ZONE,
+    description VARCHAR(50)
+);
+
+statement ok
+INSERT INTO test_time_tz_range VALUES(1, TIME '12:00:00 -12:59', '最小时区');
+
+statement ok
+INSERT INTO test_time_tz_range VALUES(2, TIME '12:00:00 +14:00', '最大时区');
+
+statement ok
+INSERT INTO test_time_tz_range VALUES(3, TIME '12:00:00 +8:00', '北京时区');
+
+statement ok
+INSERT INTO test_time_tz_range VALUES(4, TIME '12:00:00 +0:00', 'UTC时区');
+
+query IIT
+SELECT * FROM test_time_tz_range ORDER BY id;
+----
+1 12:00:00 -12:59 最小时区
+2 12:00:00 +14:00 最大时区
+3 12:00:00 +08:00 北京时区
+4 12:00:00 +00:00 UTC时区
+
+statement ok
+DROP TABLE test_time_tz_range;

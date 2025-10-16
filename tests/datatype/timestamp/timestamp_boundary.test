@@ -1,0 +1,32 @@
+# Test Case Name: TIMESTAMP类型边界值测试
+# Description: 测试TIMESTAMP类型的最小值和最大值
+# Category: datatype/timestamp
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_boundary;
+
+statement ok
+CREATE TABLE test_timestamp_boundary(
+    id INT,
+    test_timestamp TIMESTAMP(9),
+    description VARCHAR(50)
+);
+
+statement ok
+INSERT INTO test_timestamp_boundary VALUES(1, TIMESTAMP '-4712-01-01 00:00:00.000000000', '最小时间戳');
+
+statement ok
+INSERT INTO test_timestamp_boundary VALUES(2, TIMESTAMP '9999-12-31 23:59:59.999999999', '最大时间戳');
+
+statement ok
+INSERT INTO test_timestamp_boundary VALUES(3, TIMESTAMP '2000-01-01 00:00:00.000000000', '千禧年时刻');
+
+query IIT
+SELECT * FROM test_timestamp_boundary ORDER BY id;
+----
+1 -4712-01-01 00:00:00.000000000 最小时间戳
+2 9999-12-31 23:59:59.999999999 最大时间戳
+3 2000-01-01 00:00:00.000000000 千禧年时刻
+
+statement ok
+DROP TABLE test_timestamp_boundary;

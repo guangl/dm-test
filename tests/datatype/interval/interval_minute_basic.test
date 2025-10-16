@@ -1,0 +1,31 @@
+# Test Case Name: INTERVAL MINUTE类型基本操作测试
+# Description: 测试INTERVAL MINUTE类型的基本功能
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_minute;
+
+statement ok
+CREATE TABLE test_interval_minute(
+    id INT,
+    duration INTERVAL MINUTE(3)
+);
+
+statement ok
+INSERT INTO test_interval_minute VALUES(1, INTERVAL '150' MINUTE(3));
+
+statement ok
+INSERT INTO test_interval_minute VALUES(2, INTERVAL '060' MINUTE(3));
+
+statement ok
+INSERT INTO test_interval_minute VALUES(3, INTERVAL '015' MINUTE(3));
+
+query II
+SELECT * FROM test_interval_minute ORDER BY id;
+----
+1 INTERVAL '150' MINUTE(3)
+2 INTERVAL '60' MINUTE(3)
+3 INTERVAL '15' MINUTE(3)
+
+statement ok
+DROP TABLE test_interval_minute;

@@ -1,0 +1,24 @@
+# Test Case Name: IMAGE类型基本操作测试
+# Description: 测试IMAGE类型的创建、插入、查询等基本操作
+# Category: datatype/image
+
+statement ok
+DROP TABLE IF EXISTS test_image;
+
+statement ok
+CREATE TABLE test_image(id INT, img_data IMAGE);
+
+statement ok
+INSERT INTO test_image VALUES(1, 0x89504E47);
+
+statement ok
+INSERT INTO test_image VALUES(2, 0xFFD8FFE0);
+
+query I
+SELECT id FROM test_image WHERE img_data IS NOT NULL ORDER BY id;
+----
+1
+2
+
+statement ok
+DROP TABLE test_image;

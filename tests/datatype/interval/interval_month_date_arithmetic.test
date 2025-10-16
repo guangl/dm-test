@@ -1,0 +1,28 @@
+# Test Case Name: INTERVAL MONTH日期运算测试
+# Description: 测试INTERVAL MONTH类型与DATE类型的运算
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_month_date;
+
+statement ok
+CREATE TABLE test_interval_month_date(
+    id INT,
+    base_date DATE
+);
+
+statement ok
+INSERT INTO test_interval_month_date VALUES(1, DATE '2023-10-15');
+
+query II
+SELECT id, base_date + INTERVAL '18' MONTH(2) FROM test_interval_month_date;
+----
+1 2025-04-15
+
+query II
+SELECT id, base_date - INTERVAL '6' MONTH(2) FROM test_interval_month_date;
+----
+1 2023-04-15
+
+statement ok
+DROP TABLE test_interval_month_date;

@@ -1,0 +1,34 @@
+# Test Case Name: CHAR类型比较操作测试
+# Description: 测试CHAR类型在WHERE子句中的比较操作
+# Category: datatype/char
+
+statement ok
+DROP TABLE IF EXISTS test_char_comparison;
+
+statement ok
+CREATE TABLE test_char_comparison (
+    id INTEGER PRIMARY KEY,
+    name CHAR(10)
+);
+
+statement ok
+INSERT INTO test_char_comparison VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie');
+
+query IT
+SELECT * FROM test_char_comparison WHERE name = 'Bob       ' ORDER BY id;
+----
+2 Bob       
+
+query IT
+SELECT * FROM test_char_comparison WHERE name > 'Alice' ORDER BY id;
+----
+2 Bob       
+3 Charlie   
+
+query IT
+SELECT * FROM test_char_comparison WHERE name LIKE 'A%' ORDER BY id;
+----
+1 Alice     
+
+statement ok
+DROP TABLE test_char_comparison;

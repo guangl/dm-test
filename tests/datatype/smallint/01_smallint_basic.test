@@ -1,0 +1,21 @@
+# Test Case Name: SMALLINT类型基本功能测试
+# Description: 测试SMALLINT类型的基本功能
+# Category: datatype/smallint
+
+statement ok
+DROP TABLE IF EXISTS test_smallint_basic;
+
+statement ok
+CREATE TABLE test_smallint_basic (id INTEGER PRIMARY KEY, val SMALLINT);
+
+statement ok
+INSERT INTO test_smallint_basic VALUES (1, 32767), (2, -32768);
+
+query II
+SELECT * FROM test_smallint_basic ORDER BY id;
+----
+1 32767
+2 -32768
+
+statement ok
+DROP TABLE test_smallint_basic;

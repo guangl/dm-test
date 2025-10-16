@@ -1,0 +1,25 @@
+# Test Case Name: BIGINT类型聚合函数测试
+# Description: 测试BIGINT类型在聚合函数中的使用
+# Category: datatype/bigint
+
+statement ok
+DROP TABLE IF EXISTS test_bigint_aggregate;
+
+statement ok
+CREATE TABLE test_bigint_aggregate (id INTEGER PRIMARY KEY, value BIGINT);
+
+statement ok
+INSERT INTO test_bigint_aggregate VALUES (1, 1000000), (2, 2000000), (3, 3000000);
+
+query I
+SELECT SUM(value) FROM test_bigint_aggregate;
+----
+6000000
+
+query I
+SELECT AVG(value) FROM test_bigint_aggregate;
+----
+2000000
+
+statement ok
+DROP TABLE test_bigint_aggregate;

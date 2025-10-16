@@ -1,0 +1,23 @@
+# Test Case Name: JSON类型更新操作测试
+# Description: 测试JSON类型的UPDATE操作
+# Category: datatype/json
+
+statement ok
+DROP TABLE IF EXISTS test_json_update;
+
+statement ok
+CREATE TABLE test_json_update(id INT, json_data JSON);
+
+statement ok
+INSERT INTO test_json_update VALUES(1, '{"status": "active"}');
+
+statement ok
+UPDATE test_json_update SET json_data = '{"status": "inactive"}' WHERE id = 1;
+
+query I
+SELECT COUNT(*) FROM test_json_update WHERE json_data IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_json_update;

@@ -1,0 +1,21 @@
+# Test Case Name: ROWID聚合测试
+# Description: 测试ROWID在聚合操作中的使用
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_agg;
+
+statement ok
+CREATE TABLE test_rowid_agg (id INTEGER PRIMARY KEY, category VARCHAR(20));
+
+statement ok
+INSERT INTO test_rowid_agg VALUES (1, 'A'), (2, 'B'), (3, 'A');
+
+query TI
+SELECT category, COUNT(*) FROM test_rowid_agg GROUP BY category ORDER BY category;
+----
+A 2
+B 1
+
+statement ok
+DROP TABLE test_rowid_agg;

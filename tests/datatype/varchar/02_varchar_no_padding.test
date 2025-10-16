@@ -1,0 +1,21 @@
+# Test Case Name: VARCHAR类型长度变化测试
+# Description: 测试VARCHAR类型不会进行空白填充
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_no_padding;
+
+statement ok
+CREATE TABLE test_varchar_no_padding (id INTEGER PRIMARY KEY, text VARCHAR(50));
+
+statement ok
+INSERT INTO test_varchar_no_padding VALUES (1, 'Hi'), (2, 'Hello');
+
+query II
+SELECT id, LENGTH(text) FROM test_varchar_no_padding ORDER BY id;
+----
+1 2
+2 5
+
+statement ok
+DROP TABLE test_varchar_no_padding;

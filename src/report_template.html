@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试结果报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            height: calc(100vh - 40px);
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .summary {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .summary-item .number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .summary-item .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+
+        .search-box {
+            flex: 1;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .status-filters {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .status-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .status-filter input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            padding: 20px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-tree {
+            list-style: none;
+        }
+
+        .category-level-1 {
+            margin-bottom: 10px;
+        }
+
+        .category-level-1>.category-header {
+            font-weight: 600;
+            color: #212529;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-level-1>.category-header:hover {
+            background: #e9ecef;
+        }
+
+        .category-level-1>.category-header.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .category-expand-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+
+        .category-level-1.expanded>.category-header .category-expand-icon {
+            transform: rotate(90deg);
+        }
+
+        .category-level-2 {
+            list-style: none;
+            padding-left: 20px;
+            display: none;
+            margin-top: 5px;
+        }
+
+        .category-level-1.expanded>.category-level-2 {
+            display: block;
+        }
+
+        .category-level-2 li {
+            padding: 4px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+            margin-bottom: 3px;
+            color: #495057;
+        }
+
+        .category-level-2 li:hover {
+            background: #e9ecef;
+        }
+
+        .cat2-checkbox {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .category-count {
+            font-size: 0.85em;
+            opacity: 0.8;
+            margin-left: 5px;
+        }
+
+        .test-results {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .test-case {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .test-case:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .test-case.passed {
+            border-left: 5px solid #28a745;
+        }
+
+        .test-case.failed {
+            border-left: 5px solid #dc3545;
+        }
+
+        .test-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+        }
+
+        .test-header:hover {
+            background: #e9ecef;
+        }
+
+        .test-title {
+            flex: 1;
+        }
+
+        .test-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 5px;
+        }
+
+        .test-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .meta-item {
+            font-size: 0.85em;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.passed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .expand-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .test-case.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .test-body {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .test-case.expanded .test-body {
+            display: block;
+        }
+
+        .test-description {
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .sql-statements {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .sql-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .sql-header h4 {
+            color: #495057;
+            margin: 0;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: #28a745;
+        }
+
+        .sql-container {
+            background: #282c34;
+            color: #e6e6e6;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+            line-height: 1.8;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 15px;
+            color: #721c24;
+        }
+
+        .error-message h4 {
+            margin-bottom: 10px;
+            color: #721c24;
+        }
+
+        .error-message pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .no-results-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .no-results h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                height: calc(100vh - 20px);
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 200px;
+                max-height: 200px;
+                border-right: none;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .controls {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .summary {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .summary-item {
+                padding: 10px 20px;
+            }
+
+            .test-results {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🧪 测试结果报告</h1>
+            <div class="summary">
+                <div class="summary-item">
+                    <span class="number">{{TOTAL}}</span>
+                    <span class="label">总测试数</span>
+                </div>
+                <div class="summary-item">
+                    <span class="number">{{PASSED}}</span>
+                    <span class="label">通过</span>
+                </div>
+                <div class="summary-item">
+                    <span class="number">{{FAILED}}</span>
+                    <span class="label">失败</span>
+                </div>
+                <div class="summary-item">
+                    <span class="number">{{PASS_RATE}}%</span>
+                    <span class="label">通过率</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 搜索测试用例名称、描述或SQL...">
+            </div>
+
+            <div class="status-filters">
+                <label class="status-filter">
+                    <input type="checkbox" id="showPassed" checked>
+                    <span>✅ 通过</span>
+                </label>
+                <label class="status-filter">
+                    <input type="checkbox" id="showFailed" checked>
+                    <span>❌ 失败</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>📁 测试分类</h3>
+                <ul class="category-tree" id="categoryTree">
+                </ul>
+            </div>
+
+            <div class="test-results" id="testResults">
+                {{TEST_CASES}} </div>
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <h3>未找到匹配的测试用例</h3>
+            <p>请尝试调整搜索条件或过滤器</p>
+        </div>
+    </div>
+
+    <script>
+        const categories = {{ CATEGORIES_JSON }};
+        let selectedCategory = { cat1: '', cat2: '' };
+
+        // 展开/收起测试用例
+        function toggleTest(header) {
+            const testCase = header.parentElement;
+            testCase.classList.toggle('expanded');
+        }
+
+        // 复制 SQL 到剪贴板
+        function copySql(button) {
+            const sqlContainer = button.parentElement.nextElementSibling;
+            const sqlText = sqlContainer.textContent;
+
+            navigator.clipboard.writeText(sqlText).then(() => {
+                // 修改按钮状态
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<span>✓</span><span>已复制</span>';
+                button.classList.add('copied');
+
+                // 2秒后恢复原状
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败:', err);
+                alert('复制失败，请手动复制');
+            });
+        }
+
+        // 初始化分类树
+        function initCategoryTree() {
+            const tree = document.getElementById('categoryTree');
+            const sortedCat1 = Object.keys(categories).sort();
+
+            sortedCat1.forEach(cat1 => {
+                const li = document.createElement('li');
+                li.className = 'category-level-1';
+
+                const cat2List = categories[cat1];
+                const hasChildren = cat2List && cat2List.length > 0;
+
+                // 统计该分类下的测试数量
+                const count = countTestsInCategory(cat1, null);
+
+                const header = document.createElement('div');
+                header.className = 'category-header';
+                header.innerHTML = `
+                    <span>${cat1} <span class="category-count">(${count})</span></span>
+                    ${hasChildren ? '<span class="category-expand-icon">▶</span>' : ''}
+                `;
+                header.onclick = () => toggleCategory1(li, cat1);
+
+                li.appendChild(header);
+
+                if (hasChildren) {
+                    const ul = document.createElement('ul');
+                    ul.className = 'category-level-2';
+
+                    cat2List.sort().forEach(cat2 => {
+                        const cat2Count = countTestsInCategory(cat1, cat2);
+                        const cat2Li = document.createElement('li');
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.className = 'cat2-checkbox';
+                        checkbox.value = cat2;
+                        checkbox.dataset.cat1 = cat1;
+                        checkbox.checked = true;
+                        checkbox.onclick = (e) => {
+                            e.stopPropagation();
+                        };
+                        checkbox.onchange = () => {
+                            filterTests();
+                        };
+
+                        const label = document.createElement('label');
+                        label.style.cursor = 'pointer';
+                        label.style.display = 'flex';
+                        label.style.alignItems = 'center';
+                        label.style.gap = '8px';
+
+                        label.appendChild(checkbox);
+                        const textSpan = document.createElement('span');
+                        textSpan.textContent = `${cat2} `;
+                        label.appendChild(textSpan);
+
+                        const countSpan = document.createElement('span');
+                        countSpan.className = 'category-count';
+                        countSpan.textContent = `(${cat2Count})`;
+                        label.appendChild(countSpan);
+
+                        cat2Li.appendChild(label);
+                        ul.appendChild(cat2Li);
+                    });
+
+                    li.appendChild(ul);
+                }
+
+                tree.appendChild(li);
+            });
+        }
+
+        // 统计某分类下的测试数量
+        function countTestsInCategory(cat1, cat2) {
+            const testCases = document.querySelectorAll('.test-case');
+            let count = 0;
+            testCases.forEach(tc => {
+                const tcCat1 = tc.dataset.category1;
+                const tcCat2 = tc.dataset.category2;
+                if (tcCat1 === cat1 && (cat2 === null || tcCat2 === cat2)) {
+                    count++;
+                }
+            });
+            return count;
+        }
+
+        // 切换一级分类展开/收起
+        function toggleCategory1(li, cat1) {
+            const hasChildren = categories[cat1] && categories[cat1].length > 0;
+
+            // 选择该一级分类
+            selectCategory(cat1);
+
+            // 如果有子分类，切换展开/收起状态
+            if (hasChildren) {
+                const wasExpanded = li.classList.contains('expanded');
+                li.classList.toggle('expanded');
+
+                // 如果是第一次展开，默认全选所有二级分类
+                if (!wasExpanded) {
+                    const checkboxes = li.querySelectorAll('.cat2-checkbox');
+                    checkboxes.forEach(cb => cb.checked = true);
+                }
+            }
+        }
+
+        // 选择分类
+        function selectCategory(cat1) {
+            // 更新选中状态
+            selectedCategory = { cat1 };
+
+            // 更新UI - 高亮一级分类
+            document.querySelectorAll('.category-header').forEach(el => el.classList.remove('active'));
+
+            if (cat1) {
+                document.querySelectorAll('.category-level-1').forEach(li => {
+                    const header = li.querySelector('.category-header');
+                    if (header.textContent.trim().startsWith(cat1)) {
+                        header.classList.add('active');
+                    }
+                });
+            }
+
+            filterTests();
+        }
+
+        // 过滤测试用例
+        function filterTests() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const showPassed = document.getElementById('showPassed').checked;
+            const showFailed = document.getElementById('showFailed').checked;
+
+            const testCases = document.querySelectorAll('.test-case');
+            let visibleCount = 0;
+
+            testCases.forEach(testCase => {
+                const name = testCase.dataset.name.toLowerCase();
+                const description = testCase.dataset.description.toLowerCase();
+                const testCat1 = testCase.dataset.category1;
+                const testCat2 = testCase.dataset.category2;
+                const status = testCase.dataset.status;
+
+                // 获取SQL内容
+                const sqlContainer = testCase.querySelector('.sql-container');
+                const sqlStatements = sqlContainer ? sqlContainer.textContent.toLowerCase() : '';
+
+                // 检查搜索条件
+                const matchesSearch = !searchText ||
+                    name.includes(searchText) ||
+                    description.includes(searchText) ||
+                    sqlStatements.includes(searchText);
+
+                // 检查分类过滤
+                let matchesCategory = true;
+                if (selectedCategory.cat1) {
+                    // 如果选择了一级分类，检查是否匹配
+                    if (testCat1 !== selectedCategory.cat1) {
+                        matchesCategory = false;
+                    } else {
+                        // 如果一级分类匹配，检查二级分类的多选
+                        const selectedCat2Checkboxes = document.querySelectorAll(
+                            `.cat2-checkbox[data-cat1="${selectedCategory.cat1}"]:checked`
+                        );
+
+                        if (selectedCat2Checkboxes.length > 0) {
+                            // 如果有选中的二级分类，测试必须匹配其中之一
+                            const selectedCat2Values = Array.from(selectedCat2Checkboxes).map(cb => cb.value);
+                            matchesCategory = selectedCat2Values.includes(testCat2);
+                        }
+                        // 如果没有选中任何二级分类，不显示该一级分类下的任何测试
+                        else if (testCat2) {
+                            matchesCategory = false;
+                        }
+                    }
+                }
+
+                // 检查状态过滤
+                const matchesStatus = (status === 'passed' && showPassed) ||
+                    (status === 'failed' && showFailed);
+
+                // 显示或隐藏
+                if (matchesSearch && matchesCategory && matchesStatus) {
+                    testCase.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    testCase.style.display = 'none';
+                }
+            });
+
+            // 显示或隐藏"无结果"消息
+            const resultsDiv = document.getElementById('testResults');
+            const noResultsDiv = document.getElementById('noResults');
+
+            if (visibleCount === 0) {
+                resultsDiv.style.display = 'none';
+                noResultsDiv.style.display = 'block';
+            } else {
+                resultsDiv.style.display = 'block';
+                noResultsDiv.style.display = 'none';
+            }
+        }
+
+        // 事件监听器
+        document.getElementById('searchInput').addEventListener('input', filterTests);
+        document.getElementById('showPassed').addEventListener('change', filterTests);
+        document.getElementById('showFailed').addEventListener('change', filterTests);
+
+        // 初始化
+        initCategoryTree();
+        filterTests();
+    </script>
+</body>
+
+</html>

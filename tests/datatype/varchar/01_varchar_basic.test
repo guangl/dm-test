@@ -1,0 +1,24 @@
+# Test Case Name: VARCHAR类型基本功能测试
+# Description: 测试VARCHAR类型的创建、插入、查询等基本功能
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_basic;
+
+statement ok
+CREATE TABLE test_varchar_basic (id INTEGER PRIMARY KEY, name VARCHAR(50), description VARCHAR(200));
+
+statement ok
+INSERT INTO test_varchar_basic VALUES (1, 'Product A', 'High quality product');
+
+statement ok
+INSERT INTO test_varchar_basic VALUES (2, 'Product B', 'Budget friendly option');
+
+query ITT
+SELECT * FROM test_varchar_basic ORDER BY id;
+----
+1 Product A High quality product
+2 Product B Budget friendly option
+
+statement ok
+DROP TABLE test_varchar_basic;

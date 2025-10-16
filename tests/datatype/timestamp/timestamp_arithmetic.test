@@ -1,0 +1,38 @@
+# Test Case Name: TIMESTAMP类型算术运算测试
+# Description: 测试TIMESTAMP类型的算术运算
+# Category: datatype/timestamp
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_arithmetic;
+
+statement ok
+CREATE TABLE test_timestamp_arithmetic(
+    id INT,
+    base_timestamp TIMESTAMP
+);
+
+statement ok
+INSERT INTO test_timestamp_arithmetic VALUES(1, TIMESTAMP '2023-10-15 10:00:00');
+
+query II
+SELECT id, base_timestamp + 5 FROM test_timestamp_arithmetic;
+----
+1 2023-10-20 10:00:00.000000
+
+query II
+SELECT id, base_timestamp + INTERVAL '2' HOUR FROM test_timestamp_arithmetic;
+----
+1 2023-10-15 12:00:00.000000
+
+query II
+SELECT id, base_timestamp - INTERVAL '30' MINUTE FROM test_timestamp_arithmetic;
+----
+1 2023-10-15 09:30:00.000000
+
+query II
+SELECT id, base_timestamp + 2.5 FROM test_timestamp_arithmetic;
+----
+1 2023-10-17 22:00:00.000000
+
+statement ok
+DROP TABLE test_timestamp_arithmetic;

@@ -1,0 +1,33 @@
+# Test Case Name: TEXT类型NULL值测试
+# Description: 测试TEXT类型对NULL值的处理
+# Category: datatype/text
+
+statement ok
+DROP TABLE IF EXISTS test_text_null;
+
+statement ok
+CREATE TABLE test_text_null(id INT, content TEXT);
+
+statement ok
+INSERT INTO test_text_null VALUES(1, NULL);
+
+statement ok
+INSERT INTO test_text_null VALUES(2, '');
+
+statement ok
+INSERT INTO test_text_null VALUES(3, 'Not NULL');
+
+query IT
+SELECT * FROM test_text_null ORDER BY id;
+----
+1  NULL
+2  
+3  Not NULL
+
+query I
+SELECT COUNT(*) FROM test_text_null WHERE content IS NULL;
+----
+1
+
+statement ok
+DROP TABLE test_text_null;

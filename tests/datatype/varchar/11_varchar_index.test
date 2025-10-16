@@ -1,0 +1,26 @@
+# Test Case Name: VARCHAR类型索引测试
+# Description: 测试在VARCHAR类型字段上创建索引
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_index;
+
+statement ok
+CREATE TABLE test_varchar_index (id INTEGER PRIMARY KEY, username VARCHAR(50), email VARCHAR(100));
+
+statement ok
+CREATE INDEX idx_username ON test_varchar_index(username);
+
+statement ok
+INSERT INTO test_varchar_index VALUES (1, 'alice', 'alice@example.com'), (2, 'bob', 'bob@example.com');
+
+query ITT
+SELECT * FROM test_varchar_index WHERE username = 'alice';
+----
+1 alice alice@example.com
+
+statement ok
+DROP INDEX idx_username;
+
+statement ok
+DROP TABLE test_varchar_index;

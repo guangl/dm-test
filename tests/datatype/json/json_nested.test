@@ -1,0 +1,23 @@
+# Test Case Name: JSON类型嵌套结构测试
+# Description: 测试JSON类型存储嵌套的复杂数据结构
+# Category: datatype/json
+
+statement ok
+DROP TABLE IF EXISTS test_json_nested;
+
+statement ok
+CREATE TABLE test_json_nested(id INT, json_data JSON);
+
+statement ok
+INSERT INTO test_json_nested VALUES(1, '{"user": {"name": "Alice", "address": {"city": "Beijing"}}}');
+
+statement ok
+INSERT INTO test_json_nested VALUES(2, '{"items": [{"id": 1, "name": "Item1"}, {"id": 2, "name": "Item2"}]}');
+
+query I
+SELECT COUNT(*) FROM test_json_nested WHERE json_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_json_nested;

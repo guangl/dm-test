@@ -1,0 +1,25 @@
+# Test Case Name: TIME类型精度测试
+# Description: 测试TIME类型不同小数秒精度(0-6)
+# Category: datatype/time
+
+statement ok
+DROP TABLE IF EXISTS test_time_precision;
+
+statement ok
+CREATE TABLE test_time_precision(
+    id INT,
+    time0 TIME(0),
+    time3 TIME(3),
+    time6 TIME(6)
+);
+
+statement ok
+INSERT INTO test_time_precision VALUES(1, '12:30:45.123456', '12:30:45.123456', '12:30:45.123456');
+
+query IIII
+SELECT * FROM test_time_precision;
+----
+1 12:30:45 12:30:45.123 12:30:45.123456
+
+statement ok
+DROP TABLE test_time_precision;

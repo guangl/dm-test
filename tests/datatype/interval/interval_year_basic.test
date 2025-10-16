@@ -1,0 +1,31 @@
+# Test Case Name: INTERVAL YEAR类型基本操作测试
+# Description: 测试INTERVAL YEAR类型的基本功能
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_year;
+
+statement ok
+CREATE TABLE test_interval_year(
+    id INT,
+    duration INTERVAL YEAR(4)
+);
+
+statement ok
+INSERT INTO test_interval_year VALUES(1, INTERVAL '2023' YEAR(4));
+
+statement ok
+INSERT INTO test_interval_year VALUES(2, INTERVAL '0100' YEAR(4));
+
+statement ok
+INSERT INTO test_interval_year VALUES(3, INTERVAL '0005' YEAR(4));
+
+query II
+SELECT * FROM test_interval_year ORDER BY id;
+----
+1 INTERVAL '2023' YEAR(4)
+2 INTERVAL '100' YEAR(4)
+3 INTERVAL '5' YEAR(4)
+
+statement ok
+DROP TABLE test_interval_year;

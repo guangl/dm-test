@@ -1,0 +1,22 @@
+# Test Case Name: NUMERIC类型排序测试
+# Description: 测试NUMERIC类型的排序操作
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_order;
+
+statement ok
+CREATE TABLE test_numeric_order (id INTEGER PRIMARY KEY, val NUMERIC(10,2));
+
+statement ok
+INSERT INTO test_numeric_order VALUES (1, 50.00), (2, 10.50), (3, 30.25);
+
+query IR
+SELECT * FROM test_numeric_order ORDER BY val ASC;
+----
+2 10.50
+3 30.25
+1 50.00
+
+statement ok
+DROP TABLE test_numeric_order;

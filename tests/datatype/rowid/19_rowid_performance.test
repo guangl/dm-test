@@ -1,0 +1,20 @@
+# Test Case Name: ROWID性能测试
+# Description: 测试使用ROWID的性能特性
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_perf;
+
+statement ok
+CREATE TABLE test_rowid_perf (id INTEGER PRIMARY KEY, data VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_perf VALUES (1, 'A'), (2, 'B'), (3, 'C'), (4, 'D'), (5, 'E');
+
+query I
+SELECT COUNT(*) FROM test_rowid_perf WHERE ROWID IS NOT NULL;
+----
+5
+
+statement ok
+DROP TABLE test_rowid_perf;

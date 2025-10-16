@@ -1,0 +1,26 @@
+# Test Case Name: IMAGE类型二进制数据测试
+# Description: 测试IMAGE类型存储二进制数据
+# Category: datatype/image
+
+statement ok
+DROP TABLE IF EXISTS test_image_binary;
+
+statement ok
+CREATE TABLE test_image_binary(id INT, img_data IMAGE);
+
+statement ok
+INSERT INTO test_image_binary VALUES(1, 0x00);
+
+statement ok
+INSERT INTO test_image_binary VALUES(2, 0xFF);
+
+statement ok
+INSERT INTO test_image_binary VALUES(3, 0x0123456789ABCDEF);
+
+query I
+SELECT COUNT(*) FROM test_image_binary WHERE img_data IS NOT NULL;
+----
+3
+
+statement ok
+DROP TABLE test_image_binary;

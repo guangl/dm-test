@@ -1,0 +1,32 @@
+# Test Case Name: ROWID多表测试
+# Description: 测试多表中的ROWID
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_multi1;
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_multi2;
+
+statement ok
+CREATE TABLE test_rowid_multi1 (id INTEGER PRIMARY KEY, val VARCHAR(10));
+
+statement ok
+CREATE TABLE test_rowid_multi2 (id INTEGER PRIMARY KEY, val VARCHAR(10));
+
+statement ok
+INSERT INTO test_rowid_multi1 VALUES (1, 'A');
+
+statement ok
+INSERT INTO test_rowid_multi2 VALUES (1, 'B');
+
+query I
+SELECT COUNT(*) FROM test_rowid_multi1 WHERE ROWID IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_rowid_multi1;
+
+statement ok
+DROP TABLE test_rowid_multi2;

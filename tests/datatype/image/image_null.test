@@ -1,0 +1,28 @@
+# Test Case Name: IMAGE类型NULL值测试
+# Description: 测试IMAGE类型对NULL值的处理
+# Category: datatype/image
+
+statement ok
+DROP TABLE IF EXISTS test_image_null;
+
+statement ok
+CREATE TABLE test_image_null(id INT, img_data IMAGE);
+
+statement ok
+INSERT INTO test_image_null VALUES(1, NULL);
+
+statement ok
+INSERT INTO test_image_null VALUES(2, 0x00);
+
+query I
+SELECT COUNT(*) FROM test_image_null WHERE img_data IS NULL;
+----
+1
+
+query I
+SELECT COUNT(*) FROM test_image_null WHERE img_data IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_image_null;

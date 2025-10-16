@@ -1,0 +1,20 @@
+# Test Case Name: NUMERIC类型精度测试
+# Description: 测试NUMERIC类型的精度和小数位数
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_precision;
+
+statement ok
+CREATE TABLE test_numeric_precision (id INTEGER PRIMARY KEY, value1 NUMERIC(5,2), value2 NUMERIC(10,4));
+
+statement ok
+INSERT INTO test_numeric_precision VALUES (1, 123.45, 12345.6789);
+
+query IRR
+SELECT * FROM test_numeric_precision;
+----
+1 123.45 12345.6789
+
+statement ok
+DROP TABLE test_numeric_precision;

@@ -1,0 +1,20 @@
+# Test Case Name: REAL类型算术运算测试
+# Description: 测试REAL类型的算术运算
+# Category: datatype/real
+
+statement ok
+DROP TABLE IF EXISTS test_real_arith;
+
+statement ok
+CREATE TABLE test_real_arith (id INTEGER PRIMARY KEY, v1 REAL, v2 REAL);
+
+statement ok
+INSERT INTO test_real_arith VALUES (1, 10.5, 5.5);
+
+query F
+SELECT v1 + v2 FROM test_real_arith WHERE id = 1;
+----
+16.0
+
+statement ok
+DROP TABLE test_real_arith;

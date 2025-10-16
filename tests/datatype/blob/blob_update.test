@@ -1,0 +1,31 @@
+# Test Case Name: BLOB类型更新操作测试
+# Description: 测试BLOB类型的UPDATE操作
+# Category: datatype/blob
+
+statement ok
+DROP TABLE IF EXISTS test_blob_update;
+
+statement ok
+CREATE TABLE test_blob_update(id INT, blob_data BLOB);
+
+statement ok
+INSERT INTO test_blob_update VALUES(1, 0xABCD);
+
+statement ok
+UPDATE test_blob_update SET blob_data = 0xEF01 WHERE id = 1;
+
+query I
+SELECT COUNT(*) FROM test_blob_update WHERE blob_data IS NOT NULL;
+----
+1
+
+statement ok
+UPDATE test_blob_update SET blob_data = NULL WHERE id = 1;
+
+query I
+SELECT COUNT(*) FROM test_blob_update WHERE blob_data IS NULL;
+----
+1
+
+statement ok
+DROP TABLE test_blob_update;

@@ -1,0 +1,32 @@
+# Test Case Name: TIME类型边界值测试
+# Description: 测试TIME类型的最小值和最大值
+# Category: datatype/time
+
+statement ok
+DROP TABLE IF EXISTS test_time_boundary;
+
+statement ok
+CREATE TABLE test_time_boundary(
+    id INT,
+    test_time TIME(6),
+    description VARCHAR(50)
+);
+
+statement ok
+INSERT INTO test_time_boundary VALUES(1, TIME '00:00:00.000000', '最小时间');
+
+statement ok
+INSERT INTO test_time_boundary VALUES(2, TIME '23:59:59.999999', '最大时间');
+
+statement ok
+INSERT INTO test_time_boundary VALUES(3, TIME '12:00:00.000000', '正午时间');
+
+query IIT
+SELECT * FROM test_time_boundary ORDER BY id;
+----
+1 00:00:00.000000 最小时间
+2 23:59:59.999999 最大时间
+3 12:00:00.000000 正午时间
+
+statement ok
+DROP TABLE test_time_boundary;

@@ -1,0 +1,20 @@
+# Test Case Name: BFILE类型基本操作测试
+# Description: 测试BFILE类型的创建和基本操作(仅能只读访问外部文件)
+# Category: datatype/bfile
+
+statement ok
+DROP TABLE IF EXISTS test_bfile;
+
+statement ok
+CREATE TABLE test_bfile(id INT, file_ref BFILE);
+
+statement ok
+INSERT INTO test_bfile VALUES(1, NULL);
+
+query I
+SELECT COUNT(*) FROM test_bfile WHERE file_ref IS NULL;
+----
+1
+
+statement ok
+DROP TABLE test_bfile;

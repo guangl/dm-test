@@ -1,0 +1,33 @@
+# Test Case Name: TIMESTAMP WITH TIME ZONE的NULL值测试
+# Description: 测试TIMESTAMP WITH TIME ZONE类型的NULL值处理
+# Category: datatype/timestamp_with_timezone
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_tz_null;
+
+statement ok
+CREATE TABLE test_timestamp_tz_null(
+    id INT,
+    nullable_timestamp TIMESTAMP WITH TIME ZONE,
+    not_null_timestamp TIMESTAMP WITH TIME ZONE NOT NULL
+);
+
+statement ok
+INSERT INTO test_timestamp_tz_null VALUES(1, NULL, TIMESTAMP '2023-10-15 12:00:00 +8:00');
+
+statement ok
+INSERT INTO test_timestamp_tz_null VALUES(2, TIMESTAMP '2023-01-01 00:00:00 -5:00', TIMESTAMP '2023-12-31 23:59:59 +0:00');
+
+query III
+SELECT * FROM test_timestamp_tz_null ORDER BY id;
+----
+1 NULL 2023-10-15 12:00:00.000000 +08:00
+2 2023-01-01 00:00:00.000000 -05:00 2023-12-31 23:59:59.000000 +00:00
+
+query I
+SELECT COUNT(*) FROM test_timestamp_tz_null WHERE nullable_timestamp IS NULL;
+----
+1
+
+statement ok
+DROP TABLE test_timestamp_tz_null;

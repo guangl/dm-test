@@ -1,0 +1,23 @@
+# Test Case Name: JSON类型基本操作测试
+# Description: 测试JSON类型的创建、插入、查询等基本操作
+# Category: datatype/json
+
+statement ok
+DROP TABLE IF EXISTS test_json;
+
+statement ok
+CREATE TABLE test_json(id INT, json_data JSON);
+
+statement ok
+INSERT INTO test_json VALUES(1, '{"name": "Alice", "age": 30}');
+
+statement ok
+INSERT INTO test_json VALUES(2, '{"name": "Bob", "age": 25}');
+
+query I
+SELECT COUNT(*) FROM test_json WHERE json_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_json;

@@ -1,0 +1,37 @@
+# Test Case Name: BLOB类型综合操作测试
+# Description: 测试BLOB类型的增删改查操作
+# Category: datatype/blob
+
+statement ok
+DROP TABLE IF EXISTS test_blob_ops;
+
+statement ok
+CREATE TABLE test_blob_ops(id INT, blob_data BLOB);
+
+statement ok
+INSERT INTO test_blob_ops VALUES(1, 0x01);
+
+statement ok
+INSERT INTO test_blob_ops VALUES(2, 0x02);
+
+statement ok
+INSERT INTO test_blob_ops VALUES(3, 0x03);
+
+query I
+SELECT COUNT(*) FROM test_blob_ops;
+----
+3
+
+statement ok
+DELETE FROM test_blob_ops WHERE id = 2;
+
+query I
+SELECT COUNT(*) FROM test_blob_ops;
+----
+2
+
+statement ok
+UPDATE test_blob_ops SET blob_data = 0xFF WHERE id = 1;
+
+statement ok
+DROP TABLE test_blob_ops;

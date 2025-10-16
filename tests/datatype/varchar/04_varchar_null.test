@@ -1,0 +1,24 @@
+# Test Case Name: VARCHAR类型NULL值处理
+# Description: 测试VARCHAR类型对NULL值的处理
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_null;
+
+statement ok
+CREATE TABLE test_varchar_null (id INTEGER PRIMARY KEY, nullable_text VARCHAR(100), not_null_text VARCHAR(100) NOT NULL);
+
+statement ok
+INSERT INTO test_varchar_null VALUES (1, NULL, 'Required'), (2, 'Optional', 'Required');
+
+query ITT
+SELECT * FROM test_varchar_null ORDER BY id;
+----
+1 NULL Required
+2 Optional Required
+
+statement error
+INSERT INTO test_varchar_null VALUES (3, 'Test', NULL);
+
+statement ok
+DROP TABLE test_varchar_null;

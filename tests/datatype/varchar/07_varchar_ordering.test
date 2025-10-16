@@ -1,0 +1,23 @@
+# Test Case Name: VARCHAR类型排序测试
+# Description: 测试VARCHAR类型在ORDER BY中的排序
+# Category: datatype/varchar
+
+statement ok
+DROP TABLE IF EXISTS test_varchar_ordering;
+
+statement ok
+CREATE TABLE test_varchar_ordering (id INTEGER PRIMARY KEY, name VARCHAR(30));
+
+statement ok
+INSERT INTO test_varchar_ordering VALUES (1, 'Zebra'), (2, 'Apple'), (3, 'Mango'), (4, 'Banana');
+
+query IT
+SELECT * FROM test_varchar_ordering ORDER BY name ASC;
+----
+2 Apple
+4 Banana
+3 Mango
+1 Zebra
+
+statement ok
+DROP TABLE test_varchar_ordering;

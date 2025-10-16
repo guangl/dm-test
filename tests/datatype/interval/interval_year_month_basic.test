@@ -1,0 +1,31 @@
+# Test Case Name: INTERVAL YEAR TO MONTH类型基本操作测试
+# Description: 测试INTERVAL YEAR TO MONTH类型的基本功能
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_year_month;
+
+statement ok
+CREATE TABLE test_interval_year_month(
+    id INT,
+    duration INTERVAL YEAR(2) TO MONTH
+);
+
+statement ok
+INSERT INTO test_interval_year_month VALUES(1, INTERVAL '15-8' YEAR(2) TO MONTH);
+
+statement ok
+INSERT INTO test_interval_year_month VALUES(2, INTERVAL '03-11' YEAR(2) TO MONTH);
+
+statement ok
+INSERT INTO test_interval_year_month VALUES(3, INTERVAL '00-6' YEAR(2) TO MONTH);
+
+query II
+SELECT * FROM test_interval_year_month ORDER BY id;
+----
+1 INTERVAL '15-8' YEAR(2) TO MONTH
+2 INTERVAL '3-11' YEAR(2) TO MONTH
+3 INTERVAL '0-6' YEAR(2) TO MONTH
+
+statement ok
+DROP TABLE test_interval_year_month;

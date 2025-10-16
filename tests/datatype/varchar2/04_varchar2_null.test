@@ -1,0 +1,24 @@
+# Test Case Name: VARCHAR2类型NULL值测试
+# Description: 测试VARCHAR2类型对NULL值的处理
+# Category: datatype/varchar2
+
+statement ok
+DROP TABLE IF EXISTS test_varchar2_null;
+
+statement ok
+CREATE TABLE test_varchar2_null (id INTEGER PRIMARY KEY, nullable_text VARCHAR2(100), not_null_text VARCHAR2(100) NOT NULL);
+
+statement ok
+INSERT INTO test_varchar2_null VALUES (1, NULL, 'Required'), (2, 'Optional', 'Required');
+
+query ITT
+SELECT * FROM test_varchar2_null ORDER BY id;
+----
+1 NULL Required
+2 Optional Required
+
+statement error
+INSERT INTO test_varchar2_null VALUES (3, 'Test', NULL);
+
+statement ok
+DROP TABLE test_varchar2_null;

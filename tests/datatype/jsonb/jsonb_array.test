@@ -1,0 +1,23 @@
+# Test Case Name: JSONB类型数组测试
+# Description: 测试JSONB类型存储数组数据
+# Category: datatype/jsonb
+
+statement ok
+DROP TABLE IF EXISTS test_jsonb_array;
+
+statement ok
+CREATE TABLE test_jsonb_array(id INT, jsonb_data JSONB);
+
+statement ok
+INSERT INTO test_jsonb_array VALUES(1, '["red", "green", "blue"]');
+
+statement ok
+INSERT INTO test_jsonb_array VALUES(2, '[10, 20, 30, 40]');
+
+query I
+SELECT COUNT(*) FROM test_jsonb_array WHERE jsonb_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_jsonb_array;

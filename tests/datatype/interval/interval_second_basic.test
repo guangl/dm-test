@@ -1,0 +1,31 @@
+# Test Case Name: INTERVAL SECOND类型基本操作测试
+# Description: 测试INTERVAL SECOND类型的基本功能
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_second;
+
+statement ok
+CREATE TABLE test_interval_second(
+    id INT,
+    duration INTERVAL SECOND(2, 1)
+);
+
+statement ok
+INSERT INTO test_interval_second VALUES(1, INTERVAL '59.5' SECOND(2, 1));
+
+statement ok
+INSERT INTO test_interval_second VALUES(2, INTERVAL '30.0' SECOND(2, 1));
+
+statement ok
+INSERT INTO test_interval_second VALUES(3, INTERVAL '15.9' SECOND(2, 1));
+
+query II
+SELECT * FROM test_interval_second ORDER BY id;
+----
+1 INTERVAL '59.5' SECOND(2,1)
+2 INTERVAL '30.0' SECOND(2,1)
+3 INTERVAL '15.9' SECOND(2,1)
+
+statement ok
+DROP TABLE test_interval_second;

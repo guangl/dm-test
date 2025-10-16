@@ -1,0 +1,20 @@
+# Test Case Name: ROWID类型基本功能测试
+# Description: 测试ROWID类型的基本查询功能
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_basic;
+
+statement ok
+CREATE TABLE test_rowid_basic (id INTEGER PRIMARY KEY, name VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_basic VALUES (1, 'Alice'), (2, 'Bob');
+
+query I
+SELECT COUNT(*) FROM test_rowid_basic WHERE ROWID IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_rowid_basic;

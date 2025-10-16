@@ -1,0 +1,31 @@
+# Test Case Name: JSON类型NULL值测试
+# Description: 测试JSON类型对NULL值和JSON null值的处理
+# Category: datatype/json
+
+statement ok
+DROP TABLE IF EXISTS test_json_null;
+
+statement ok
+CREATE TABLE test_json_null(id INT, json_data JSON);
+
+statement ok
+INSERT INTO test_json_null VALUES(1, NULL);
+
+statement ok
+INSERT INTO test_json_null VALUES(2, 'null');
+
+statement ok
+INSERT INTO test_json_null VALUES(3, '{"key": null}');
+
+query I
+SELECT COUNT(*) FROM test_json_null WHERE json_data IS NULL;
+----
+1
+
+query I
+SELECT COUNT(*) FROM test_json_null WHERE json_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_json_null;

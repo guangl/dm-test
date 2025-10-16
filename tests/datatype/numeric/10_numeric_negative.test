@@ -1,0 +1,21 @@
+# Test Case Name: NUMERIC类型负数测试
+# Description: 测试NUMERIC类型对负数的处理
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_neg;
+
+statement ok
+CREATE TABLE test_numeric_neg (id INTEGER PRIMARY KEY, val NUMERIC(10,2));
+
+statement ok
+INSERT INTO test_numeric_neg VALUES (1, -99.99), (2, -0.01);
+
+query IR
+SELECT * FROM test_numeric_neg ORDER BY id;
+----
+1 -99.99
+2 -0.01
+
+statement ok
+DROP TABLE test_numeric_neg;

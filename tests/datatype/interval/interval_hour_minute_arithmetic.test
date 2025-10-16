@@ -1,0 +1,29 @@
+# Test Case Name: INTERVAL HOUR TO MINUTE时间运算测试
+# Description: 测试INTERVAL HOUR TO MINUTE类型与TIME/TIMESTAMP类型的运算
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_hour_minute_arithmetic;
+
+statement ok
+CREATE TABLE test_interval_hour_minute_arithmetic(
+    id INT,
+    base_time TIME,
+    base_timestamp TIMESTAMP
+);
+
+statement ok
+INSERT INTO test_interval_hour_minute_arithmetic VALUES(1, TIME '10:00:00', TIMESTAMP '2023-10-15 10:00:00');
+
+query III
+SELECT id, base_time + INTERVAL '05:30' HOUR(2) TO MINUTE, base_timestamp + INTERVAL '05:30' HOUR(2) TO MINUTE FROM test_interval_hour_minute_arithmetic;
+----
+1 15:30:00 2023-10-15 15:30:00.000000
+
+query III
+SELECT id, base_time - INTERVAL '02:15' HOUR(2) TO MINUTE, base_timestamp - INTERVAL '02:15' HOUR(2) TO MINUTE FROM test_interval_hour_minute_arithmetic;
+----
+1 07:45:00 2023-10-15 07:45:00.000000
+
+statement ok
+DROP TABLE test_interval_hour_minute_arithmetic;

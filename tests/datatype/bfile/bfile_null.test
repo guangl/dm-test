@@ -1,0 +1,23 @@
+# Test Case Name: BFILE类型NULL值测试
+# Description: 测试BFILE类型对NULL值的处理
+# Category: datatype/bfile
+
+statement ok
+DROP TABLE IF EXISTS test_bfile_null;
+
+statement ok
+CREATE TABLE test_bfile_null(id INT, file_ref BFILE);
+
+statement ok
+INSERT INTO test_bfile_null VALUES(1, NULL);
+
+statement ok
+INSERT INTO test_bfile_null VALUES(2, NULL);
+
+query I
+SELECT COUNT(*) FROM test_bfile_null WHERE file_ref IS NULL;
+----
+2
+
+statement ok
+DROP TABLE test_bfile_null;

@@ -1,0 +1,20 @@
+# Test Case Name: ROWID类型查询测试
+# Description: 测试使用ROWID进行行定位
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_select;
+
+statement ok
+CREATE TABLE test_rowid_select (id INTEGER PRIMARY KEY, data VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_select VALUES (1, 'Data1'), (2, 'Data2'), (3, 'Data3');
+
+query ITT
+SELECT id, data, ROWID FROM test_rowid_select WHERE id = 2;
+----
+2 Data2 (rowid)
+
+statement ok
+DROP TABLE test_rowid_select;

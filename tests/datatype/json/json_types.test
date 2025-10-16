@@ -1,0 +1,32 @@
+# Test Case Name: JSON类型多种数据类型测试
+# Description: 测试JSON类型存储不同的JSON数据类型
+# Category: datatype/json
+
+statement ok
+DROP TABLE IF EXISTS test_json_types;
+
+statement ok
+CREATE TABLE test_json_types(id INT, json_data JSON);
+
+statement ok
+INSERT INTO test_json_types VALUES(1, '{"string": "text"}');
+
+statement ok
+INSERT INTO test_json_types VALUES(2, '{"number": 123}');
+
+statement ok
+INSERT INTO test_json_types VALUES(3, '{"float": 3.14}');
+
+statement ok
+INSERT INTO test_json_types VALUES(4, '{"boolean": true}');
+
+statement ok
+INSERT INTO test_json_types VALUES(5, '{"null": null}');
+
+query I
+SELECT COUNT(*) FROM test_json_types WHERE json_data IS NOT NULL;
+----
+5
+
+statement ok
+DROP TABLE test_json_types;

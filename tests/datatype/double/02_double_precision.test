@@ -1,0 +1,20 @@
+# Test Case Name: DOUBLE类型高精度测试
+# Description: 测试DOUBLE类型的高精度特性
+# Category: datatype/double
+
+statement ok
+DROP TABLE IF EXISTS test_double_prec;
+
+statement ok
+CREATE TABLE test_double_prec (id INTEGER PRIMARY KEY, val DOUBLE);
+
+statement ok
+INSERT INTO test_double_prec VALUES (1, 1.23456789012345);
+
+query I
+SELECT COUNT(*) FROM test_double_prec WHERE val > 1.2;
+----
+1
+
+statement ok
+DROP TABLE test_double_prec;

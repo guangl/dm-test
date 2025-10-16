@@ -1,0 +1,28 @@
+# Test Case Name: TEXT类型基本操作测试
+# Description: 测试TEXT类型的创建、插入、查询等基本操作
+# Category: datatype/text
+
+statement ok
+DROP TABLE IF EXISTS test_text;
+
+statement ok
+CREATE TABLE test_text(id INT, content TEXT);
+
+statement ok
+INSERT INTO test_text VALUES(1, 'Hello World');
+
+statement ok
+INSERT INTO test_text VALUES(2, '这是中文文本测试');
+
+statement ok
+INSERT INTO test_text VALUES(3, 'This is a longer text content for testing TEXT data type.');
+
+query IT
+SELECT * FROM test_text ORDER BY id;
+----
+1  Hello World
+2  这是中文文本测试
+3  This is a longer text content for testing TEXT data type.
+
+statement ok
+DROP TABLE test_text;

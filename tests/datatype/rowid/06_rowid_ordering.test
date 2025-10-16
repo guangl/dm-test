@@ -1,0 +1,22 @@
+# Test Case Name: ROWID排序测试
+# Description: 测试按ROWID排序
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_order;
+
+statement ok
+CREATE TABLE test_rowid_order (id INTEGER PRIMARY KEY, val VARCHAR(10));
+
+statement ok
+INSERT INTO test_rowid_order VALUES (3, 'C'), (1, 'A'), (2, 'B');
+
+query IT
+SELECT id, val FROM test_rowid_order ORDER BY ROWID;
+----
+3 C
+1 A
+2 B
+
+statement ok
+DROP TABLE test_rowid_order;

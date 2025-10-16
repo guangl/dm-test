@@ -1,0 +1,21 @@
+# Test Case Name: CHARACTER类型聚合测试
+# Description: 测试CHARACTER类型在聚合操作中的使用
+# Category: datatype/character
+
+statement ok
+DROP TABLE IF EXISTS test_character_aggregate;
+
+statement ok
+CREATE TABLE test_character_aggregate (id INTEGER PRIMARY KEY, category CHARACTER(15));
+
+statement ok
+INSERT INTO test_character_aggregate VALUES (1, 'TypeA'), (2, 'TypeB'), (3, 'TypeA');
+
+query TI
+SELECT category, COUNT(*) FROM test_character_aggregate GROUP BY category ORDER BY category;
+----
+TypeA           2
+TypeB           1
+
+statement ok
+DROP TABLE test_character_aggregate;

@@ -1,0 +1,18 @@
+# Test Case Name: NUMERIC类型约束测试
+# Description: 测试NUMERIC类型的CHECK约束
+# Category: datatype/numeric
+
+statement ok
+DROP TABLE IF EXISTS test_numeric_const;
+
+statement ok
+CREATE TABLE test_numeric_const (id INTEGER PRIMARY KEY, price NUMERIC(10,2) CHECK (price >= 0));
+
+statement ok
+INSERT INTO test_numeric_const VALUES (1, 100.00);
+
+statement error
+INSERT INTO test_numeric_const VALUES (2, -10.00);
+
+statement ok
+DROP TABLE test_numeric_const;

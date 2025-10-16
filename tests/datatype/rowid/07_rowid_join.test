@@ -1,0 +1,33 @@
+# Test Case Name: ROWID连接测试
+# Description: 测试在JOIN中使用ROWID
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_t1;
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_t2;
+
+statement ok
+CREATE TABLE test_rowid_t1 (id INTEGER PRIMARY KEY, name VARCHAR(20));
+
+statement ok
+CREATE TABLE test_rowid_t2 (id INTEGER PRIMARY KEY, value VARCHAR(20));
+
+statement ok
+INSERT INTO test_rowid_t1 VALUES (1, 'Alice'), (2, 'Bob');
+
+statement ok
+INSERT INTO test_rowid_t2 VALUES (1, 'Val1'), (2, 'Val2');
+
+query ITT
+SELECT t1.id, t1.name, t2.value FROM test_rowid_t1 t1 JOIN test_rowid_t2 t2 ON t1.id = t2.id ORDER BY t1.id;
+----
+1 Alice Val1
+2 Bob Val2
+
+statement ok
+DROP TABLE test_rowid_t1;
+
+statement ok
+DROP TABLE test_rowid_t2;

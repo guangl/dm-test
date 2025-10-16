@@ -1,0 +1,21 @@
+# Test Case Name: VARCHAR2类型基本功能测试
+# Description: 测试VARCHAR2类型的创建、插入、查询等基本功能
+# Category: datatype/varchar2
+
+statement ok
+DROP TABLE IF EXISTS test_varchar2_basic;
+
+statement ok
+CREATE TABLE test_varchar2_basic (id INTEGER PRIMARY KEY, name VARCHAR2(50), description VARCHAR2(200));
+
+statement ok
+INSERT INTO test_varchar2_basic VALUES (1, 'Item A', 'Description for Item A'), (2, 'Item B', 'Description for Item B');
+
+query ITT
+SELECT * FROM test_varchar2_basic ORDER BY id;
+----
+1 Item A Description for Item A
+2 Item B Description for Item B
+
+statement ok
+DROP TABLE test_varchar2_basic;

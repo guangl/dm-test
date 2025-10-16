@@ -1,0 +1,26 @@
+# Test Case Name: TIMESTAMP类型精度测试
+# Description: 测试TIMESTAMP类型不同小数秒精度(0-9)
+# Category: datatype/timestamp
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_precision;
+
+statement ok
+CREATE TABLE test_timestamp_precision(
+    id INT,
+    ts0 TIMESTAMP(0),
+    ts3 TIMESTAMP(3),
+    ts6 TIMESTAMP(6),
+    ts9 TIMESTAMP(9)
+);
+
+statement ok
+INSERT INTO test_timestamp_precision VALUES(1, '2023-10-15 12:30:45.123456789', '2023-10-15 12:30:45.123456789', '2023-10-15 12:30:45.123456789', '2023-10-15 12:30:45.123456789');
+
+query IIIII
+SELECT * FROM test_timestamp_precision;
+----
+1 2023-10-15 12:30:45 2023-10-15 12:30:45.123 2023-10-15 12:30:45.123457 2023-10-15 12:30:45.123456789
+
+statement ok
+DROP TABLE test_timestamp_precision;

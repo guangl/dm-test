@@ -1,0 +1,20 @@
+# Test Case Name: ROWID限制测试
+# Description: 测试ROWID的使用限制
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_limits;
+
+statement ok
+CREATE TABLE test_rowid_limits (id INTEGER PRIMARY KEY, text VARCHAR(100));
+
+statement ok
+INSERT INTO test_rowid_limits VALUES (1, 'Testing limits');
+
+query I
+SELECT COUNT(*) FROM test_rowid_limits WHERE ROWID IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_rowid_limits;

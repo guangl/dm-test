@@ -1,0 +1,23 @@
+# Test Case Name: 时间间隔乘除运算测试
+# Description: 测试时间间隔与数值的乘除运算
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_multiply_divide;
+
+statement ok
+CREATE TABLE test_interval_multiply_divide(
+    id INT,
+    base_interval INTERVAL MINUTE TO SECOND
+);
+
+statement ok
+INSERT INTO test_interval_multiply_divide VALUES(1, INTERVAL '10:30' MINUTE TO SECOND);
+
+query II
+SELECT id, base_interval FROM test_interval_multiply_divide;
+----
+1 INTERVAL '10:30.000000' MINUTE(9) TO SECOND(6)
+
+statement ok
+DROP TABLE test_interval_multiply_divide;

@@ -1,0 +1,23 @@
+# Test Case Name: JSONB类型基本操作测试
+# Description: 测试JSONB类型的创建、插入、查询等基本操作
+# Category: datatype/jsonb
+
+statement ok
+DROP TABLE IF EXISTS test_jsonb;
+
+statement ok
+CREATE TABLE test_jsonb(id INT, jsonb_data JSONB);
+
+statement ok
+INSERT INTO test_jsonb VALUES(1, '{"name": "Charlie", "age": 35}');
+
+statement ok
+INSERT INTO test_jsonb VALUES(2, '{"name": "David", "age": 28}');
+
+query I
+SELECT COUNT(*) FROM test_jsonb WHERE jsonb_data IS NOT NULL;
+----
+2
+
+statement ok
+DROP TABLE test_jsonb;

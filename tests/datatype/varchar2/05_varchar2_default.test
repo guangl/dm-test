@@ -1,0 +1,24 @@
+# Test Case Name: VARCHAR2类型默认值测试
+# Description: 测试VARCHAR2类型的默认值设置
+# Category: datatype/varchar2
+
+statement ok
+DROP TABLE IF EXISTS test_varchar2_default;
+
+statement ok
+CREATE TABLE test_varchar2_default (id INTEGER PRIMARY KEY, status VARCHAR2(20) DEFAULT 'PENDING', notes VARCHAR2(100) DEFAULT '');
+
+statement ok
+INSERT INTO test_varchar2_default (id) VALUES (1);
+
+statement ok
+INSERT INTO test_varchar2_default VALUES (2, 'ACTIVE', 'Some notes');
+
+query ITT
+SELECT * FROM test_varchar2_default ORDER BY id;
+----
+1 PENDING (empty)
+2 ACTIVE Some notes
+
+statement ok
+DROP TABLE test_varchar2_default;

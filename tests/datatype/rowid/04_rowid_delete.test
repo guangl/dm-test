@@ -1,0 +1,23 @@
+# Test Case Name: ROWID类型删除测试
+# Description: 测试使用ROWID进行删除操作
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_delete;
+
+statement ok
+CREATE TABLE test_rowid_delete (id INTEGER PRIMARY KEY, name VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_delete VALUES (1, 'Keep'), (2, 'Delete');
+
+statement ok
+DELETE FROM test_rowid_delete WHERE id = 2;
+
+query I
+SELECT COUNT(*) FROM test_rowid_delete;
+----
+1
+
+statement ok
+DROP TABLE test_rowid_delete;

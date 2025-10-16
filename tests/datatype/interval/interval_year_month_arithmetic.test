@@ -1,0 +1,28 @@
+# Test Case Name: INTERVAL YEAR TO MONTH算术运算测试
+# Description: 测试INTERVAL YEAR TO MONTH类型的加减运算
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_year_month_arithmetic;
+
+statement ok
+CREATE TABLE test_interval_year_month_arithmetic(
+    id INT,
+    base_date DATE
+);
+
+statement ok
+INSERT INTO test_interval_year_month_arithmetic VALUES(1, DATE '2023-10-15');
+
+query II
+SELECT id, base_date + INTERVAL '2-6' YEAR(2) TO MONTH FROM test_interval_year_month_arithmetic;
+----
+1 2026-04-15
+
+query II
+SELECT id, base_date - INTERVAL '1-3' YEAR(2) TO MONTH FROM test_interval_year_month_arithmetic;
+----
+1 2022-07-15
+
+statement ok
+DROP TABLE test_interval_year_month_arithmetic;

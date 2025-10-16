@@ -1,0 +1,39 @@
+# Test Case Name: DATE类型格式测试
+# Description: 测试DATE类型支持的各种输入格式
+# Category: datatype/date
+
+statement ok
+DROP TABLE IF EXISTS test_date_format;
+
+statement ok
+CREATE TABLE test_date_format(
+    id INT,
+    test_date DATE
+);
+
+statement ok
+INSERT INTO test_date_format VALUES(1, DATE '2023-10-15');
+
+statement ok
+INSERT INTO test_date_format VALUES(2, '2023/10/15');
+
+statement ok
+INSERT INTO test_date_format VALUES(3, '2023.10.15');
+
+statement ok
+INSERT INTO test_date_format VALUES(4, '2023-10-15');
+
+statement ok
+INSERT INTO test_date_format VALUES(5, DATE '1-1-1');
+
+query II
+SELECT * FROM test_date_format ORDER BY id;
+----
+1 2023-10-15
+2 2023-10-15
+3 2023-10-15
+4 2023-10-15
+5 0001-01-01
+
+statement ok
+DROP TABLE test_date_format;

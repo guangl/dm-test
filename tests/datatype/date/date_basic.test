@@ -1,0 +1,32 @@
+# Test Case Name: DATE类型基本操作测试
+# Description: 测试DATE类型的创建、插入和查询基本功能
+# Category: datatype/date
+
+statement ok
+DROP TABLE IF EXISTS test_date_basic;
+
+statement ok
+CREATE TABLE test_date_basic(
+    id INT,
+    birth_date DATE,
+    hire_date DATE
+);
+
+statement ok
+INSERT INTO test_date_basic VALUES(1, DATE '1990-01-15', '2020-06-01');
+
+statement ok
+INSERT INTO test_date_basic VALUES(2, DATE '1985-12-31', '2019-03-20');
+
+statement ok
+INSERT INTO test_date_basic VALUES(3, '2000-05-20', DATE '2021-01-10');
+
+query III
+SELECT * FROM test_date_basic ORDER BY id;
+----
+1 1990-01-15 2020-06-01
+2 1985-12-31 2019-03-20
+3 2000-05-20 2021-01-10
+
+statement ok
+DROP TABLE test_date_basic;

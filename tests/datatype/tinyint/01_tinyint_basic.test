@@ -1,0 +1,21 @@
+# Test Case Name: TINYINT类型基本功能测试
+# Description: 测试TINYINT类型的基本功能
+# Category: datatype/tinyint
+
+statement ok
+DROP TABLE IF EXISTS test_tinyint_basic;
+
+statement ok
+CREATE TABLE test_tinyint_basic (id INTEGER PRIMARY KEY, val TINYINT);
+
+statement ok
+INSERT INTO test_tinyint_basic VALUES (1, 127), (2, -128);
+
+query II
+SELECT * FROM test_tinyint_basic ORDER BY id;
+----
+1 127
+2 -128
+
+statement ok
+DROP TABLE test_tinyint_basic;

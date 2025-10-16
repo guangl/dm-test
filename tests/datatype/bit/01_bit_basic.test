@@ -1,0 +1,21 @@
+# Test Case Name: BIT类型基本功能测试
+# Description: 测试BIT类型的基本功能
+# Category: datatype/bit
+
+statement ok
+DROP TABLE IF EXISTS test_bit_basic;
+
+statement ok
+CREATE TABLE test_bit_basic (id INTEGER PRIMARY KEY, flag BIT);
+
+statement ok
+INSERT INTO test_bit_basic VALUES (1, 0), (2, 1);
+
+query II
+SELECT * FROM test_bit_basic ORDER BY id;
+----
+1 0
+2 1
+
+statement ok
+DROP TABLE test_bit_basic;

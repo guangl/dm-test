@@ -1,0 +1,38 @@
+# Test Case Name: DATE类型NULL值测试
+# Description: 测试DATE类型的NULL值处理
+# Category: datatype/date
+
+statement ok
+DROP TABLE IF EXISTS test_date_null;
+
+statement ok
+CREATE TABLE test_date_null(
+    id INT,
+    nullable_date DATE,
+    not_null_date DATE NOT NULL
+);
+
+statement ok
+INSERT INTO test_date_null VALUES(1, NULL, DATE '2023-10-15');
+
+statement ok
+INSERT INTO test_date_null VALUES(2, DATE '2023-01-01', DATE '2023-12-31');
+
+query III
+SELECT * FROM test_date_null ORDER BY id;
+----
+1 NULL 2023-10-15
+2 2023-01-01 2023-12-31
+
+query I
+SELECT COUNT(*) FROM test_date_null WHERE nullable_date IS NULL;
+----
+1
+
+query I
+SELECT COUNT(*) FROM test_date_null WHERE nullable_date IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_date_null;

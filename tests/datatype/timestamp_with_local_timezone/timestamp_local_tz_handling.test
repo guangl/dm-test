@@ -1,0 +1,28 @@
+# Test Case Name: TIMESTAMP WITH LOCAL TIME ZONE时区处理测试
+# Description: 测试TIMESTAMP WITH LOCAL TIME ZONE自动转换为本地时区的功能
+# Category: datatype/timestamp_with_local_timezone
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_local_tz_handling;
+
+statement ok
+CREATE TABLE test_timestamp_local_tz_handling(
+    id INT,
+    local_time TIMESTAMP(3) WITH LOCAL TIME ZONE,
+    description VARCHAR(100)
+);
+
+statement ok
+INSERT INTO test_timestamp_local_tz_handling VALUES(1, TIMESTAMP '2023-10-15 12:00:00.000 +8:00', '指定时区插入');
+
+statement ok
+INSERT INTO test_timestamp_local_tz_handling VALUES(2, TIMESTAMP '2023-10-15 12:00:00.000', '默认时区插入');
+
+query IIT
+SELECT * FROM test_timestamp_local_tz_handling ORDER BY id;
+----
+1 2023-10-15 12:00:00.000 指定时区插入
+2 2023-10-15 12:00:00.000 默认时区插入
+
+statement ok
+DROP TABLE test_timestamp_local_tz_handling;

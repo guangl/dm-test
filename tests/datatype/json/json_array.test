@@ -1,0 +1,26 @@
+# Test Case Name: JSON类型数组测试
+# Description: 测试JSON类型存储数组数据
+# Category: datatype/json
+
+statement ok
+DROP TABLE IF EXISTS test_json_array;
+
+statement ok
+CREATE TABLE test_json_array(id INT, json_data JSON);
+
+statement ok
+INSERT INTO test_json_array VALUES(1, '["apple", "banana", "orange"]');
+
+statement ok
+INSERT INTO test_json_array VALUES(2, '[1, 2, 3, 4, 5]');
+
+statement ok
+INSERT INTO test_json_array VALUES(3, '[true, false, null]');
+
+query I
+SELECT COUNT(*) FROM test_json_array WHERE json_data IS NOT NULL;
+----
+3
+
+statement ok
+DROP TABLE test_json_array;

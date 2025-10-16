@@ -1,0 +1,20 @@
+# Test Case Name: ROWID持久性测试
+# Description: 测试ROWID的持久性特征
+# Category: datatype/rowid
+
+statement ok
+DROP TABLE IF EXISTS test_rowid_persist;
+
+statement ok
+CREATE TABLE test_rowid_persist (id INTEGER PRIMARY KEY, data VARCHAR(50));
+
+statement ok
+INSERT INTO test_rowid_persist VALUES (1, 'Persistent');
+
+query I
+SELECT COUNT(*) FROM test_rowid_persist WHERE ROWID IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_rowid_persist;

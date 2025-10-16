@@ -1,0 +1,23 @@
+# Test Case Name: JSONB类型更新操作测试
+# Description: 测试JSONB类型的UPDATE操作
+# Category: datatype/jsonb
+
+statement ok
+DROP TABLE IF EXISTS test_jsonb_update;
+
+statement ok
+CREATE TABLE test_jsonb_update(id INT, jsonb_data JSONB);
+
+statement ok
+INSERT INTO test_jsonb_update VALUES(1, '{"flag": true}');
+
+statement ok
+UPDATE test_jsonb_update SET jsonb_data = '{"flag": false}' WHERE id = 1;
+
+query I
+SELECT COUNT(*) FROM test_jsonb_update WHERE jsonb_data IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_jsonb_update;

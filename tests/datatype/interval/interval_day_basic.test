@@ -1,0 +1,31 @@
+# Test Case Name: INTERVAL DAY类型基本操作测试
+# Description: 测试INTERVAL DAY类型的基本功能
+# Category: datatype/interval
+
+statement ok
+DROP TABLE IF EXISTS test_interval_day;
+
+statement ok
+CREATE TABLE test_interval_day(
+    id INT,
+    duration INTERVAL DAY(3)
+);
+
+statement ok
+INSERT INTO test_interval_day VALUES(1, INTERVAL '150' DAY(3));
+
+statement ok
+INSERT INTO test_interval_day VALUES(2, INTERVAL '030' DAY(3));
+
+statement ok
+INSERT INTO test_interval_day VALUES(3, INTERVAL '007' DAY(3));
+
+query II
+SELECT * FROM test_interval_day ORDER BY id;
+----
+1 INTERVAL '150' DAY(3)
+2 INTERVAL '30' DAY(3)
+3 INTERVAL '7' DAY(3)
+
+statement ok
+DROP TABLE test_interval_day;
