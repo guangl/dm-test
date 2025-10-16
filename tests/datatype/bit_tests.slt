@@ -1,0 +1,1084 @@
+# Generated from datatypes_bit_tests.json
+# Total test cases: 44
+
+# Test Case 1/44
+# 位类型-BIT-边界值测试-0
+# 测试BIT类型的边界值0
+
+statement ok
+DROP TABLE IF EXISTS test_bit_zero;
+
+
+statement ok
+CREATE TABLE test_bit_zero (id INT, col_bit BIT);
+
+statement ok
+INSERT INTO test_bit_zero VALUES (1, 0), (2, 0), (3, 0);
+
+query TT
+SELECT * FROM test_bit_zero ORDER BY id;
+----
+1 0
+2 0
+3 0
+
+statement ok
+DROP TABLE test_bit_zero;
+
+
+# Test Case 2/44
+# 位类型-BIT-边界值测试-1
+# 测试BIT类型的边界值1
+
+statement ok
+DROP TABLE IF EXISTS test_bit_one;
+
+
+statement ok
+CREATE TABLE test_bit_one (id INT, col_bit BIT);
+
+statement ok
+INSERT INTO test_bit_one VALUES (1, 1), (2, 1), (3, 1);
+
+query TT
+SELECT * FROM test_bit_one ORDER BY id;
+----
+1 1
+2 1
+3 1
+
+statement ok
+DROP TABLE test_bit_one;
+
+
+# Test Case 3/44
+# 位类型-BIT-值2自动转换测试
+# 测试插入值2时达梦数据库的自动转换行为(可能转为1)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_invalid2;
+
+
+statement ok
+CREATE TABLE test_bit_invalid2 (id INT, col_bit BIT);
+
+statement ok
+INSERT INTO test_bit_invalid2 VALUES (1, 2);
+
+query TT
+SELECT * FROM test_bit_invalid2;
+----
+1 1
+
+statement ok
+DROP TABLE test_bit_invalid2;
+
+
+# Test Case 4/44
+# 位类型-BIT-负值自动转换测试
+# 测试插入负数值-1时达梦数据库的自动转换行为(可能转为1)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_invalid_neg;
+
+
+statement ok
+CREATE TABLE test_bit_invalid_neg (id INT, col_bit BIT);
+
+statement ok
+INSERT INTO test_bit_invalid_neg VALUES (1, -1);
+
+query TT
+SELECT * FROM test_bit_invalid_neg;
+----
+1 1
+
+statement ok
+DROP TABLE test_bit_invalid_neg;
+
+
+# Test Case 5/44
+# 位类型-BIT-字符串转换测试-'0'
+# 测试字符串'0'转换为BIT
+
+statement ok
+DROP TABLE IF EXISTS test_bit_str_zero;
+
+
+statement ok
+CREATE TABLE test_bit_str_zero (id INT, col_bit BIT);
+
+statement ok
+INSERT INTO test_bit_str_zero VALUES (1, '0'), (2, '0');
+
+query TT
+SELECT * FROM test_bit_str_zero ORDER BY id;
+----
+1 0
+2 0
+
+statement ok
+DROP TABLE test_bit_str_zero;
+
+
+# Test Case 6/44
+# 位类型-BIT-字符串转换测试-'1'
+# 测试字符串'1'转换为BIT
+
+statement ok
+DROP TABLE IF EXISTS test_bit_str_one;
+
+
+statement ok
+CREATE TABLE test_bit_str_one (id INT, col_bit BIT);
+
+statement ok
+INSERT INTO test_bit_str_one VALUES (1, '1'), (2, '1');
+
+query TT
+SELECT * FROM test_bit_str_one ORDER BY id;
+----
+1 1
+2 1
+
+statement ok
+DROP TABLE test_bit_str_one;
+
+
+# Test Case 7/44
+# 位类型-BIT-布尔值TRUE错误测试
+# 测试插入布尔值TRUE到BIT列会报错(达梦不支持TRUE/FALSE,只支持0/1)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_bool_true;
+
+
+statement ok
+CREATE TABLE test_bit_bool_true (id INT, col_bit BIT);
+
+statement error
+INSERT INTO test_bit_bool_true VALUES (1, TRUE);
+
+statement ok
+DROP TABLE test_bit_bool_true;
+
+
+# Test Case 8/44
+# 位类型-BIT-布尔值FALSE错误测试
+# 测试插入布尔值FALSE到BIT列会报错(达梦不支持TRUE/FALSE,只支持0/1)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_bool_false;
+
+
+statement ok
+CREATE TABLE test_bit_bool_false (id INT, col_bit BIT);
+
+statement error
+INSERT INTO test_bit_bool_false VALUES (1, FALSE);
+
+statement ok
+DROP TABLE test_bit_bool_false;
+
+
+# Test Case 9/44
+# 位运算-AND运算-真值表测试
+# 测试AND位运算的完整真值表
+
+statement ok
+DROP TABLE IF EXISTS test_bit_and_truth;
+
+
+statement ok
+CREATE TABLE test_bit_and_truth (id INT, bit1 BIT, bit2 BIT, expected INT);
+
+statement ok
+INSERT INTO test_bit_and_truth VALUES (1, 0, 0, 0), (2, 0, 1, 0), (3, 1, 0, 0), (4, 1, 1, 1);
+
+query TTTTTT
+SELECT id, bit1, bit2, (bit1 & bit2) AS result, expected, CASE WHEN (bit1 & bit2) = expected THEN 'PASS' ELSE 'FAIL' END AS status FROM test_bit_and_truth ORDER BY id;
+----
+1 0 0 0 0 PASS
+2 0 1 0 0 PASS
+3 1 0 0 0 PASS
+4 1 1 1 1 PASS
+
+statement ok
+DROP TABLE test_bit_and_truth;
+
+
+# Test Case 10/44
+# 位运算-OR运算-真值表测试
+# 测试OR位运算的完整真值表
+
+statement ok
+DROP TABLE IF EXISTS test_bit_or_truth;
+
+
+statement ok
+CREATE TABLE test_bit_or_truth (id INT, bit1 BIT, bit2 BIT, expected INT);
+
+statement ok
+INSERT INTO test_bit_or_truth VALUES (1, 0, 0, 0), (2, 0, 1, 1), (3, 1, 0, 1), (4, 1, 1, 1);
+
+query TTTTTT
+SELECT id, bit1, bit2, (bit1 | bit2) AS result, expected, CASE WHEN (bit1 | bit2) = expected THEN 'PASS' ELSE 'FAIL' END AS status FROM test_bit_or_truth ORDER BY id;
+----
+1 0 0 0 0 PASS
+2 0 1 1 1 PASS
+3 1 0 1 1 PASS
+4 1 1 1 1 PASS
+
+statement ok
+DROP TABLE test_bit_or_truth;
+
+
+# Test Case 11/44
+# 位运算-XOR运算-真值表测试
+# 测试XOR位运算的完整真值表
+
+statement ok
+DROP TABLE IF EXISTS test_bit_xor_truth;
+
+
+statement ok
+CREATE TABLE test_bit_xor_truth (id INT, bit1 BIT, bit2 BIT, expected INT);
+
+statement ok
+INSERT INTO test_bit_xor_truth VALUES (1, 0, 0, 0), (2, 0, 1, 1), (3, 1, 0, 1), (4, 1, 1, 0);
+
+query TTTTTT
+SELECT id, bit1, bit2, (bit1 ^ bit2) AS result, expected, CASE WHEN (bit1 ^ bit2) = expected THEN 'PASS' ELSE 'FAIL' END AS status FROM test_bit_xor_truth ORDER BY id;
+----
+1 0 0 0 0 PASS
+2 0 1 1 1 PASS
+3 1 0 1 1 PASS
+4 1 1 0 0 PASS
+
+statement ok
+DROP TABLE test_bit_xor_truth;
+
+
+# Test Case 12/44
+# 位运算-NOT运算测试
+# 测试NOT位运算(按位取反)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_not_op;
+
+
+statement ok
+CREATE TABLE test_bit_not_op (id INT, col_bit BIT);
+
+statement ok
+INSERT INTO test_bit_not_op VALUES (1, 0), (2, 1);
+
+query TTT
+SELECT id, col_bit, (~col_bit) AS not_result FROM test_bit_not_op ORDER BY id;
+----
+1 0 1
+2 1 0
+
+statement ok
+DROP TABLE test_bit_not_op;
+
+
+# Test Case 13/44
+# 位运算-复合运算测试-(A AND B) OR C
+# 测试复合位运算表达式
+
+statement ok
+DROP TABLE IF EXISTS test_bit_compound;
+
+
+statement ok
+CREATE TABLE test_bit_compound (id INT, a BIT, b BIT, c BIT);
+
+statement ok
+INSERT INTO test_bit_compound VALUES (1, 1, 1, 0), (2, 1, 0, 1), (3, 0, 1, 1), (4, 0, 0, 0);
+
+query TTTTT
+SELECT id, a, b, c, ((a & b) | c) AS result FROM test_bit_compound ORDER BY id;
+----
+1 1 1 0 1
+2 1 0 1 1
+3 0 1 1 1
+4 0 0 0 0
+
+statement ok
+DROP TABLE test_bit_compound;
+
+
+# Test Case 14/44
+# 位运算-优先级测试-AND优先于OR
+# 测试位运算的优先级:AND高于OR
+
+statement ok
+DROP TABLE IF EXISTS test_bit_precedence;
+
+
+statement ok
+CREATE TABLE test_bit_precedence (id INT, a BIT, b BIT, c BIT);
+
+statement ok
+INSERT INTO test_bit_precedence VALUES (1, 1, 0, 1);
+
+query TTT
+SELECT id, (a | b & c) AS without_paren, ((a | b) & c) AS with_paren FROM test_bit_precedence;
+----
+1 1 1
+
+statement ok
+DROP TABLE test_bit_precedence;
+
+
+# Test Case 15/44
+# 逻辑运算-等于比较测试
+# 测试BIT值的等于比较
+
+statement ok
+DROP TABLE IF EXISTS test_bit_equal;
+
+
+statement ok
+CREATE TABLE test_bit_equal (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_equal VALUES (1, 0), (2, 1), (3, 0), (4, 1);
+
+query TT
+SELECT * FROM test_bit_equal WHERE flag = 1 ORDER BY id;
+----
+2 1
+4 1
+
+statement ok
+DROP TABLE test_bit_equal;
+
+
+# Test Case 16/44
+# 逻辑运算-不等于比较测试
+# 测试BIT值的不等于比较
+
+statement ok
+DROP TABLE IF EXISTS test_bit_not_equal;
+
+
+statement ok
+CREATE TABLE test_bit_not_equal (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_not_equal VALUES (1, 0), (2, 1), (3, 0), (4, 1);
+
+query TT
+SELECT * FROM test_bit_not_equal WHERE flag <> 0 ORDER BY id;
+----
+2 1
+4 1
+
+statement ok
+DROP TABLE test_bit_not_equal;
+
+
+# Test Case 17/44
+# 逻辑运算-大于小于比较测试
+# 测试BIT值的大于和小于比较
+
+statement ok
+DROP TABLE IF EXISTS test_bit_gt_lt;
+
+
+statement ok
+CREATE TABLE test_bit_gt_lt (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_gt_lt VALUES (1, 0), (2, 1), (3, 0), (4, 1);
+
+query T
+SELECT COUNT(*) AS gt_count FROM test_bit_gt_lt WHERE flag > 0;
+----
+2
+
+statement ok
+DROP TABLE test_bit_gt_lt;
+
+
+# Test Case 18/44
+# 逻辑运算-IN列表测试
+# 测试BIT值的IN列表查询
+
+statement ok
+DROP TABLE IF EXISTS test_bit_in;
+
+
+statement ok
+CREATE TABLE test_bit_in (id INT, status BIT, name VARCHAR(50));
+
+statement ok
+INSERT INTO test_bit_in VALUES (1, 0, 'Inactive'), (2, 1, 'Active'), (3, 0, 'Pending');
+
+query TTT
+SELECT * FROM test_bit_in WHERE status IN (1) ORDER BY id;
+----
+2 1 Active
+
+statement ok
+DROP TABLE test_bit_in;
+
+
+# Test Case 19/44
+# 逻辑运算-BETWEEN范围测试
+# 测试BIT值的BETWEEN范围查询
+
+statement ok
+DROP TABLE IF EXISTS test_bit_between;
+
+
+statement ok
+CREATE TABLE test_bit_between (id INT, value BIT);
+
+statement ok
+INSERT INTO test_bit_between VALUES (1, 0), (2, 1), (3, 0), (4, 1);
+
+query T
+SELECT COUNT(*) AS count FROM test_bit_between WHERE value BETWEEN 0 AND 1;
+----
+4
+
+statement ok
+DROP TABLE test_bit_between;
+
+
+# Test Case 20/44
+# NULL值处理-IS NULL测试
+# 测试BIT类型的IS NULL判断
+
+statement ok
+DROP TABLE IF EXISTS test_bit_is_null;
+
+
+statement ok
+CREATE TABLE test_bit_is_null (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_is_null VALUES (1, NULL), (2, 0), (3, NULL), (4, 1);
+
+query TT
+SELECT * FROM test_bit_is_null WHERE flag IS NULL ORDER BY id;
+----
+1 NULL
+3 NULL
+
+statement ok
+DROP TABLE test_bit_is_null;
+
+
+# Test Case 21/44
+# NULL值处理-IS NOT NULL测试
+# 测试BIT类型的IS NOT NULL判断
+
+statement ok
+DROP TABLE IF EXISTS test_bit_is_not_null;
+
+
+statement ok
+CREATE TABLE test_bit_is_not_null (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_is_not_null VALUES (1, NULL), (2, 0), (3, NULL), (4, 1);
+
+query TT
+SELECT * FROM test_bit_is_not_null WHERE flag IS NOT NULL ORDER BY id;
+----
+2 0
+4 1
+
+statement ok
+DROP TABLE test_bit_is_not_null;
+
+
+# Test Case 22/44
+# NULL值处理-COALESCE函数测试
+# 测试BIT类型的COALESCE函数处理NULL值
+
+statement ok
+DROP TABLE IF EXISTS test_bit_coalesce;
+
+
+statement ok
+CREATE TABLE test_bit_coalesce (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_coalesce VALUES (1, NULL), (2, 0), (3, NULL), (4, 1);
+
+query TT
+SELECT id, COALESCE(flag, 0) AS result_flag FROM test_bit_coalesce ORDER BY id;
+----
+1 0
+2 0
+3 0
+4 1
+
+statement ok
+DROP TABLE test_bit_coalesce;
+
+
+# Test Case 23/44
+# NULL值处理-NVL函数测试
+# 测试BIT类型的NVL函数处理NULL值
+
+statement ok
+DROP TABLE IF EXISTS test_bit_nvl;
+
+
+statement ok
+CREATE TABLE test_bit_nvl (id INT, status BIT);
+
+statement ok
+INSERT INTO test_bit_nvl VALUES (1, NULL), (2, 1), (3, NULL);
+
+query TT
+SELECT id, NVL(status, 0) AS status_with_default FROM test_bit_nvl ORDER BY id;
+----
+1 0
+2 1
+3 0
+
+statement ok
+DROP TABLE test_bit_nvl;
+
+
+# Test Case 24/44
+# 聚合函数-COUNT测试
+# 测试BIT类型的COUNT聚合
+
+statement ok
+DROP TABLE IF EXISTS test_bit_count_agg;
+
+
+statement ok
+CREATE TABLE test_bit_count_agg (id INT, active BIT);
+
+statement ok
+INSERT INTO test_bit_count_agg VALUES (1, 1), (2, 0), (3, NULL), (4, 1), (5, 0);
+
+query TTT
+SELECT COUNT(*) AS total, COUNT(active) AS non_null, COUNT(DISTINCT active) AS distinct_count FROM test_bit_count_agg;
+----
+5 4 2
+
+statement ok
+DROP TABLE test_bit_count_agg;
+
+
+# Test Case 25/44
+# 聚合函数-SUM求和测试
+# 测试BIT类型的SUM聚合(统计1的个数)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_sum;
+
+
+statement ok
+CREATE TABLE test_bit_sum (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_sum VALUES (1, 1), (2, 0), (3, 1), (4, 1), (5, 0);
+
+statement error
+SELECT SUM(flag) AS total_ones FROM test_bit_sum;
+
+statement ok
+DROP TABLE test_bit_sum;
+
+
+# Test Case 26/44
+# 聚合函数-AVG平均值测试
+# 测试BIT类型的AVG聚合(计算1的比例)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_avg;
+
+
+statement ok
+CREATE TABLE test_bit_avg (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_avg VALUES (1, 1), (2, 0), (3, 1), (4, 1), (5, 0);
+
+statement error
+SELECT AVG(flag) AS avg_value FROM test_bit_avg;
+
+statement ok
+DROP TABLE test_bit_avg;
+
+
+# Test Case 27/44
+# 聚合函数-MAX和MIN测试
+# 测试BIT类型的MAX和MIN聚合
+
+statement ok
+DROP TABLE IF EXISTS test_bit_max_min;
+
+
+statement ok
+CREATE TABLE test_bit_max_min (id INT, value BIT);
+
+statement ok
+INSERT INTO test_bit_max_min VALUES (1, 0), (2, 1), (3, 0), (4, 1);
+
+query TT
+SELECT MAX(value) AS max_value, MIN(value) AS min_value FROM test_bit_max_min;
+----
+1 0
+
+statement ok
+DROP TABLE test_bit_max_min;
+
+
+# Test Case 28/44
+# 分组查询-GROUP BY测试
+# 测试BIT类型的GROUP BY分组
+
+statement ok
+DROP TABLE IF EXISTS test_bit_groupby;
+
+
+statement ok
+CREATE TABLE test_bit_groupby (id INT, status BIT, amount INT);
+
+statement ok
+INSERT INTO test_bit_groupby VALUES (1, 0, 100), (2, 1, 200), (3, 0, 150), (4, 1, 250), (5, 0, 120);
+
+query TTT
+SELECT status, COUNT(*) AS count, SUM(amount) AS total_amount FROM test_bit_groupby GROUP BY status ORDER BY status;
+----
+0 3 370
+1 2 450
+
+statement ok
+DROP TABLE test_bit_groupby;
+
+
+# Test Case 29/44
+# 分组查询-HAVING子句测试
+# 测试BIT类型的HAVING子句过滤
+
+statement ok
+DROP TABLE IF EXISTS test_bit_having;
+
+
+statement ok
+CREATE TABLE test_bit_having (id INT, active BIT, score INT);
+
+statement ok
+INSERT INTO test_bit_having VALUES (1, 1, 90), (2, 1, 85), (3, 0, 70), (4, 0, 65), (5, 1, 95);
+
+query TT
+SELECT active, AVG(score) AS avg_score FROM test_bit_having GROUP BY active HAVING AVG(score) > 80 ORDER BY active;
+----
+1 90
+
+statement ok
+DROP TABLE test_bit_having;
+
+
+# Test Case 30/44
+# 索引测试-单列索引
+# 测试在BIT列上创建单列索引
+
+statement ok
+DROP TABLE IF EXISTS test_bit_single_index;
+
+
+statement ok
+CREATE TABLE test_bit_single_index (id INT PRIMARY KEY, is_active BIT, name VARCHAR(50));
+
+statement ok
+CREATE INDEX idx_is_active ON test_bit_single_index(is_active);
+
+statement ok
+INSERT INTO test_bit_single_index VALUES (1, 1, 'User1'), (2, 0, 'User2'), (3, 1, 'User3'), (4, 0, 'User4');
+
+query T
+SELECT COUNT(*) AS active_count FROM test_bit_single_index WHERE is_active = 1;
+----
+2
+
+statement ok
+DROP INDEX idx_is_active;
+
+statement ok
+DROP TABLE test_bit_single_index;
+
+
+# Test Case 31/44
+# 索引测试-复合索引
+# 测试包含BIT列的复合索引
+
+statement ok
+DROP TABLE IF EXISTS test_bit_composite_index;
+
+
+statement ok
+CREATE TABLE test_bit_composite_index (id INT PRIMARY KEY, category INT, is_enabled BIT);
+
+statement ok
+CREATE INDEX idx_category_enabled ON test_bit_composite_index(category, is_enabled);
+
+statement ok
+INSERT INTO test_bit_composite_index VALUES (1, 1, 1), (2, 1, 0), (3, 2, 1), (4, 2, 0);
+
+query T
+SELECT COUNT(*) AS count FROM test_bit_composite_index WHERE category = 1 AND is_enabled = 1;
+----
+1
+
+statement ok
+DROP INDEX idx_category_enabled;
+
+statement ok
+DROP TABLE test_bit_composite_index;
+
+
+# Test Case 32/44
+# 约束测试-NOT NULL约束
+# 测试BIT列的NOT NULL约束
+
+statement ok
+DROP TABLE IF EXISTS test_bit_not_null;
+
+
+statement ok
+CREATE TABLE test_bit_not_null (id INT, required_flag BIT NOT NULL);
+
+statement ok
+INSERT INTO test_bit_not_null VALUES (1, 1), (2, 0);
+
+query T
+SELECT COUNT(*) AS count FROM test_bit_not_null;
+----
+2
+
+statement ok
+DROP TABLE test_bit_not_null;
+
+
+# Test Case 33/44
+# 约束测试-NOT NULL约束违反
+# 测试违反BIT列NOT NULL约束的错误
+
+statement ok
+DROP TABLE IF EXISTS test_bit_not_null_violation;
+
+
+statement ok
+CREATE TABLE test_bit_not_null_violation (id INT, required_flag BIT NOT NULL);
+
+statement error
+INSERT INTO test_bit_not_null_violation VALUES (1, NULL);
+
+statement ok
+DROP TABLE test_bit_not_null_violation;
+
+
+# Test Case 34/44
+# 约束测试-DEFAULT值
+# 测试BIT列的DEFAULT值约束
+
+statement ok
+DROP TABLE IF EXISTS test_bit_default;
+
+
+statement ok
+CREATE TABLE test_bit_default (id INT, status BIT DEFAULT 0);
+
+statement ok
+INSERT INTO test_bit_default (id) VALUES (1), (2);
+
+query TT
+SELECT * FROM test_bit_default ORDER BY id;
+----
+1 0
+2 0
+
+statement ok
+DROP TABLE test_bit_default;
+
+
+# Test Case 35/44
+# 约束测试-CHECK约束
+# 测试BIT列的CHECK约束
+
+statement ok
+DROP TABLE IF EXISTS test_bit_check;
+
+
+statement ok
+CREATE TABLE test_bit_check (id INT, flag BIT CHECK (flag IN (0, 1)));
+
+statement ok
+INSERT INTO test_bit_check VALUES (1, 0), (2, 1);
+
+query T
+SELECT COUNT(*) AS count FROM test_bit_check;
+----
+2
+
+statement ok
+DROP TABLE test_bit_check;
+
+
+# Test Case 36/44
+# CASE表达式-简单CASE测试
+# 测试BIT列在简单CASE表达式中的使用
+
+statement ok
+DROP TABLE IF EXISTS test_bit_simple_case;
+
+
+statement ok
+CREATE TABLE test_bit_simple_case (id INT, status BIT, name VARCHAR(50));
+
+statement ok
+INSERT INTO test_bit_simple_case VALUES (1, 0, 'Item1'), (2, 1, 'Item2'), (3, 0, 'Item3');
+
+query TTT
+SELECT id, name, CASE status WHEN 0 THEN 'Inactive' WHEN 1 THEN 'Active' END AS status_text FROM test_bit_simple_case ORDER BY id;
+----
+1 Item1 Inactive
+2 Item2 Active
+3 Item3 Inactive
+
+statement ok
+DROP TABLE test_bit_simple_case;
+
+
+# Test Case 37/44
+# CASE表达式-搜索CASE测试
+# 测试BIT列在搜索CASE表达式中的使用
+
+statement ok
+DROP TABLE IF EXISTS test_bit_searched_case;
+
+
+statement ok
+CREATE TABLE test_bit_searched_case (id INT, is_active BIT, is_verified BIT);
+
+statement ok
+INSERT INTO test_bit_searched_case VALUES (1, 1, 1), (2, 1, 0), (3, 0, 1), (4, 0, 0);
+
+query TT
+SELECT id, CASE WHEN is_active = 1 AND is_verified = 1 THEN 'Ready' WHEN is_active = 1 THEN 'Active' ELSE 'Inactive' END AS state FROM test_bit_searched_case ORDER BY id;
+----
+1 Ready
+2 Active
+3 Inactive
+4 Inactive
+
+statement ok
+DROP TABLE test_bit_searched_case;
+
+
+# Test Case 38/44
+# 子查询-WHERE子查询测试
+# 测试BIT列在WHERE子查询中的使用
+
+statement ok
+DROP TABLE IF EXISTS test_bit_subquery_main;
+
+
+statement ok
+CREATE TABLE test_bit_subquery_main (id INT, name VARCHAR(50));
+
+statement ok
+DROP TABLE IF EXISTS test_bit_subquery_flags;
+
+
+statement ok
+CREATE TABLE test_bit_subquery_flags (id INT, is_visible BIT);
+
+statement ok
+INSERT INTO test_bit_subquery_main VALUES (1, 'Item1'), (2, 'Item2'), (3, 'Item3');
+
+statement ok
+INSERT INTO test_bit_subquery_flags VALUES (1, 1), (2, 0), (3, 1);
+
+query TT
+SELECT * FROM test_bit_subquery_main WHERE id IN (SELECT id FROM test_bit_subquery_flags WHERE is_visible = 1) ORDER BY id;
+----
+1 Item1
+3 Item3
+
+statement ok
+DROP TABLE test_bit_subquery_main;
+
+statement ok
+DROP TABLE test_bit_subquery_flags;
+
+
+# Test Case 39/44
+# UPDATE操作-更新BIT值测试
+# 测试更新BIT列的值
+
+statement ok
+DROP TABLE IF EXISTS test_bit_update_op;
+
+
+statement ok
+CREATE TABLE test_bit_update_op (id INT, status BIT);
+
+statement ok
+INSERT INTO test_bit_update_op VALUES (1, 0), (2, 0), (3, 0);
+
+statement ok
+UPDATE test_bit_update_op SET status = 1 WHERE id IN (1, 3);
+
+query TT
+SELECT * FROM test_bit_update_op ORDER BY id;
+----
+1 1
+2 0
+3 1
+
+statement ok
+DROP TABLE test_bit_update_op;
+
+
+# Test Case 40/44
+# UPDATE操作-切换BIT值错误测试
+# 测试使用算术运算切换BIT值会报错(达梦不支持BIT类型的算术运算)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_toggle;
+
+
+statement ok
+CREATE TABLE test_bit_toggle (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_toggle VALUES (1, 0), (2, 1), (3, 0);
+
+statement error
+UPDATE test_bit_toggle SET flag = 1 - flag;
+
+statement ok
+DROP TABLE test_bit_toggle;
+
+
+# Test Case 41/44
+# UPDATE操作-使用CASE切换BIT值测试
+# 测试使用CASE表达式切换BIT值(0变1,1变0)
+
+statement ok
+DROP TABLE IF EXISTS test_bit_toggle_case;
+
+
+statement ok
+CREATE TABLE test_bit_toggle_case (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_toggle_case VALUES (1, 0), (2, 1), (3, 0);
+
+statement ok
+UPDATE test_bit_toggle_case SET flag = CASE WHEN flag = 0 THEN 1 ELSE 0 END;
+
+query TT
+SELECT * FROM test_bit_toggle_case ORDER BY id;
+----
+1 1
+2 0
+3 1
+
+statement ok
+DROP TABLE test_bit_toggle_case;
+
+
+# Test Case 42/44
+# JOIN操作-内连接测试
+# 测试基于BIT列的内连接
+
+statement ok
+DROP TABLE IF EXISTS test_bit_join_t1;
+
+
+statement ok
+CREATE TABLE test_bit_join_t1 (id INT, active BIT, name VARCHAR(50));
+
+statement ok
+DROP TABLE IF EXISTS test_bit_join_t2;
+
+
+statement ok
+CREATE TABLE test_bit_join_t2 (id INT, active BIT, value INT);
+
+statement ok
+INSERT INTO test_bit_join_t1 VALUES (1, 1, 'A'), (2, 0, 'B'), (3, 1, 'C');
+
+statement ok
+INSERT INTO test_bit_join_t2 VALUES (1, 1, 100), (2, 0, 200), (3, 1, 300);
+
+query TTT
+SELECT t1.id, t1.name, t2.value FROM test_bit_join_t1 t1 INNER JOIN test_bit_join_t2 t2 ON t1.active = t2.active AND t1.id = t2.id ORDER BY t1.id;
+----
+1 A 100
+2 B 200
+3 C 300
+
+statement ok
+DROP TABLE test_bit_join_t1;
+
+statement ok
+DROP TABLE test_bit_join_t2;
+
+
+# Test Case 43/44
+# 性能测试-大量BIT数据插入
+# 测试批量插入BIT数据的性能
+
+statement ok
+DROP TABLE IF EXISTS test_bit_bulk_insert;
+
+
+statement ok
+CREATE TABLE test_bit_bulk_insert (id INT, flag BIT);
+
+statement ok
+INSERT INTO test_bit_bulk_insert SELECT ROWNUM, MOD(ROWNUM, 2) FROM DUAL CONNECT BY ROWNUM <= 10000;
+
+query T
+SELECT COUNT(*) AS total FROM test_bit_bulk_insert;
+----
+10000
+
+statement ok
+DROP TABLE test_bit_bulk_insert;
+
+
+# Test Case 44/44
+# 性能测试-BIT列索引查询
+# 测试使用BIT列索引的查询性能
+
+statement ok
+DROP TABLE IF EXISTS test_bit_index_perf;
+
+
+statement ok
+CREATE TABLE test_bit_index_perf (id INT PRIMARY KEY, active BIT, data VARCHAR(100));
+
+statement ok
+CREATE INDEX idx_active_perf ON test_bit_index_perf(active);
+
+statement ok
+INSERT INTO test_bit_index_perf SELECT ROWNUM, MOD(ROWNUM, 2), 'Data' || ROWNUM FROM DUAL CONNECT BY ROWNUM <= 10000;
+
+query T
+SELECT COUNT(*) AS active_count FROM test_bit_index_perf WHERE active = 1;
+----
+5000
+
+statement ok
+DROP INDEX idx_active_perf;
+
+statement ok
+DROP TABLE test_bit_index_perf;

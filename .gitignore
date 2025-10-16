@@ -1,0 +1,9 @@
+/target
+
+# 自动生成的测试结果文件
+test-results.json
+*.json
+!Cargo.json
+
+# 测试结果目录
+results/

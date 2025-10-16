@@ -1,0 +1,1063 @@
+# Generated from datatypes_datetime_tests.json
+# Total test cases: 46
+
+# Test Case 1/46
+# 日期类型-DATE-边界值测试-最小日期
+# 测试DATE类型的最小日期值(0001-01-01)
+
+statement ok
+DROP TABLE IF EXISTS test_date_min;
+
+
+statement ok
+CREATE TABLE test_date_min (id INT, min_date DATE);
+
+statement ok
+INSERT INTO test_date_min VALUES (1, DATE '0001-01-01');
+
+query TT
+SELECT * FROM test_date_min;
+----
+1 0001-01-01
+
+statement ok
+DROP TABLE test_date_min;
+
+
+# Test Case 2/46
+# 日期类型-DATE-边界值测试-最大日期
+# 测试DATE类型的最大日期值(9999-12-31)
+
+statement ok
+DROP TABLE IF EXISTS test_date_max;
+
+
+statement ok
+CREATE TABLE test_date_max (id INT, max_date DATE);
+
+statement ok
+INSERT INTO test_date_max VALUES (1, DATE '9999-12-31');
+
+query TT
+SELECT * FROM test_date_max;
+----
+1 9999-12-31
+
+statement ok
+DROP TABLE test_date_max;
+
+
+# Test Case 3/46
+# 日期类型-DATE-闰年测试-2月29日
+# 测试闰年的2月29日
+
+statement ok
+DROP TABLE IF EXISTS test_date_leap;
+
+
+statement ok
+CREATE TABLE test_date_leap (id INT, leap_date DATE);
+
+statement ok
+INSERT INTO test_date_leap VALUES (1, DATE '2024-02-29'), (2, DATE '2000-02-29'), (3, DATE '2020-02-29');
+
+query TT
+SELECT * FROM test_date_leap ORDER BY id;
+----
+1 2024-02-29
+2 2000-02-29
+3 2020-02-29
+
+statement ok
+DROP TABLE test_date_leap;
+
+
+# Test Case 4/46
+# 日期类型-DATE-错误测试-无效日期格式
+# 测试插入无效日期格式时的错误处理
+
+statement ok
+DROP TABLE IF EXISTS test_date_invalid_format;
+
+
+statement ok
+CREATE TABLE test_date_invalid_format (id INT, test_date DATE);
+
+statement error
+INSERT INTO test_date_invalid_format VALUES (1, DATE '2023-13-01');
+
+statement ok
+DROP TABLE test_date_invalid_format;
+
+
+# Test Case 5/46
+# 日期类型-DATE-错误测试-非闰年2月29日
+# 测试非闰年插入2月29日的错误处理
+
+statement ok
+DROP TABLE IF EXISTS test_date_nonleap;
+
+
+statement ok
+CREATE TABLE test_date_nonleap (id INT, test_date DATE);
+
+statement error
+INSERT INTO test_date_nonleap VALUES (1, DATE '2023-02-29');
+
+statement ok
+DROP TABLE test_date_nonleap;
+
+
+# Test Case 6/46
+# 时间类型-TIME-精度测试-带毫秒
+# 测试TIME类型的毫秒精度(TIME(3)) - 使用TO_CHAR因为dmPython的time对象不含微秒
+
+statement ok
+DROP TABLE IF EXISTS test_time_precision;
+
+
+statement ok
+CREATE TABLE test_time_precision (id INT, col_time TIME(3));
+
+statement ok
+INSERT INTO test_time_precision VALUES (1, TIME '12:34:56.123'), (2, TIME '23:59:59.999');
+
+query TT
+SELECT id, TO_CHAR(col_time, 'HH24:MI:SS.FF3') as COL_TIME FROM test_time_precision ORDER BY id;
+----
+1 12:34:56.123
+2 23:59:59.999
+
+statement ok
+DROP TABLE test_time_precision;
+
+
+# Test Case 7/46
+# 时间类型-TIME-精度测试-带微秒
+# 测试TIME类型的微秒精度(TIME(6)) - 使用TO_CHAR因为dmPython的time对象不含微秒
+
+statement ok
+DROP TABLE IF EXISTS test_time_microsecond;
+
+
+statement ok
+CREATE TABLE test_time_microsecond (id INT, col_time TIME(6));
+
+statement ok
+INSERT INTO test_time_microsecond VALUES (1, TIME '12:34:56.123456'), (2, TIME '00:00:00.000001');
+
+query TT
+SELECT id, TO_CHAR(col_time, 'HH24:MI:SS.FF6') as COL_TIME FROM test_time_microsecond ORDER BY id;
+----
+1 12:34:56.123456
+2 00:00:00.000001
+
+statement ok
+DROP TABLE test_time_microsecond;
+
+
+# Test Case 8/46
+# 时间类型-TIME-边界值测试-午夜
+# 测试TIME类型的边界值00:00:00
+
+statement ok
+DROP TABLE IF EXISTS test_time_midnight;
+
+
+statement ok
+CREATE TABLE test_time_midnight (id INT, midnight_time TIME);
+
+statement ok
+INSERT INTO test_time_midnight VALUES (1, TIME '00:00:00');
+
+query TT
+SELECT * FROM test_time_midnight;
+----
+1 00:00:00
+
+statement ok
+DROP TABLE test_time_midnight;
+
+
+# Test Case 9/46
+# 时间类型-TIME-边界值测试-23:59:59
+# 测试TIME类型的边界值23:59:59
+
+statement ok
+DROP TABLE IF EXISTS test_time_max;
+
+
+statement ok
+CREATE TABLE test_time_max (id INT, max_time TIME);
+
+statement ok
+INSERT INTO test_time_max VALUES (1, TIME '23:59:59');
+
+query TT
+SELECT * FROM test_time_max;
+----
+1 23:59:59
+
+statement ok
+DROP TABLE test_time_max;
+
+
+# Test Case 10/46
+# 时间类型-TIME-错误测试-无效小时
+# 测试插入无效小时值(24)的错误处理
+
+statement ok
+DROP TABLE IF EXISTS test_time_invalid_hour;
+
+
+statement ok
+CREATE TABLE test_time_invalid_hour (id INT, test_time TIME);
+
+statement error
+INSERT INTO test_time_invalid_hour VALUES (1, TIME '24:00:00');
+
+statement ok
+DROP TABLE test_time_invalid_hour;
+
+
+# Test Case 11/46
+# 时间类型-TIME-错误测试-无效分钟
+# 测试插入无效分钟值(60)的错误处理
+
+statement ok
+DROP TABLE IF EXISTS test_time_invalid_minute;
+
+
+statement ok
+CREATE TABLE test_time_invalid_minute (id INT, test_time TIME);
+
+statement error
+INSERT INTO test_time_invalid_minute VALUES (1, TIME '12:60:00');
+
+statement ok
+DROP TABLE test_time_invalid_minute;
+
+
+# Test Case 12/46
+# 时间戳类型-TIMESTAMP-精度测试-默认精度
+# 测试TIMESTAMP类型的默认精度(秒)
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_default;
+
+
+statement ok
+CREATE TABLE test_timestamp_default (id INT, col_timestamp TIMESTAMP);
+
+statement ok
+INSERT INTO test_timestamp_default VALUES (1, TIMESTAMP '2023-12-25 12:34:56');
+
+query TT
+SELECT * FROM test_timestamp_default;
+----
+1 2023-12-25 12:34:56
+
+statement ok
+DROP TABLE test_timestamp_default;
+
+
+# Test Case 13/46
+# 时间戳类型-TIMESTAMP-精度测试-毫秒
+# 测试TIMESTAMP类型的毫秒精度(TIMESTAMP(3))
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_millisec;
+
+
+statement ok
+CREATE TABLE test_timestamp_millisec (id INT, col_timestamp TIMESTAMP(3));
+
+statement ok
+INSERT INTO test_timestamp_millisec VALUES (1, TIMESTAMP '2023-12-25 12:34:56.789');
+
+query TT
+SELECT * FROM test_timestamp_millisec;
+----
+1 2023-12-25 12:34:56.789
+
+statement ok
+DROP TABLE test_timestamp_millisec;
+
+
+# Test Case 14/46
+# 时间戳类型-TIMESTAMP-精度测试-微秒
+# 测试TIMESTAMP类型的微秒精度(TIMESTAMP(6))
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_microsec;
+
+
+statement ok
+CREATE TABLE test_timestamp_microsec (id INT, col_timestamp TIMESTAMP(6));
+
+statement ok
+INSERT INTO test_timestamp_microsec VALUES (1, TIMESTAMP '2023-12-25 12:34:56.123456');
+
+query TT
+SELECT * FROM test_timestamp_microsec;
+----
+1 2023-12-25 12:34:56.123456
+
+statement ok
+DROP TABLE test_timestamp_microsec;
+
+
+# Test Case 15/46
+# 时间戳类型-TIMESTAMP-边界值测试-最小值
+# 测试TIMESTAMP类型的最小值
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_min;
+
+
+statement ok
+CREATE TABLE test_timestamp_min (id INT, min_timestamp TIMESTAMP);
+
+statement ok
+INSERT INTO test_timestamp_min VALUES (1, TIMESTAMP '0001-01-01 00:00:00');
+
+query TT
+SELECT * FROM test_timestamp_min;
+----
+1 0001-01-01 00:00:00
+
+statement ok
+DROP TABLE test_timestamp_min;
+
+
+# Test Case 16/46
+# 时间戳类型-TIMESTAMP-边界值测试-最大值
+# 测试TIMESTAMP类型的最大值
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_max;
+
+
+statement ok
+CREATE TABLE test_timestamp_max (id INT, max_timestamp TIMESTAMP);
+
+statement ok
+INSERT INTO test_timestamp_max VALUES (1, TIMESTAMP '9999-12-31 23:59:59');
+
+query TT
+SELECT * FROM test_timestamp_max;
+----
+1 9999-12-31 23:59:59
+
+statement ok
+DROP TABLE test_timestamp_max;
+
+
+# Test Case 17/46
+# 时间戳类型-TIMESTAMP WITH TIME ZONE-基本测试
+# 测试带时区的时间戳类型
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_tz_basic;
+
+
+statement ok
+CREATE TABLE test_timestamp_tz_basic (id INT, ts_tz TIMESTAMP WITH TIME ZONE);
+
+statement ok
+INSERT INTO test_timestamp_tz_basic VALUES (1, TIMESTAMP '2023-12-25 08:00:00 +08:00'), (2, TIMESTAMP '2023-12-25 00:00:00 +00:00');
+
+query T
+SELECT id FROM test_timestamp_tz_basic ORDER BY id;
+----
+1
+2
+
+statement ok
+DROP TABLE test_timestamp_tz_basic;
+
+
+# Test Case 18/46
+# 时间戳类型-TIMESTAMP WITH TIME ZONE-时区转换
+# 测试时区转换功能
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_tz_convert;
+
+
+statement ok
+CREATE TABLE test_timestamp_tz_convert (id INT, ts_tz TIMESTAMP WITH TIME ZONE);
+
+statement ok
+INSERT INTO test_timestamp_tz_convert VALUES (1, TIMESTAMP '2023-12-25 12:00:00 +08:00');
+
+query T
+SELECT id FROM test_timestamp_tz_convert;
+----
+1
+
+statement ok
+DROP TABLE test_timestamp_tz_convert;
+
+
+# Test Case 19/46
+# 日期运算-日期加法-加天数
+# 测试日期加天数运算
+
+statement ok
+DROP TABLE IF EXISTS test_date_add_days;
+
+
+statement ok
+CREATE TABLE test_date_add_days (id INT, base_date DATE);
+
+statement ok
+INSERT INTO test_date_add_days VALUES (1, DATE '2023-12-25');
+
+query TTTTT
+SELECT id, base_date, base_date + 1 AS next_day, base_date + 7 AS next_week, base_date + 365 AS next_year FROM test_date_add_days;
+----
+1 2023-12-25 2023-12-26 2024-01-01 2024-12-24
+
+statement ok
+DROP TABLE test_date_add_days;
+
+
+# Test Case 20/46
+# 日期运算-日期减法-减天数
+# 测试日期减天数运算
+
+statement ok
+DROP TABLE IF EXISTS test_date_subtract_days;
+
+
+statement ok
+CREATE TABLE test_date_subtract_days (id INT, base_date DATE);
+
+statement ok
+INSERT INTO test_date_subtract_days VALUES (1, DATE '2024-01-10');
+
+query TTTT
+SELECT id, base_date, base_date - 1 AS prev_day, base_date - 10 AS ten_days_ago FROM test_date_subtract_days;
+----
+1 2024-01-10 2024-01-09 2023-12-31
+
+statement ok
+DROP TABLE test_date_subtract_days;
+
+
+# Test Case 21/46
+# 日期运算-日期差值计算
+# 测试两个日期之间的天数差值
+
+statement ok
+DROP TABLE IF EXISTS test_date_diff;
+
+
+statement ok
+CREATE TABLE test_date_diff (id INT, start_date DATE, end_date DATE);
+
+statement ok
+INSERT INTO test_date_diff VALUES (1, DATE '2023-12-01', DATE '2023-12-31'), (2, DATE '2023-01-01', DATE '2023-12-31');
+
+query TTTT
+SELECT id, start_date, end_date, (end_date - start_date) AS days_diff FROM test_date_diff ORDER BY id;
+----
+1 2023-12-01 2023-12-31 30
+2 2023-01-01 2023-12-31 364
+
+statement ok
+DROP TABLE test_date_diff;
+
+
+# Test Case 22/46
+# 日期函数-ADD_MONTHS测试
+# 测试ADD_MONTHS函数,在日期上增加月份
+
+statement ok
+DROP TABLE IF EXISTS test_add_months;
+
+
+statement ok
+CREATE TABLE test_add_months (id INT, base_date DATE);
+
+statement ok
+INSERT INTO test_add_months VALUES (1, DATE '2023-12-25'), (2, DATE '2023-01-31');
+
+query TTTT
+SELECT id, base_date, ADD_MONTHS(base_date, 1) AS plus_1_month, ADD_MONTHS(base_date, 12) AS plus_1_year FROM test_add_months ORDER BY id;
+----
+1 2023-12-25 2024-01-25 2024-12-25
+2 2023-01-31 2023-02-28 2024-01-31
+
+statement ok
+DROP TABLE test_add_months;
+
+
+# Test Case 23/46
+# 日期函数-LAST_DAY测试
+# 测试LAST_DAY函数,返回月份最后一天
+
+statement ok
+DROP TABLE IF EXISTS test_last_day;
+
+
+statement ok
+CREATE TABLE test_last_day (id INT, test_date DATE);
+
+statement ok
+INSERT INTO test_last_day VALUES (1, DATE '2023-02-15'), (2, DATE '2024-02-15'), (3, DATE '2023-12-01');
+
+query TTT
+SELECT id, test_date, LAST_DAY(test_date) AS last_day_of_month FROM test_last_day ORDER BY id;
+----
+1 2023-02-15 2023-02-28
+2 2024-02-15 2024-02-29
+3 2023-12-01 2023-12-31
+
+statement ok
+DROP TABLE test_last_day;
+
+
+# Test Case 24/46
+# 日期函数-NEXT_DAY测试
+# 测试NEXT_DAY函数,返回指定日期后的下一个星期几
+
+statement ok
+DROP TABLE IF EXISTS test_next_day;
+
+
+statement ok
+CREATE TABLE test_next_day (id INT, test_date DATE);
+
+statement ok
+INSERT INTO test_next_day VALUES (1, DATE '2023-12-25');
+
+query TTT
+SELECT id, test_date, NEXT_DAY(test_date, '星期一') AS next_monday FROM test_next_day;
+----
+1 2023-12-25 2024-01-01
+
+statement ok
+DROP TABLE test_next_day;
+
+
+# Test Case 25/46
+# 日期函数-TRUNC日期截断测试
+# 测试TRUNC函数截断日期到指定精度
+
+statement ok
+DROP TABLE IF EXISTS test_trunc_date;
+
+
+statement ok
+CREATE TABLE test_trunc_date (id INT, test_date DATE);
+
+statement ok
+INSERT INTO test_trunc_date VALUES (1, DATE '2023-12-25');
+
+query TTTT
+SELECT id, test_date, TRUNC(test_date, 'MONTH') AS first_of_month, TRUNC(test_date, 'YEAR') AS first_of_year FROM test_trunc_date;
+----
+1 2023-12-25 2023-12-01 2023-01-01
+
+statement ok
+DROP TABLE test_trunc_date;
+
+
+# Test Case 26/46
+# 日期函数-SYSDATE系统日期测试
+# 测试SYSDATE函数获取系统当前日期时间
+
+statement ok
+DROP TABLE IF EXISTS test_sysdate;
+
+
+statement ok
+CREATE TABLE test_sysdate (id INT, record_time TIMESTAMP);
+
+statement ok
+INSERT INTO test_sysdate VALUES (1, SYSDATE);
+
+query T
+SELECT COUNT(*) AS count FROM test_sysdate WHERE record_time IS NOT NULL;
+----
+1
+
+statement ok
+DROP TABLE test_sysdate;
+
+
+# Test Case 27/46
+# 日期格式化-TO_CHAR多种格式测试
+# 测试TO_CHAR函数的多种日期格式化
+
+statement ok
+DROP TABLE IF EXISTS test_to_char_formats;
+
+
+statement ok
+CREATE TABLE test_to_char_formats (id INT, test_date DATE);
+
+statement ok
+INSERT INTO test_to_char_formats VALUES (1, DATE '2023-12-25');
+
+query TTTTT
+SELECT id, TO_CHAR(test_date, 'YYYY') AS year_only, TO_CHAR(test_date, 'MM') AS month_only, TO_CHAR(test_date, 'DD') AS day_only, TO_CHAR(test_date, 'YYYY-MM-DD') AS full_date FROM test_to_char_formats;
+----
+1 2023 12 25 2023-12-25
+
+statement ok
+DROP TABLE test_to_char_formats;
+
+
+# Test Case 28/46
+# 日期格式化-TO_CHAR时间格式测试
+# 测试TO_CHAR函数格式化时间部分
+
+statement ok
+DROP TABLE IF EXISTS test_to_char_time;
+
+
+statement ok
+CREATE TABLE test_to_char_time (id INT, test_timestamp TIMESTAMP);
+
+statement ok
+INSERT INTO test_to_char_time VALUES (1, TIMESTAMP '2023-12-25 14:30:45');
+
+query TTT
+SELECT id, TO_CHAR(test_timestamp, 'HH24:MI:SS') AS time_24h, TO_CHAR(test_timestamp, 'HH12:MI:SS AM') AS time_12h FROM test_to_char_time;
+----
+1 14:30:45 02:30:45 PM
+
+statement ok
+DROP TABLE test_to_char_time;
+
+
+# Test Case 29/46
+# 日期解析-TO_DATE多种格式测试
+# 测试TO_DATE函数解析不同格式的日期字符串
+
+statement ok
+DROP TABLE IF EXISTS test_to_date_formats;
+
+
+statement ok
+CREATE TABLE test_to_date_formats (id INT, date_col DATE);
+
+statement ok
+INSERT INTO test_to_date_formats VALUES (1, TO_DATE('2023-12-25', 'YYYY-MM-DD')), (2, TO_DATE('25/12/2023', 'DD/MM/YYYY')), (3, TO_DATE('20231225', 'YYYYMMDD'));
+
+query TT
+SELECT * FROM test_to_date_formats ORDER BY id;
+----
+1 2023-12-25
+2 2023-12-25
+3 2023-12-25
+
+statement ok
+DROP TABLE test_to_date_formats;
+
+
+# Test Case 30/46
+# 日期解析-TO_TIMESTAMP测试
+# 测试TO_TIMESTAMP函数解析带时间的字符串
+
+statement ok
+DROP TABLE IF EXISTS test_to_timestamp;
+
+
+statement ok
+CREATE TABLE test_to_timestamp (id INT, ts_col TIMESTAMP);
+
+statement ok
+INSERT INTO test_to_timestamp VALUES (1, TO_TIMESTAMP('2023-12-25 14:30:45', 'YYYY-MM-DD HH24:MI:SS'));
+
+query TT
+SELECT * FROM test_to_timestamp;
+----
+1 2023-12-25 14:30:45
+
+statement ok
+DROP TABLE test_to_timestamp;
+
+
+# Test Case 31/46
+# 日期提取-EXTRACT年月日测试
+# 测试EXTRACT函数提取年、月、日
+
+statement ok
+DROP TABLE IF EXISTS test_extract_ymd;
+
+
+statement ok
+CREATE TABLE test_extract_ymd (id INT, test_date DATE);
+
+statement ok
+INSERT INTO test_extract_ymd VALUES (1, DATE '2023-12-25');
+
+query TTTT
+SELECT id, EXTRACT(YEAR FROM test_date) AS year_val, EXTRACT(MONTH FROM test_date) AS month_val, EXTRACT(DAY FROM test_date) AS day_val FROM test_extract_ymd;
+----
+1 2023 12 25
+
+statement ok
+DROP TABLE test_extract_ymd;
+
+
+# Test Case 32/46
+# 日期提取-EXTRACT时分秒测试
+# 测试EXTRACT函数提取时、分、秒
+
+statement ok
+DROP TABLE IF EXISTS test_extract_hms;
+
+
+statement ok
+CREATE TABLE test_extract_hms (id INT, test_timestamp TIMESTAMP);
+
+statement ok
+INSERT INTO test_extract_hms VALUES (1, TIMESTAMP '2023-12-25 14:30:45');
+
+query TTTT
+SELECT id, EXTRACT(HOUR FROM test_timestamp) AS hour_val, EXTRACT(MINUTE FROM test_timestamp) AS minute_val, EXTRACT(SECOND FROM test_timestamp) AS second_val FROM test_extract_hms;
+----
+1 14 30 45
+
+statement ok
+DROP TABLE test_extract_hms;
+
+
+# Test Case 33/46
+# 时间间隔-INTERVAL YEAR测试
+# 测试INTERVAL YEAR间隔类型
+
+statement ok
+DROP TABLE IF EXISTS test_interval_year;
+
+
+statement ok
+CREATE TABLE test_interval_year (id INT, base_date DATE, result_date DATE);
+
+statement ok
+INSERT INTO test_interval_year VALUES (1, DATE '2023-12-25', DATE '2023-12-25' + INTERVAL '1' YEAR);
+
+query TTT
+SELECT * FROM test_interval_year;
+----
+1 2023-12-25 2024-12-25
+
+statement ok
+DROP TABLE test_interval_year;
+
+
+# Test Case 34/46
+# 时间间隔-INTERVAL DAY测试
+# 测试INTERVAL DAY间隔类型
+
+statement ok
+DROP TABLE IF EXISTS test_interval_day;
+
+
+statement ok
+CREATE TABLE test_interval_day (id INT, base_date DATE, result_date DATE);
+
+statement ok
+INSERT INTO test_interval_day VALUES (1, DATE '2023-12-25', DATE '2023-12-25' + INTERVAL '7' DAY);
+
+query TTT
+SELECT * FROM test_interval_day;
+----
+1 2023-12-25 2024-01-01
+
+statement ok
+DROP TABLE test_interval_day;
+
+
+# Test Case 35/46
+# 时间间隔-INTERVAL HOUR测试
+# 测试INTERVAL HOUR间隔类型
+
+statement ok
+DROP TABLE IF EXISTS test_interval_hour;
+
+
+statement ok
+CREATE TABLE test_interval_hour (id INT, base_ts TIMESTAMP, result_ts TIMESTAMP);
+
+statement ok
+INSERT INTO test_interval_hour VALUES (1, TIMESTAMP '2023-12-25 12:00:00', TIMESTAMP '2023-12-25 12:00:00' + INTERVAL '3' HOUR);
+
+query TTT
+SELECT * FROM test_interval_hour;
+----
+1 2023-12-25 12:00:00 2023-12-25 15:00:00
+
+statement ok
+DROP TABLE test_interval_hour;
+
+
+# Test Case 36/46
+# 日期比较-等于测试
+# 测试日期相等比较
+
+statement ok
+DROP TABLE IF EXISTS test_date_equal;
+
+
+statement ok
+CREATE TABLE test_date_equal (id INT, test_date DATE);
+
+statement ok
+INSERT INTO test_date_equal VALUES (1, DATE '2023-12-25'), (2, DATE '2023-12-26'), (3, DATE '2023-12-25');
+
+query TT
+SELECT * FROM test_date_equal WHERE test_date = DATE '2023-12-25' ORDER BY id;
+----
+1 2023-12-25
+3 2023-12-25
+
+statement ok
+DROP TABLE test_date_equal;
+
+
+# Test Case 37/46
+# 日期比较-大于小于测试
+# 测试日期大于和小于比较
+
+statement ok
+DROP TABLE IF EXISTS test_date_gt_lt;
+
+
+statement ok
+CREATE TABLE test_date_gt_lt (id INT, test_date DATE);
+
+statement ok
+INSERT INTO test_date_gt_lt VALUES (1, DATE '2023-12-20'), (2, DATE '2023-12-25'), (3, DATE '2023-12-30');
+
+query TT
+SELECT * FROM test_date_gt_lt WHERE test_date > DATE '2023-12-22' AND test_date < DATE '2023-12-28' ORDER BY id;
+----
+2 2023-12-25
+
+statement ok
+DROP TABLE test_date_gt_lt;
+
+
+# Test Case 38/46
+# 日期比较-BETWEEN范围测试
+# 测试日期BETWEEN范围查询
+
+statement ok
+DROP TABLE IF EXISTS test_date_between;
+
+
+statement ok
+CREATE TABLE test_date_between (id INT, event_date DATE);
+
+statement ok
+INSERT INTO test_date_between VALUES (1, DATE '2023-01-15'), (2, DATE '2023-06-15'), (3, DATE '2023-12-15'), (4, DATE '2024-01-15');
+
+query TT
+SELECT * FROM test_date_between WHERE event_date BETWEEN DATE '2023-06-01' AND DATE '2023-12-31' ORDER BY id;
+----
+2 2023-06-15
+3 2023-12-15
+
+statement ok
+DROP TABLE test_date_between;
+
+
+# Test Case 39/46
+# 日期比较-IN列表测试
+# 测试日期IN列表查询
+
+statement ok
+DROP TABLE IF EXISTS test_date_in;
+
+
+statement ok
+CREATE TABLE test_date_in (id INT, holiday DATE);
+
+statement ok
+INSERT INTO test_date_in VALUES (1, DATE '2023-01-01'), (2, DATE '2023-05-01'), (3, DATE '2023-10-01'), (4, DATE '2023-12-25');
+
+query TT
+SELECT * FROM test_date_in WHERE holiday IN (DATE '2023-01-01', DATE '2023-10-01') ORDER BY id;
+----
+1 2023-01-01
+3 2023-10-01
+
+statement ok
+DROP TABLE test_date_in;
+
+
+# Test Case 40/46
+# NULL值处理-日期类型COALESCE
+# 测试日期类型的COALESCE函数处理NULL值
+
+statement ok
+DROP TABLE IF EXISTS test_date_coalesce;
+
+
+statement ok
+CREATE TABLE test_date_coalesce (id INT, date1 DATE, date2 DATE);
+
+statement ok
+INSERT INTO test_date_coalesce VALUES (1, NULL, DATE '2023-12-25'), (2, DATE '2024-01-01', NULL), (3, NULL, NULL);
+
+query TT
+SELECT id, COALESCE(date1, date2, DATE '1900-01-01') AS result_date FROM test_date_coalesce ORDER BY id;
+----
+1 2023-12-25
+2 2024-01-01
+3 1900-01-01
+
+statement ok
+DROP TABLE test_date_coalesce;
+
+
+# Test Case 41/46
+# NULL值处理-时间戳类型NVL
+# 测试时间戳类型的NVL函数处理NULL值
+
+statement ok
+DROP TABLE IF EXISTS test_timestamp_nvl;
+
+
+statement ok
+CREATE TABLE test_timestamp_nvl (id INT, ts_col TIMESTAMP);
+
+statement ok
+INSERT INTO test_timestamp_nvl VALUES (1, NULL), (2, TIMESTAMP '2023-12-25 12:00:00');
+
+query TT
+SELECT id, NVL(ts_col, TIMESTAMP '1900-01-01 00:00:00') AS result_ts FROM test_timestamp_nvl ORDER BY id;
+----
+1 1900-01-01 00:00:00
+2 2023-12-25 12:00:00
+
+statement ok
+DROP TABLE test_timestamp_nvl;
+
+
+# Test Case 42/46
+# 日期索引-DATE类型索引测试
+# 测试在DATE列上创建索引
+
+statement ok
+DROP TABLE IF EXISTS test_date_index;
+
+
+statement ok
+CREATE TABLE test_date_index (id INT PRIMARY KEY, event_date DATE);
+
+statement ok
+CREATE INDEX idx_event_date ON test_date_index(event_date);
+
+statement ok
+INSERT INTO test_date_index VALUES (1, DATE '2023-01-01'), (2, DATE '2023-06-01'), (3, DATE '2023-12-01');
+
+query T
+SELECT COUNT(*) AS count FROM test_date_index WHERE event_date >= DATE '2023-06-01';
+----
+2
+
+statement ok
+DROP INDEX idx_event_date;
+
+statement ok
+DROP TABLE test_date_index;
+
+
+# Test Case 43/46
+# 日期约束-CHECK约束测试
+# 测试日期列的CHECK约束
+
+statement ok
+DROP TABLE IF EXISTS test_date_check;
+
+
+statement ok
+CREATE TABLE test_date_check (id INT, start_date DATE, end_date DATE, CHECK (end_date >= start_date));
+
+statement ok
+INSERT INTO test_date_check VALUES (1, DATE '2023-01-01', DATE '2023-12-31');
+
+query TTT
+SELECT * FROM test_date_check;
+----
+1 2023-01-01 2023-12-31
+
+statement ok
+DROP TABLE test_date_check;
+
+
+# Test Case 44/46
+# 日期约束-CHECK约束错误测试
+# 测试违反日期CHECK约束的错误处理
+
+statement ok
+DROP TABLE IF EXISTS test_date_check_error;
+
+
+statement ok
+CREATE TABLE test_date_check_error (id INT, start_date DATE, end_date DATE, CHECK (end_date >= start_date));
+
+statement error
+INSERT INTO test_date_check_error VALUES (1, DATE '2023-12-31', DATE '2023-01-01');
+
+statement ok
+DROP TABLE test_date_check_error;
+
+
+# Test Case 45/46
+# 性能测试-大量日期数据插入
+# 测试批量插入日期数据的性能
+
+statement ok
+DROP TABLE IF EXISTS test_date_bulk;
+
+
+statement ok
+CREATE TABLE test_date_bulk (id INT, log_date DATE);
+
+statement ok
+INSERT INTO test_date_bulk SELECT ROWNUM, DATE '2023-01-01' + ROWNUM FROM DUAL CONNECT BY ROWNUM <= 1000;
+
+query T
+SELECT COUNT(*) AS total_count FROM test_date_bulk;
+----
+1000
+
+statement ok
+DROP TABLE test_date_bulk;
+
+
+# Test Case 46/46
+# 性能测试-日期范围查询
+# 测试日期范围查询的性能
+
+statement ok
+DROP TABLE IF EXISTS test_date_range_perf;
+
+
+statement ok
+CREATE TABLE test_date_range_perf (id INT, log_date DATE);
+
+statement ok
+CREATE INDEX idx_log_date ON test_date_range_perf(log_date);
+
+statement ok
+INSERT INTO test_date_range_perf SELECT ROWNUM, DATE '2023-01-01' + MOD(ROWNUM, 365) FROM DUAL CONNECT BY ROWNUM <= 10000;
+
+query T
+SELECT COUNT(*) AS count FROM test_date_range_perf WHERE log_date BETWEEN DATE '2023-06-01' AND DATE '2023-06-30';
+----
+810
+
+statement ok
+DROP INDEX idx_log_date;
+
+statement ok
+DROP TABLE test_date_range_perf;
