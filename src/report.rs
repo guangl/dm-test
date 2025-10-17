@@ -297,17 +297,17 @@ impl HtmlReportGenerator {
             }
 
             // 添加错误信息
-            if !tc.success
-                && let Some(ref error_msg) = tc.error_message
-            {
-                test_cases_html.push_str(&format!(
-                    r#"                    <div class="error-message">
+            if !tc.success {
+                if let Some(ref error_msg) = tc.error_message {
+                    test_cases_html.push_str(&format!(
+                        r#"                    <div class="error-message">
                         <h4>❌ 错误信息</h4>
                         <pre>{}</pre>
                     </div>
 "#,
-                    Self::html_escape(error_msg)
-                ));
+                        Self::html_escape(error_msg)
+                    ));
+                }
             }
 
             test_cases_html.push_str(
