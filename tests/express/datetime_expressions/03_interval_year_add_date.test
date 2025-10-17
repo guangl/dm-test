@@ -1,0 +1,9 @@
+# Test Case Name: INTERVAL YEAR加DATE测试
+# Description: 测试年间隔加日期,得到日期
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT INTERVAL '1' YEAR + DATE '2005-04-01' FROM DUAL;
+----
+2006-04-01

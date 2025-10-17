@@ -1,0 +1,7 @@
+# Test Case Name: 整数除以零测试
+# Description: 测试非零整数除以0的情况(应该产生错误)
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+statement error
+SELECT 10 / 0 FROM DUAL;

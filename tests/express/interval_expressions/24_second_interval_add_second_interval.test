@@ -1,0 +1,9 @@
+# Test Case Name: SECOND间隔加SECOND间隔测试
+# Description: 测试SECOND间隔加SECOND间隔,得到SECOND间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '30.5' SECOND + INTERVAL '15.3' SECOND FROM DUAL;
+----
+INTERVAL '45.800000' SECOND(9,6)

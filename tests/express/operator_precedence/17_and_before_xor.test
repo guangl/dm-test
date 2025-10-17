@@ -1,0 +1,9 @@
+# Test Case Name: 按位与优先于按位异或测试
+# Description: 测试按位与优先级高于按位异或(^)
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 12 & 8 ^ 4 FROM DUAL;
+----
+12

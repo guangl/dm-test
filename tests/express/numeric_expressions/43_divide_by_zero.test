@@ -1,0 +1,7 @@
+# Test Case Name: 零除零测试
+# Description: 测试0除以0的情况(应该产生错误或NULL)
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+statement error
+SELECT 0 / 0 FROM DUAL;

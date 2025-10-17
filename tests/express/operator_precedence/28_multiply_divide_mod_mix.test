@@ -1,0 +1,9 @@
+# Test Case Name: 乘除取余混合测试
+# Description: 测试乘法、除法、取余同级混合运算
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 20 % 6 * 2 / 4 FROM DUAL;
+----
+2

@@ -1,0 +1,9 @@
+# Test Case Name: 乘法优先于加法测试
+# Description: 测试乘法优先级高于加法
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 5 + 3 * 2 FROM DUAL;
+----
+11

@@ -1,0 +1,9 @@
+# Test Case Name: DATE减DATE得到DAY间隔测试
+# Description: 测试日期减日期,使用DAY限定符,得到日间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (DATE '2005-04-16' - DATE '2005-04-01') DAY FROM DUAL;
+----
+INTERVAL '15' DAY(9)

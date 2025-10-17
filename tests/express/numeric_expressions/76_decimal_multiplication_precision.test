@@ -1,0 +1,9 @@
+# Test Case Name: 小数乘法精度测试
+# Description: 测试小数乘法结果的精度
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(1.23 AS NUMERIC(3,2)) * CAST(4.56 AS NUMERIC(3,2)) FROM DUAL;
+----
+5.6088

@@ -1,0 +1,9 @@
+# Test Case Name: 嵌套括号与运算符组合测试
+# Description: 测试嵌套括号与各种运算符的复杂组合
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT ((10 + 5) * 2 - 8) / ((3 + 1) * 2) FROM DUAL;
+----
+2

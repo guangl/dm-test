@@ -1,0 +1,9 @@
+# Test Case Name: 字符串连接基本测试
+# Description: 测试两个普通字符串的连接操作
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT '武汉' || '达梦' FROM DUAL;
+----
+武汉达梦

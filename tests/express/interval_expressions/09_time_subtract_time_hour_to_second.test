@@ -1,0 +1,9 @@
+# Test Case Name: TIME减TIME得到HOUR TO SECOND间隔测试
+# Description: 测试时间减时间,使用HOUR TO SECOND限定符
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (TIME '15:30:45' - TIME '10:00:00') HOUR TO SECOND FROM DUAL;
+----
+INTERVAL '5:30:45.000000' HOUR(9) TO SECOND(6)

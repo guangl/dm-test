@@ -1,0 +1,9 @@
+# Test Case Name: 一元运算符右结合测试
+# Description: 测试一元运算符从右到左结合
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT -(+(-5)) FROM DUAL;
+----
+-5

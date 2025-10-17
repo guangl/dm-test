@@ -1,0 +1,9 @@
+# Test Case Name: 不同精度间隔加法测试
+# Description: 测试不同引导精度的YEAR间隔加法,结果精度为最大值
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '100' YEAR(3) + INTERVAL '50' YEAR(2) FROM DUAL;
+----
+INTERVAL '150' YEAR(9)

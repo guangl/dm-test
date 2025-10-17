@@ -1,0 +1,9 @@
+# Test Case Name: 间隔除1测试
+# Description: 测试间隔除1,结果不变
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '5 12:30:45' DAY TO SECOND / 1 FROM DUAL;
+----
+INTERVAL '5 12:30:45.000000' DAY(9) TO SECOND(6)

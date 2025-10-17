@@ -1,0 +1,9 @@
+# Test Case Name: 负间隔加法测试
+# Description: 测试负YEAR间隔加正YEAR间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '-5' YEAR + INTERVAL '10' YEAR FROM DUAL;
+----
+INTERVAL '5' YEAR(9)

@@ -1,0 +1,9 @@
+# Test Case Name: 多个字符串连续连接测试
+# Description: 测试多个字符串连续连接操作
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'A' || 'B' || 'C' || 'D' FROM DUAL;
+----
+ABCD

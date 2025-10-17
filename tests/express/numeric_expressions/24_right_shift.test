@@ -1,0 +1,9 @@
+# Test Case Name: 右移运算符测试
+# Description: 测试右移运算符>>,要求参与运算的操作数只能为整数数据类型、精确数据类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query I
+SELECT 8 >> 3 FROM DUAL;
+----
+1

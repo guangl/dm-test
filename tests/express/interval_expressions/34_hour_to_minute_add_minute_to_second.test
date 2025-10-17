@@ -1,0 +1,9 @@
+# Test Case Name: HOUR TO MINUTE加MINUTE TO SECOND测试
+# Description: 测试不同子类型的日时间隔加法
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '3:30' HOUR TO MINUTE + INTERVAL '45:30' MINUTE TO SECOND FROM DUAL;
+----
+INTERVAL '4:15:30.000000' HOUR(9) TO SECOND(6)

@@ -1,0 +1,9 @@
+# Test Case Name: 整数与精确数据类型左移运算
+# Description: 当整数与精确数据类型运算时,将精确数据类型四舍五入转化成bigint类型后运算,结果为bigint类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query I
+SELECT 5 << CAST(2.6 AS NUMERIC(3,1)) FROM DUAL;
+----
+40

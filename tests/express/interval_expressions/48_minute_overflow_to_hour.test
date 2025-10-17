@@ -1,0 +1,9 @@
+# Test Case Name: 分钟溢出到小时测试
+# Description: 测试HOUR TO MINUTE间隔分钟超过60自动进位到小时
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '5:45' HOUR TO MINUTE + INTERVAL '30' MINUTE FROM DUAL;
+----
+INTERVAL '6:15' HOUR(9) TO MINUTE

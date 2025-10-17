@@ -1,0 +1,9 @@
+# Test Case Name: 负号与乘法优先级测试
+# Description: 测试负号作为一元运算符,先于乘法计算
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 2 * -3 FROM DUAL;
+----
+-6

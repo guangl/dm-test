@@ -1,0 +1,9 @@
+# Test Case Name: DATE减DATE得到YEAR间隔测试
+# Description: 测试日期减日期,使用YEAR限定符,得到年间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (DATE '2020-12-31' - DATE '2010-01-01') YEAR FROM DUAL;
+----
+INTERVAL '10' YEAR(9)

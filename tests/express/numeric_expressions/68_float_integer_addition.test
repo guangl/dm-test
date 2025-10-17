@@ -1,0 +1,9 @@
+# Test Case Name: FLOAT与INTEGER加法测试
+# Description: 测试FLOAT类型与INTEGER类型加法,结果为近似数值类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(3.14 AS FLOAT) + CAST(2 AS INTEGER) FROM DUAL;
+----
+5.14

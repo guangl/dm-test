@@ -1,0 +1,9 @@
+# Test Case Name: 大数值相乘测试
+# Description: 测试大数值相乘
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(999999 AS NUMERIC(6,0)) * CAST(999999 AS NUMERIC(6,0)) FROM DUAL;
+----
+999998000001

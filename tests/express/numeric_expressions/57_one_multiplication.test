@@ -1,0 +1,9 @@
+# Test Case Name: 一乘以任意数测试
+# Description: 测试1乘以任意数的结果
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query I
+SELECT 1 * 12345 FROM DUAL;
+----
+12345

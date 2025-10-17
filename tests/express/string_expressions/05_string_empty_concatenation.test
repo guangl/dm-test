@@ -1,0 +1,9 @@
+# Test Case Name: 非空字符串连接空字符串测试
+# Description: 测试非空字符串连接空字符串
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'Test' || '' FROM DUAL;
+----
+Test

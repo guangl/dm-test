@@ -1,0 +1,9 @@
+# Test Case Name: 零长度字符串连接测试
+# Description: 测试零长度VARCHAR的连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT CAST('' AS VARCHAR(0)) || 'Test' FROM DUAL;
+----
+Test

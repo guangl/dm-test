@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP小数秒加法测试
+# Description: 测试时间戳带小数秒的加法
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2007-07-15 10:00:00.123456' + INTERVAL '0.5' SECOND FROM DUAL;
+----
+2007-07-15 10:00:00.623456

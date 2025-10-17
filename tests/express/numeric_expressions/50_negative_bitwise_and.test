@@ -1,0 +1,9 @@
+# Test Case Name: 负数按位与测试
+# Description: 测试负数参与按位与运算
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query I
+SELECT -1 & 10 FROM DUAL;
+----
+10

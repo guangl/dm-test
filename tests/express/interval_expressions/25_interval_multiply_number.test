@@ -1,0 +1,9 @@
+# Test Case Name: 间隔乘数值测试
+# Description: 测试MINUTE TO SECOND间隔乘3,得到MINUTE TO SECOND间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '10:10' MINUTE TO SECOND * 3 FROM DUAL;
+----
+INTERVAL '30:30.000000' MINUTE(9) TO SECOND(6)

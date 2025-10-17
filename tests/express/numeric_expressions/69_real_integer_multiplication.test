@@ -1,0 +1,9 @@
+# Test Case Name: REAL与INTEGER乘法测试
+# Description: 测试REAL类型与INTEGER类型乘法,结果为近似数值类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(3.5 AS REAL) * CAST(2 AS INTEGER) FROM DUAL;
+----
+7.0

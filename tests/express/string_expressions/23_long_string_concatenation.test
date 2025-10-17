@@ -1,0 +1,9 @@
+# Test Case Name: 长字符串连接测试
+# Description: 测试较长字符串的连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'This is a very long string that will be concatenated' || ' with another long string to test string concatenation' FROM DUAL;
+----
+This is a very long string that will be concatenated with another long string to test string concatenation

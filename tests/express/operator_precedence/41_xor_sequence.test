@@ -1,0 +1,9 @@
+# Test Case Name: 按位异或多次运算测试
+# Description: 测试多个按位异或从左到右执行
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 15 ^ 7 ^ 3 FROM DUAL;
+----
+11

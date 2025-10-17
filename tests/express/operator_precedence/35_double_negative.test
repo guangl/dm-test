@@ -1,0 +1,9 @@
+# Test Case Name: 双负号优先级测试
+# Description: 测试双负号(两个一元减号)的处理
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT -(-5) FROM DUAL;
+----
+5

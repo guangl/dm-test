@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP AT TIME ZONE地区名测试
+# Description: 测试时间戳使用AT TIME ZONE进行时区转换,指定时区地区名
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2024-06-20 05:32:29 +08:00' AT TIME ZONE 'America/Los_Angeles' FROM DUAL;
+----
+2024-06-19 14:32:29.000000 -07:00

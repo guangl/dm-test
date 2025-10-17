@@ -1,0 +1,9 @@
+# Test Case Name: HOUR间隔小数除法测试
+# Description: 测试HOUR间隔除较小数值
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '100' HOUR / 0.5 FROM DUAL;
+----
+INTERVAL '200' HOUR(9)

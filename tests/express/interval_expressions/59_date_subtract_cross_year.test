@@ -1,0 +1,9 @@
+# Test Case Name: 跨年日期相减测试
+# Description: 测试跨年日期相减得到间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (DATE '2025-01-01' - DATE '2024-12-31') DAY FROM DUAL;
+----
+INTERVAL '1' DAY(9)

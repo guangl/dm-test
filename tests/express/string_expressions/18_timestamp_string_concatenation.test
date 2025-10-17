@@ -1,0 +1,9 @@
+# Test Case Name: 时间戳转字符串连接测试
+# Description: 测试时间戳与字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'Timestamp: ' || CAST(TIMESTAMP '2025-10-17 10:30:00' AS VARCHAR(30)) FROM DUAL;
+----
+Timestamp: 2025-10-17 10:30:00

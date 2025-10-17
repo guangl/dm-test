@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP跨月加法测试
+# Description: 测试时间戳加间隔跨月
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2007-01-31 10:00:00' + INTERVAL '1' MONTH FROM DUAL;
+----
+2007-02-28 10:00:00.000000

@@ -1,0 +1,9 @@
+# Test Case Name: TIME加INTERVAL SECOND测试
+# Description: 测试时间加秒间隔,得到时间
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIME '10:30:00' + INTERVAL '30' SECOND FROM DUAL;
+----
+10:30:30

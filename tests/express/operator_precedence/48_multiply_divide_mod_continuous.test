@@ -1,0 +1,9 @@
+# Test Case Name: 乘法除法取余连续测试
+# Description: 测试乘除取余连续运算,同级从左到右
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 100 / 5 * 3 % 7 FROM DUAL;
+----
+4

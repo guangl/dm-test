@@ -1,0 +1,9 @@
+# Test Case Name: 字符串连接结果长度测试
+# Description: 测试字符串连接后的长度等于两个运算数长度之和
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query I
+SELECT LENGTH('ABC' || 'DEF') FROM DUAL;
+----
+6

@@ -1,0 +1,9 @@
+# Test Case Name: BIGINT与BIGINT左移运算结果类型测试
+# Description: 左右操作数都为bigint类型时操作结果为bigint类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query I
+SELECT CAST(5 AS BIGINT) << CAST(2 AS BIGINT) FROM DUAL;
+----
+20

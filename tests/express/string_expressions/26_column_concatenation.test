@@ -1,0 +1,22 @@
+# Test Case Name: 表列字符串连接测试
+# Description: 测试表列之间的字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+statement ok
+DROP TABLE IF EXISTS test_string_concat;
+
+statement ok
+CREATE TABLE test_string_concat (first_name VARCHAR(50), last_name VARCHAR(50));
+
+statement ok
+INSERT INTO test_string_concat VALUES ('张', '三'), ('李', '四');
+
+query T
+SELECT first_name || last_name FROM test_string_concat ORDER BY first_name;
+----
+李四
+张三
+
+statement ok
+DROP TABLE test_string_concat;

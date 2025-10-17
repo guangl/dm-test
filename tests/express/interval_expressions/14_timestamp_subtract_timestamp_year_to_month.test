@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP减TIMESTAMP得到YEAR TO MONTH间隔测试
+# Description: 测试时间戳减时间戳,使用YEAR TO MONTH限定符
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (TIMESTAMP '2010-01-15 10:00:00' - TIMESTAMP '2007-07-15 10:00:00') YEAR TO MONTH FROM DUAL;
+----
+INTERVAL '2-6' YEAR(9) TO MONTH

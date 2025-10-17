@@ -1,0 +1,9 @@
+# Test Case Name: DATE加INTERVAL YEAR TO MONTH测试
+# Description: 测试日期加年-月间隔,得到日期
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT DATE '2005-04-01' + INTERVAL '1-6' YEAR TO MONTH FROM DUAL;
+----
+2006-10-01

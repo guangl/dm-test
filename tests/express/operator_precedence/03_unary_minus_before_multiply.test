@@ -1,0 +1,9 @@
+# Test Case Name: 一元正负号优先级测试
+# Description: 测试一元正负号优先级高于乘法
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT -3 * 4 FROM DUAL;
+----
+-12

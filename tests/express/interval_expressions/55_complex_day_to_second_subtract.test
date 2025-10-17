@@ -1,0 +1,9 @@
+# Test Case Name: 复杂DAY TO SECOND减法测试
+# Description: 测试带小数秒的DAY TO SECOND间隔减法
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '5 10:30:45.777777' DAY TO SECOND - INTERVAL '2 5:15:20.111111' DAY TO SECOND FROM DUAL;
+----
+INTERVAL '3 5:15:25.666666' DAY(9) TO SECOND(6)

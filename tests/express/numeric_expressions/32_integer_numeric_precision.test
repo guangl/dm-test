@@ -1,0 +1,9 @@
+# Test Case Name: INTEGER与NUMERIC加法精度转换测试
+# Description: 整数与NUMERIC运算时,INTEGER类型的精度固定为10,标度为0
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(100 AS INTEGER) + CAST(23.45 AS NUMERIC(4,2)) FROM DUAL;
+----
+123.45

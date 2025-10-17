@@ -1,0 +1,9 @@
+# Test Case Name: TIME减INTERVAL HOUR测试
+# Description: 测试时间减小时间隔,得到时间
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIME '19:00:00' - INTERVAL '9' HOUR FROM DUAL;
+----
+10:00:00

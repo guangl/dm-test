@@ -1,0 +1,9 @@
+# Test Case Name: DATE加INTERVAL MONTH闰年测试
+# Description: 测试1月31日加1个月在闰年,结果为2月29日
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT DATE '2020-01-31' + INTERVAL '1' MONTH FROM DUAL;
+----
+2020-02-29

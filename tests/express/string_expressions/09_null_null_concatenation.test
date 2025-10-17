@@ -1,0 +1,9 @@
+# Test Case Name: NULL连接NULL测试(默认模式)
+# Description: 测试NULL与NULL连接,默认模式下结果为空串
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT NULL || NULL FROM DUAL;
+----
+(empty)

@@ -1,0 +1,9 @@
+# Test Case Name: BOOLEAN转字符串连接测试
+# Description: 测试BOOLEAN值转字符串后的连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'Result: ' || CAST(1 AS VARCHAR(10)) FROM DUAL;
+----
+Result: 1

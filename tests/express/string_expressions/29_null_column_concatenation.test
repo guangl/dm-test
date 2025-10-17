@@ -1,0 +1,23 @@
+# Test Case Name: NULL列连接测试
+# Description: 测试包含NULL值的列进行字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+statement ok
+DROP TABLE IF EXISTS test_null_concat;
+
+statement ok
+CREATE TABLE test_null_concat (col1 VARCHAR(10), col2 VARCHAR(10));
+
+statement ok
+INSERT INTO test_null_concat VALUES ('A', 'B'), ('C', NULL), (NULL, 'D');
+
+query T
+SELECT col1 || col2 FROM test_null_concat ORDER BY col1 NULLS LAST;
+----
+AB
+C
+D
+
+statement ok
+DROP TABLE test_null_concat;

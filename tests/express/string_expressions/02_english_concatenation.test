@@ -1,0 +1,9 @@
+# Test Case Name: 英文字符串连接测试
+# Description: 测试两个英文字符串的连接操作
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'Hello' || 'World' FROM DUAL;
+----
+HelloWorld

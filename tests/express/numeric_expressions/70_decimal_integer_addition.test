@@ -1,0 +1,9 @@
+# Test Case Name: DECIMAL与INTEGER加法测试
+# Description: 测试DECIMAL类型与INTEGER类型加法
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(99.99 AS DECIMAL(10,2)) + CAST(1 AS INTEGER) FROM DUAL;
+----
+100.99

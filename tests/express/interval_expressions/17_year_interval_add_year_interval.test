@@ -1,0 +1,9 @@
+# Test Case Name: YEAR间隔加YEAR间隔测试
+# Description: 测试YEAR间隔加YEAR间隔,得到YEAR间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '10' YEAR + INTERVAL '5' YEAR FROM DUAL;
+----
+INTERVAL '15' YEAR(9)

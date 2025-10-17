@@ -1,0 +1,9 @@
+# Test Case Name: 近似数值类型加法运算
+# Description: 测试INTEGER与DOUBLE加法,只要有一个为近似数值类型,结果为近似数值类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT 5 + 3.3 FROM DUAL;
+----
+8.3

@@ -1,0 +1,9 @@
+# Test Case Name: 数值乘间隔测试
+# Description: 测试数值2乘HOUR间隔,得到HOUR间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT 2 * INTERVAL '5' HOUR FROM DUAL;
+----
+INTERVAL '10' HOUR(9)

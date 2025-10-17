@@ -1,0 +1,9 @@
+# Test Case Name: 多个一元运算符测试
+# Description: 测试多个一元运算符连续使用
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT ~(-10) FROM DUAL;
+----
+9

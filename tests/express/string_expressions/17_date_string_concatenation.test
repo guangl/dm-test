@@ -1,0 +1,9 @@
+# Test Case Name: 日期转字符串连接测试
+# Description: 测试日期与字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'Date: ' || CAST(DATE '2025-10-17' AS VARCHAR(20)) FROM DUAL;
+----
+Date: 2025-10-17

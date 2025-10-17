@@ -1,0 +1,9 @@
+# Test Case Name: Unicode字符连接测试
+# Description: 测试Unicode特殊字符的连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT '😀' || '😃' || '😄' FROM DUAL;
+----
+😀😃😄

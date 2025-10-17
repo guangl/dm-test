@@ -1,0 +1,9 @@
+# Test Case Name: SMALLINT与INTEGER加法类型转换测试
+# Description: 两个不同类型的整数运算的结果类型转换为范围较大的那个整数类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query I
+SELECT CAST(100 AS SMALLINT) + CAST(200 AS INTEGER) FROM DUAL;
+----
+300

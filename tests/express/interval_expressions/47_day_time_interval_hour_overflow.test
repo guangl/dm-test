@@ -1,0 +1,9 @@
+# Test Case Name: 日时间隔小时溢出测试
+# Description: 测试DAY TO HOUR间隔小时超过24自动进位到天
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '2 20' DAY TO HOUR + INTERVAL '10' HOUR FROM DUAL;
+----
+INTERVAL '3 6' DAY(9) TO HOUR

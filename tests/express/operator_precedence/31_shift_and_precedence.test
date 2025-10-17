@@ -1,0 +1,9 @@
+# Test Case Name: 左移与按位与优先级测试
+# Description: 测试左移优先于按位与
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 3 << 2 & 15 FROM DUAL;
+----
+12

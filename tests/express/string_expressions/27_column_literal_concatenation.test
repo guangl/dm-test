@@ -1,0 +1,22 @@
+# Test Case Name: 表列与常量字符串连接测试
+# Description: 测试表列与常量字符串的连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+statement ok
+DROP TABLE IF EXISTS test_string_concat2;
+
+statement ok
+CREATE TABLE test_string_concat2 (city VARCHAR(50));
+
+statement ok
+INSERT INTO test_string_concat2 VALUES ('北京'), ('上海');
+
+query T
+SELECT '城市: ' || city FROM test_string_concat2 ORDER BY city;
+----
+城市: 上海
+城市: 北京
+
+statement ok
+DROP TABLE test_string_concat2;

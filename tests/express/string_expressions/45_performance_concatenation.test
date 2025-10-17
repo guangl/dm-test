@@ -1,0 +1,9 @@
+# Test Case Name: 字符串连接性能测试
+# Description: 测试大量字符串连接操作
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'A' || 'B' || 'C' || 'D' || 'E' || 'F' || 'G' || 'H' || 'I' || 'J' FROM DUAL;
+----
+ABCDEFGHIJ

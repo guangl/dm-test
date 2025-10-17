@@ -1,0 +1,9 @@
+# Test Case Name: 数值加DATE测试
+# Description: 测试数值加日期,等价于INTERVAL '数值' DAY加日期
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT 2 + DATE '2011-09-29' FROM DUAL;
+----
+2011-10-01

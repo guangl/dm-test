@@ -1,0 +1,9 @@
+# Test Case Name: NUMERIC类型减法运算精度测试
+# Description: 测试NUMERIC类型减法,结果精度为二者整数部分长度最大值与二者标度最大值之和
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(123.45 AS NUMERIC(5,2)) - CAST(67.890 AS NUMERIC(5,3)) FROM DUAL;
+----
+55.560

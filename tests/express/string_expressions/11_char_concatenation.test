@@ -1,0 +1,9 @@
+# Test Case Name: CHAR类型连接测试
+# Description: 测试CHAR类型字符串的连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT CAST('ABC' AS CHAR(5)) || CAST('DEF' AS CHAR(5)) FROM DUAL;
+----
+ABC  DEF

@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP加小数天数测试
+# Description: 测试时间戳加小数天数
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2003-09-29 00:00:00' + 0.5 FROM DUAL;
+----
+2003-09-29 12:00:00.000000

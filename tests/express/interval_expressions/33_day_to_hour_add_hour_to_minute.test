@@ -1,0 +1,9 @@
+# Test Case Name: DAY TO HOUR加HOUR TO MINUTE测试
+# Description: 测试不同子类型的日时间隔加法,结果子类型包含所有域
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '2 10' DAY TO HOUR + INTERVAL '5:30' HOUR TO MINUTE FROM DUAL;
+----
+INTERVAL '2 15:30:00.000000' DAY(9) TO SECOND(6)

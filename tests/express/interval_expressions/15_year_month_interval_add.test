@@ -1,0 +1,9 @@
+# Test Case Name: 年月间隔加法测试
+# Description: 测试YEAR TO MONTH间隔加MONTH间隔,得到YEAR TO MONTH间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '2007-07' YEAR(4) TO MONTH + INTERVAL '7' MONTH FROM DUAL;
+----
+INTERVAL '2008-2' YEAR(9) TO MONTH

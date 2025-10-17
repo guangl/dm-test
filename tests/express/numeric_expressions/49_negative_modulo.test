@@ -1,0 +1,9 @@
+# Test Case Name: 负数取模测试
+# Description: 测试负数参与取模运算
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT -10 % 3 FROM DUAL;
+----
+-1

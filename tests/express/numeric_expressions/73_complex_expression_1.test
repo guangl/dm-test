@@ -1,0 +1,9 @@
+# Test Case Name: 复杂表达式优先级测试1
+# Description: 测试包含多个运算符的复杂表达式
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 2 + 3 * 4 - 5 FROM DUAL;
+----
+9

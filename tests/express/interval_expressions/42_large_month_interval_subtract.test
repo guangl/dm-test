@@ -1,0 +1,9 @@
+# Test Case Name: 大MONTH间隔减法测试
+# Description: 测试较大MONTH间隔的减法
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '1000' MONTH(4) - INTERVAL '500' MONTH FROM DUAL;
+----
+INTERVAL '500' MONTH(9)

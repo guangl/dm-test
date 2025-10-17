@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP AT TIME ZONE偏移量测试
+# Description: 测试时间戳使用AT TIME ZONE进行时区转换,指定时区偏移量
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2023-06-01 18:05:23.234 +08:00' AT TIME ZONE '-3:00' FROM DUAL;
+----
+2023-06-01 07:05:23.234000 -03:00

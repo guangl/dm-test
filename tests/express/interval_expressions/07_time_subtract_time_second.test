@@ -1,0 +1,9 @@
+# Test Case Name: TIME减TIME得到SECOND间隔测试
+# Description: 测试时间减时间,使用SECOND限定符,得到秒间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (TIME '10:30:30' - TIME '10:30:00') SECOND FROM DUAL;
+----
+INTERVAL '30.000000' SECOND(9,6)

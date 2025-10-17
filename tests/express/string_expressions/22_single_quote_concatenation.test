@@ -1,0 +1,9 @@
+# Test Case Name: 单引号连接测试
+# Description: 测试包含单引号的字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'It''s' || ' ' || 'a' || ' ' || 'test' FROM DUAL;
+----
+It's a test

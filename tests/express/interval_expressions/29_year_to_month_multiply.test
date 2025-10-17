@@ -1,0 +1,9 @@
+# Test Case Name: YEAR TO MONTH间隔乘法测试
+# Description: 测试YEAR TO MONTH间隔乘2
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '2-6' YEAR TO MONTH * 2 FROM DUAL;
+----
+INTERVAL '5-0' YEAR(9) TO MONTH

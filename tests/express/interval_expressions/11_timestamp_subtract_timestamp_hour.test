@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP减TIMESTAMP得到HOUR间隔测试
+# Description: 测试时间戳减时间戳,使用HOUR限定符
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (TIMESTAMP '2007-07-15 19:00:00' - TIMESTAMP '2007-01-15 19:00:00') HOUR FROM DUAL;
+----
+INTERVAL '4344' HOUR(9)

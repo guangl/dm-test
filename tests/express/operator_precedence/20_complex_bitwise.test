@@ -1,0 +1,9 @@
+# Test Case Name: 复杂位运算优先级测试
+# Description: 测试多个位运算符的优先级组合
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 8 | 4 ^ 2 & 6 FROM DUAL;
+----
+14

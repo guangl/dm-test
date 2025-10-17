@@ -1,0 +1,9 @@
+# Test Case Name: DATE减负数间隔测试
+# Description: 测试日期减负数月间隔,相当于加法
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT DATE '2005-04-01' - INTERVAL '-3' MONTH FROM DUAL;
+----
+2005-07-01

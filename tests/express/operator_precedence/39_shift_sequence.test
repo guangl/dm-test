@@ -1,0 +1,9 @@
+# Test Case Name: 移位运算从左到右测试
+# Description: 测试多个移位运算从左到右执行
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 16 >> 2 << 1 FROM DUAL;
+----
+8

@@ -1,0 +1,22 @@
+# Test Case Name: 多列字符串连接测试
+# Description: 测试多个表列的字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+statement ok
+DROP TABLE IF EXISTS test_string_concat3;
+
+statement ok
+CREATE TABLE test_string_concat3 (col1 VARCHAR(10), col2 VARCHAR(10), col3 VARCHAR(10));
+
+statement ok
+INSERT INTO test_string_concat3 VALUES ('A', 'B', 'C'), ('X', 'Y', 'Z');
+
+query T
+SELECT col1 || '-' || col2 || '-' || col3 FROM test_string_concat3 ORDER BY col1;
+----
+A-B-C
+X-Y-Z
+
+statement ok
+DROP TABLE test_string_concat3;

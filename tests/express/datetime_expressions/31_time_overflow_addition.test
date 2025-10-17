@@ -1,0 +1,9 @@
+# Test Case Name: TIME跨天加法测试
+# Description: 测试时间加间隔超过24小时后的循环处理
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIME '23:00:00' + INTERVAL '3' HOUR FROM DUAL;
+----
+02:00:00

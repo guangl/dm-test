@@ -1,0 +1,9 @@
+# Test Case Name: 字符串连接大小写测试
+# Description: 测试字符串连接保持原始大小写
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'ABC' || 'def' || 'XYZ' || 'xyz' FROM DUAL;
+----
+ABCdefXYZxyz

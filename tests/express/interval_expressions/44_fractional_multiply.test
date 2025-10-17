@@ -1,0 +1,9 @@
+# Test Case Name: 小数乘法测试
+# Description: 测试间隔乘小数
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '10.5' SECOND * 1.5 FROM DUAL;
+----
+INTERVAL '15.750000' SECOND(9,6)

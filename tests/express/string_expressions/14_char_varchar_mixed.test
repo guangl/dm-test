@@ -1,0 +1,9 @@
+# Test Case Name: CHAR与VARCHAR混合连接测试
+# Description: 测试CHAR类型与VARCHAR类型混合连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT CAST('ABC' AS CHAR(5)) || CAST('DEF' AS VARCHAR(5)) FROM DUAL;
+----
+ABC  DEF

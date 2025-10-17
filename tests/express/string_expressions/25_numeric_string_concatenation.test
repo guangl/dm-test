@@ -1,0 +1,9 @@
+# Test Case Name: 数字字符串连接测试
+# Description: 测试纯数字字符串的连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT '123' || '456' || '789' FROM DUAL;
+----
+123456789

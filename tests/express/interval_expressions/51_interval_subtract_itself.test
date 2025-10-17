@@ -1,0 +1,9 @@
+# Test Case Name: 间隔减自身测试
+# Description: 测试间隔减自身,结果为零间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '10' DAY - INTERVAL '10' DAY FROM DUAL;
+----
+INTERVAL '0' DAY(9)

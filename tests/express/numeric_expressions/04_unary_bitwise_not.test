@@ -1,0 +1,9 @@
+# Test Case Name: 一元按位非~运算符测试
+# Description: 测试按位非算符~,要求参与运算的操作数都为整数数据类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query I
+SELECT ~10 FROM DUAL;
+----
+-11

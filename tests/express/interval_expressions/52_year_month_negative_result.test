@@ -1,0 +1,9 @@
+# Test Case Name: 年月间隔负结果测试
+# Description: 测试较小YEAR间隔减较大YEAR间隔,得到负间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '5' YEAR - INTERVAL '10' YEAR FROM DUAL;
+----
+INTERVAL '-5' YEAR(9)

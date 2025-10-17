@@ -1,0 +1,9 @@
+# Test Case Name: 混合精确和近似类型加法测试
+# Description: 测试NUMERIC与DOUBLE混合运算,结果为近似类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(10.5 AS NUMERIC(3,1)) + CAST(20.3 AS DOUBLE) FROM DUAL;
+----
+30.8

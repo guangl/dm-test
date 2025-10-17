@@ -1,0 +1,9 @@
+# Test Case Name: DAY间隔加DAY间隔测试
+# Description: 测试DAY间隔加DAY间隔,得到DAY间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '10' DAY + INTERVAL '5' DAY FROM DUAL;
+----
+INTERVAL '15' DAY(9)

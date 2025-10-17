@@ -1,0 +1,9 @@
+# Test Case Name: 标度超出时的四舍五入测试
+# Description: 如果实际标度大于指定标度,那么超出标度的位数将会四舍五入省去
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(123.456 AS NUMERIC(4,1)) FROM DUAL;
+----
+123.5

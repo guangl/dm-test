@@ -1,0 +1,9 @@
+# Test Case Name: 小数除法精度测试
+# Description: 测试小数除法结果的精度
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(1 AS NUMERIC(1,0)) / CAST(3 AS NUMERIC(1,0)) FROM DUAL;
+----
+0.333333333333333333333333333333333333

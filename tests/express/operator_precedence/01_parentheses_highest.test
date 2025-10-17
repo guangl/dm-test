@@ -1,0 +1,9 @@
+# Test Case Name: 括号最高优先级测试
+# Description: 测试括号优先级最高,先计算括号内表达式
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT (2 + 3) * 4 FROM DUAL;
+----
+20

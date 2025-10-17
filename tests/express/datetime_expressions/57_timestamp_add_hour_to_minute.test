@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP加INTERVAL HOUR TO MINUTE测试
+# Description: 测试时间戳加小时-分钟间隔
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2007-07-15 10:00:00' + INTERVAL '5:30' HOUR TO MINUTE FROM DUAL;
+----
+2007-07-15 15:30:00.000000

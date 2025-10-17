@@ -1,0 +1,9 @@
+# Test Case Name: NUMERIC类型除法运算
+# Description: 测试NUMERIC类型除法,结果为DEC类型(缺省精度为38,标度未限定)
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(10 AS NUMERIC(4,1)) / CAST(3 AS NUMERIC(2,0)) FROM DUAL;
+----
+3.333333333333333333333333333333333333

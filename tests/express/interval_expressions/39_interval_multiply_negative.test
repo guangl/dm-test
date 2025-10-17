@@ -1,0 +1,9 @@
+# Test Case Name: 间隔乘负数测试
+# Description: 测试间隔乘负数,结果符号相反
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '5:30' HOUR TO MINUTE * (-2) FROM DUAL;
+----
+INTERVAL '-11:00' HOUR(9) TO MINUTE

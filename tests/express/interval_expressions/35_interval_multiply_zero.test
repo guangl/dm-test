@@ -1,0 +1,9 @@
+# Test Case Name: 间隔乘0测试
+# Description: 测试间隔乘0,结果为0间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '10:30' HOUR TO MINUTE * 0 FROM DUAL;
+----
+INTERVAL '0:00' HOUR(9) TO MINUTE

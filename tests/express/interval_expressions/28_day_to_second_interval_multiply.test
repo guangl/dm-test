@@ -1,0 +1,9 @@
+# Test Case Name: DAY TO SECOND间隔乘法测试
+# Description: 测试DAY TO SECOND间隔乘2.5
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '1 12:30:00' DAY TO SECOND * 2.5 FROM DUAL;
+----
+INTERVAL '3 19:15:00.000000' DAY(9) TO SECOND(6)

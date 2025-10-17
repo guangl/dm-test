@@ -1,0 +1,9 @@
+# Test Case Name: DATE加INTERVAL DAY测试
+# Description: 测试日期加日间隔,得到日期
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT DATE '2005-04-01' + INTERVAL '15' DAY FROM DUAL;
+----
+2005-04-16

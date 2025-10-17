@@ -1,0 +1,9 @@
+# Test Case Name: 年月间隔月份溢出测试
+# Description: 测试YEAR TO MONTH间隔月份超过12自动进位到年
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '2-10' YEAR TO MONTH + INTERVAL '5' MONTH FROM DUAL;
+----
+INTERVAL '3-3' YEAR(9) TO MONTH

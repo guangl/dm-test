@@ -1,0 +1,9 @@
+# Test Case Name: DATE加零测试
+# Description: 测试日期加0,结果不变
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT DATE '2011-09-29' + 0 FROM DUAL;
+----
+2011-09-29

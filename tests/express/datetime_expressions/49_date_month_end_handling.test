@@ -1,0 +1,9 @@
+# Test Case Name: DATE加INTERVAL MONTH月底处理测试
+# Description: 测试1月31日加1个月,结果为2月28日(非闰年)
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT DATE '2007-01-31' + INTERVAL '1' MONTH FROM DUAL;
+----
+2007-02-28

@@ -1,0 +1,9 @@
+# Test Case Name: DEC与SMALLINT减法测试
+# Description: 测试DEC类型与SMALLINT类型减法
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(100.5 AS DEC(10,2)) - CAST(50 AS SMALLINT) FROM DUAL;
+----
+50.50

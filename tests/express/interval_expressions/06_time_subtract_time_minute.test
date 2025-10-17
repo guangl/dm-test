@@ -1,0 +1,9 @@
+# Test Case Name: TIME减TIME得到MINUTE间隔测试
+# Description: 测试时间减时间,使用MINUTE限定符,得到分钟间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (TIME '11:15:00' - TIME '10:30:00') MINUTE FROM DUAL;
+----
+INTERVAL '45' MINUTE(9)

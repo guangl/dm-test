@@ -1,0 +1,9 @@
+# Test Case Name: 取余与加法优先级测试
+# Description: 测试取余优先于加法
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 15 % 4 + 5 FROM DUAL;
+----
+8

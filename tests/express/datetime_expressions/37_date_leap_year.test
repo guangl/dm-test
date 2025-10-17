@@ -1,0 +1,9 @@
+# Test Case Name: DATE闰年2月29日加法测试
+# Description: 测试闰年2月29日加一年
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT DATE '2020-02-29' + INTERVAL '1' YEAR FROM DUAL;
+----
+2021-02-28

@@ -1,0 +1,9 @@
+# Test Case Name: 按位与异或或组合测试
+# Description: 测试按位与、异或、或的优先级顺序
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 15 | 8 ^ 4 & 12 FROM DUAL;
+----
+15

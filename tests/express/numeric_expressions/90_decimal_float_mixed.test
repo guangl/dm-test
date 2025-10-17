@@ -1,0 +1,9 @@
+# Test Case Name: 混合精确和近似类型乘法测试
+# Description: 测试DECIMAL与FLOAT混合乘法,结果为近似类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(5.5 AS DECIMAL(2,1)) * CAST(2.0 AS FLOAT) FROM DUAL;
+----
+11.0

@@ -1,0 +1,9 @@
+# Test Case Name: 日时间隔加法测试
+# Description: 测试DAY TO HOUR间隔加MINUTE TO SECOND间隔,得到DAY TO SECOND间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '7 15' DAY TO HOUR + INTERVAL '10:10' MINUTE TO SECOND FROM DUAL;
+----
+INTERVAL '7 15:10:10.000000' DAY(9) TO SECOND(6)

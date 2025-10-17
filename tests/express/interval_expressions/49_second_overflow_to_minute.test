@@ -1,0 +1,9 @@
+# Test Case Name: 秒溢出到分钟测试
+# Description: 测试MINUTE TO SECOND间隔秒超过60自动进位到分钟
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '10:45' MINUTE TO SECOND + INTERVAL '30' SECOND FROM DUAL;
+----
+INTERVAL '11:15.000000' MINUTE(9) TO SECOND(6)

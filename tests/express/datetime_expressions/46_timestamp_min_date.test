@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP最小日期加法测试
+# Description: 测试最小日期-4712-01-01的时间戳加法
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '-4712-01-01 00:00:00' + INTERVAL '1' DAY FROM DUAL;
+----
+-4712-01-02 00:00:00.000000

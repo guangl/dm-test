@@ -1,0 +1,9 @@
+# Test Case Name: 复杂表达式括号分组测试2
+# Description: 测试位运算中使用括号改变优先级
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT (12 ^ 8) & (7 | 3) FROM DUAL;
+----
+4

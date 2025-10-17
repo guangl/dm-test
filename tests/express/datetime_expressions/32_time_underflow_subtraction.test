@@ -1,0 +1,9 @@
+# Test Case Name: TIME跨天减法测试
+# Description: 测试时间减间隔小于0时的循环处理
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIME '02:00:00' - INTERVAL '5' HOUR FROM DUAL;
+----
+21:00:00

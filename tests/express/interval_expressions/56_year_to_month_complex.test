@@ -1,0 +1,9 @@
+# Test Case Name: 复杂YEAR TO MONTH运算测试
+# Description: 测试YEAR TO MONTH间隔的复杂运算
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '10-8' YEAR TO MONTH + INTERVAL '5-7' YEAR TO MONTH FROM DUAL;
+----
+INTERVAL '16-3' YEAR(9) TO MONTH

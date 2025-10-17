@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP跨年加法测试
+# Description: 测试时间戳加间隔跨年
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2007-12-31 23:59:59' + INTERVAL '1' SECOND FROM DUAL;
+----
+2008-01-01 00:00:00.000000

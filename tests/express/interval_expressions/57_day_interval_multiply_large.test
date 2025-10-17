@@ -1,0 +1,9 @@
+# Test Case Name: DAY间隔大数乘法测试
+# Description: 测试DAY间隔乘较大数值
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '100' DAY * 10 FROM DUAL;
+----
+INTERVAL '1000' DAY(9)

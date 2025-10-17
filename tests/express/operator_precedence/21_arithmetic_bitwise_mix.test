@@ -1,0 +1,9 @@
+# Test Case Name: 算术与位运算混合测试
+# Description: 测试算术运算和位运算混合时的优先级
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 2 + 3 << 1 & 14 FROM DUAL;
+----
+10

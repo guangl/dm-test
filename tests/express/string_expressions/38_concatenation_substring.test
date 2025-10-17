@@ -1,0 +1,9 @@
+# Test Case Name: 字符串连接与SUBSTRING测试
+# Description: 测试字符串连接结果应用SUBSTRING函数
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT SUBSTRING('Hello' || 'World', 1, 5) FROM DUAL;
+----
+Hello

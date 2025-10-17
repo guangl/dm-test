@@ -1,0 +1,9 @@
+# Test Case Name: HOUR TO SECOND间隔除法测试
+# Description: 测试HOUR TO SECOND间隔除2
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '5:30:45' HOUR TO SECOND / 2 FROM DUAL;
+----
+INTERVAL '2:45:22.500000' HOUR(9) TO SECOND(6)

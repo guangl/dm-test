@@ -1,0 +1,9 @@
+# Test Case Name: 括号与一元运算符组合测试
+# Description: 测试括号与一元运算符的组合使用
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT -(2 + 3) * 2 FROM DUAL;
+----
+-10

@@ -1,0 +1,9 @@
+# Test Case Name: DAY TO MINUTE加DAY TO SECOND测试
+# Description: 测试DAY TO MINUTE加DAY TO SECOND,结果为DAY TO SECOND
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '2 10:30' DAY TO MINUTE + INTERVAL '1 5:15:30' DAY TO SECOND FROM DUAL;
+----
+INTERVAL '3 15:45:30.000000' DAY(9) TO SECOND(6)

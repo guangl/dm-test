@@ -1,0 +1,9 @@
+# Test Case Name: DATE减DATE得到MONTH间隔测试
+# Description: 测试日期减日期,使用MONTH限定符,得到月间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (DATE '2005-07-01' - DATE '2005-01-01') MONTH FROM DUAL;
+----
+INTERVAL '6' MONTH(9)

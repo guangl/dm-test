@@ -1,0 +1,7 @@
+# Test Case Name: 取模零测试
+# Description: 测试对0取模的情况(应该产生错误)
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+statement error
+SELECT 10 % 0 FROM DUAL;

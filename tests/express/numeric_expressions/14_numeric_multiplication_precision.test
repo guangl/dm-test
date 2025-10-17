@@ -1,0 +1,9 @@
+# Test Case Name: NUMERIC类型乘法运算精度测试
+# Description: 测试NUMERIC类型乘法,结果精度为二者精度之和,标度也是二者标度之和
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT CAST(12.34 AS NUMERIC(4,2)) * CAST(5.6 AS NUMERIC(2,1)) FROM DUAL;
+----
+69.104

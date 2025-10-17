@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP减TIMESTAMP得到DAY TO SECOND间隔测试
+# Description: 测试时间戳减时间戳,使用DAY TO SECOND限定符
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (TIMESTAMP '2007-07-17 15:30:45' - TIMESTAMP '2007-07-15 10:00:00') DAY TO SECOND FROM DUAL;
+----
+INTERVAL '2 5:30:45.000000' DAY(9) TO SECOND(6)

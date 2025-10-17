@@ -1,0 +1,9 @@
+# Test Case Name: MONTH间隔加MONTH间隔测试
+# Description: 测试MONTH间隔加MONTH间隔,得到MONTH间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '8' MONTH + INTERVAL '5' MONTH FROM DUAL;
+----
+INTERVAL '13' MONTH(9)

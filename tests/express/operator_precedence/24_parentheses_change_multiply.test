@@ -1,0 +1,9 @@
+# Test Case Name: 括号改变乘法优先级测试
+# Description: 测试使用括号改变默认的乘法优先级
+# Category: express/operator_precedence
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 2 * (3 + 4) FROM DUAL;
+----
+14

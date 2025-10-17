@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP减数值测试
+# Description: 测试时间戳减数值
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2003-10-01 17:35:30.323' - 2.358 FROM DUAL;
+----
+2003-09-29 08:59:30.323000

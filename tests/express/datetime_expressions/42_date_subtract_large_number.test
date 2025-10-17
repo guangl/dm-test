@@ -1,0 +1,9 @@
+# Test Case Name: DATE减大数值测试
+# Description: 测试日期减较大数值
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT DATE '2012-01-01' - 365 FROM DUAL;
+----
+2011-01-02

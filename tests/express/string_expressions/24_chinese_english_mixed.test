@@ -1,0 +1,9 @@
+# Test Case Name: 中英文混合连接测试
+# Description: 测试中英文混合字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT '中文' || 'English' || '混合' || 'Mixed' FROM DUAL;
+----
+中文English混合Mixed

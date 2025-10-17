@@ -1,0 +1,9 @@
+# Test Case Name: 复杂表达式优先级测试2
+# Description: 测试包含括号和多个运算符的复杂表达式
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT (2 + 3) * (4 - 1) FROM DUAL;
+----
+15

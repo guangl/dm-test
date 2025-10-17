@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP加INTERVAL DAY TO MINUTE测试
+# Description: 测试时间戳加日-分钟间隔
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2007-07-15 10:00:00' + INTERVAL '2 5:30' DAY TO MINUTE FROM DUAL;
+----
+2007-07-17 15:30:00.000000

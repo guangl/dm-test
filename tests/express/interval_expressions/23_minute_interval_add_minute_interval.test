@@ -1,0 +1,9 @@
+# Test Case Name: MINUTE间隔加MINUTE间隔测试
+# Description: 测试MINUTE间隔加MINUTE间隔,得到MINUTE间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '30' MINUTE + INTERVAL '45' MINUTE FROM DUAL;
+----
+INTERVAL '75' MINUTE(9)

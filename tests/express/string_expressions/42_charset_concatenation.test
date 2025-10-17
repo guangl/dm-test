@@ -1,0 +1,9 @@
+# Test Case Name: 字符集不同字符串连接测试
+# Description: 测试相同字符集的字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'ASCII' || '中文' || 'English' FROM DUAL;
+----
+ASCII中文English

@@ -1,0 +1,9 @@
+# Test Case Name: 复杂表达式优先级测试3
+# Description: 测试包含位运算和算术运算的复杂表达式
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query I
+SELECT 8 + 4 << 1 FROM DUAL;
+----
+24

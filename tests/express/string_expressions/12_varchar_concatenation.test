@@ -1,0 +1,9 @@
+# Test Case Name: VARCHAR类型连接测试
+# Description: 测试VARCHAR类型字符串的连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT CAST('ABC' AS VARCHAR(10)) || CAST('DEF' AS VARCHAR(10)) FROM DUAL;
+----
+ABCDEF

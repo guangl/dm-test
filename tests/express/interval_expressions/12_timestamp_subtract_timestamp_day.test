@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP减TIMESTAMP得到DAY间隔测试
+# Description: 测试时间戳减时间戳,使用DAY限定符,得到日间隔
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT (TIMESTAMP '2007-07-25 10:00:00' - TIMESTAMP '2007-07-15 10:00:00') DAY FROM DUAL;
+----
+INTERVAL '10' DAY(9)

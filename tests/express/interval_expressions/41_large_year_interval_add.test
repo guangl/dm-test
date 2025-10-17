@@ -1,0 +1,9 @@
+# Test Case Name: 大YEAR间隔加法测试
+# Description: 测试较大YEAR间隔的加法
+# Category: express/interval_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
+
+query T
+SELECT INTERVAL '9999' YEAR(4) + INTERVAL '1' YEAR FROM DUAL;
+----
+INTERVAL '10000' YEAR(9)

@@ -1,0 +1,9 @@
+# Test Case Name: 运算符优先级-除法高于减法测试
+# Description: 测试除法运算符优先级高于减法
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.5
+
+query R
+SELECT 10 - 6 / 2 FROM DUAL;
+----
+7

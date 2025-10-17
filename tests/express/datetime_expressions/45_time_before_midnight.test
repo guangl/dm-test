@@ -1,0 +1,9 @@
+# Test Case Name: TIME午夜前减法测试
+# Description: 测试接近午夜的时间减间隔
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIME '23:59:59' + INTERVAL '2' SECOND FROM DUAL;
+----
+00:00:01

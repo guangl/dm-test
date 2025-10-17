@@ -1,0 +1,9 @@
+# Test Case Name: TIMESTAMP加INTERVAL HOUR测试
+# Description: 测试时间戳加小时间隔,得到时间戳,结果的小时值>=24时进位到天
+# Category: express/datetime_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
+
+query T
+SELECT TIMESTAMP '2007-07-15 19:00:00' + INTERVAL '9' HOUR FROM DUAL;
+----
+2007-07-16 04:00:00.000000

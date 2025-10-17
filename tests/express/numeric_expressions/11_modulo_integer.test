@@ -1,0 +1,9 @@
+# Test Case Name: 整数取模运算
+# Description: 测试两个整数的取模运算,结果为DEC类型
+# Category: express/numeric_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
+
+query R
+SELECT 10 % 3 FROM DUAL;
+----
+1

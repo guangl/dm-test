@@ -1,0 +1,10 @@
+# Test Case Name: 换行符连接测试
+# Description: 测试包含换行符的字符串连接
+# Category: express/string_expressions
+# Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
+
+query T
+SELECT 'Line1' || CHR(10) || 'Line2' FROM DUAL;
+----
+Line1
+Line2
