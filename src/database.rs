@@ -1,11 +1,11 @@
 use crate::config::DatabaseConfig;
 use crate::error::DatabaseError;
+use encoding_rs::GBK;
 use odbc_api::{
     Connection, ConnectionOptions, Cursor, Environment,
     buffers::{TextColumn, TextRowSet},
 };
 use sqllogictest::{AsyncDB, DBOutput};
-use encoding_rs::GBK;
 
 pub struct DmDatabase {
     environment: Environment,
@@ -90,7 +90,7 @@ impl DmDatabase {
                 for col_index in 0..10 {
                     // 先获取原始字节
                     let bytes_opt = batch.at(col_index, row_index);
-                    
+
                     match bytes_opt {
                         Some(bytes) if !bytes.is_empty() => {
                             // 尝试 UTF-8 解码
@@ -98,10 +98,7 @@ impl DmDatabase {
                                 Ok(s) => s.to_string(),
                                 Err(_) => {
                                     // UTF-8 失败，尝试 GBK 解码
-                                    let (decoded, _, had_errors) = GBK.decode(bytes);
-                                    if had_errors {
-                                        eprintln!("警告：GBK 解码出错，使用 lossy 转换");
-                                    }
+                                    let (decoded, _, _) = GBK.decode(bytes);
                                     decoded.to_string()
                                 }
                             };

@@ -6,4 +6,4 @@
 query I
 SELECT -(+(-5)) FROM DUAL;
 ----
--5
+5

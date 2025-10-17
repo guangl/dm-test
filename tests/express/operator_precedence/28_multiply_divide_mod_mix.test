@@ -6,4 +6,4 @@
 query I
 SELECT 20 % 6 * 2 / 4 FROM DUAL;
 ----
-2
+1

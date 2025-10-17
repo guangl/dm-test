@@ -4,6 +4,8 @@
 test-results.json
 *.json
 !Cargo.json
+report.html
+*.html
 
 # 测试结果目录
 results/

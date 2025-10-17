@@ -6,4 +6,4 @@
 query I
 SELECT 5 * 2 + 3 << 1 & 30 ^ 10 | 1 FROM DUAL;
 ----
-23
+17
