@@ -36,7 +36,7 @@ impl DatabaseConfig {
 
     /// 默认连接字符串
     fn default_connection_string() -> String {
-        "Driver={DM8 ODBC DRIVER};Server=localhost;Port=5236;Database=DAMENG;UID=SYSDBA;PWD=DMDBA_hust4400"
+        "Driver={DM8 ODBC DRIVER};Server=localhost;Port=5236;Database=DAMENG;UID=SYSDBA;PWD=DMDBA_hust4400;CHARSET=UTF-8"
             .to_string()
     }
 
