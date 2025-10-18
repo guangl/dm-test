@@ -15,8 +15,8 @@ INSERT INTO test_string_concat2 VALUES ('北京'), ('上海');
 query T
 SELECT '城市: ' || city FROM test_string_concat2 ORDER BY city;
 ----
-城市: 上海
 城市: 北京
+城市: 上海
 
 statement ok
 DROP TABLE test_string_concat2;

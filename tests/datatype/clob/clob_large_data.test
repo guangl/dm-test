@@ -18,10 +18,6 @@ query I
 SELECT id FROM test_clob_large WHERE LENGTH(content) = 2000;
 ----
 1
-
-query I
-SELECT id FROM test_clob_large WHERE LENGTH(content) = 2000;
-----
 2
 
 statement ok

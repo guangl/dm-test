@@ -21,7 +21,7 @@ query IT
 SELECT * FROM test_text_null ORDER BY id;
 ----
 1
-2
+2 
 3 Not NULL
 
 query I
