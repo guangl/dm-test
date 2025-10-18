@@ -9,6 +9,15 @@ use std::path::Path;
 async fn main() -> Result<(), Box<dyn Error>> {
     let cli = Cli::parse_args();
 
+    // 如果设置了 SINGLE_TEST 环境变量，则仅运行该单个 .test 文件（用于调试）
+    if let Ok(single_file) = std::env::var("SINGLE_TEST") {
+        if !single_file.trim().is_empty() {
+            let config = DatabaseConfig::from_env();
+            // 直接运行单个测试文件并退出
+            return SqlLogicTestRunner::run_file(&config, &single_file).await;
+        }
+    }
+
     match cli.command {
         Some(Commands::Report { output, force }) => {
             generate_report(&cli.test_dir, &cli.json_output, &output, force).await
