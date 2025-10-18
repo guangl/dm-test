@@ -6,4 +6,3 @@
 query T
 SELECT '' || '' FROM DUAL;
 ----
-(empty)

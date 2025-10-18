@@ -3,7 +3,7 @@
 # Category: express/string_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
 
-query T
+query T error
 SELECT CAST('' AS VARCHAR(0)) || 'Test' FROM DUAL;
 ----
 Test

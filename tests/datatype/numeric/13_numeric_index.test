@@ -17,7 +17,7 @@ INSERT INTO test_numeric_idx VALUES (1, 100.50), (2, 200.75);
 query IR
 SELECT * FROM test_numeric_idx WHERE amount = 100.50;
 ----
-1 100.50
+1 100.5
 
 statement ok
 DROP INDEX idx_amount;

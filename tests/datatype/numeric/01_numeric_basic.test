@@ -15,7 +15,7 @@ query IRR
 SELECT * FROM test_numeric_basic ORDER BY id;
 ----
 1 99.99 100
-2 149.50 50
+2 149.5 50
 
 statement ok
 DROP TABLE test_numeric_basic;

@@ -6,4 +6,4 @@
 query R
 SELECT CAST(3.5 AS REAL) * CAST(2 AS INTEGER) FROM DUAL;
 ----
-7.0
+7

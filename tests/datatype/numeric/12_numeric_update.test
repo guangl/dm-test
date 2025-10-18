@@ -17,8 +17,8 @@ UPDATE test_numeric_upd SET price = price * 1.10 WHERE id = 1;
 query IR
 SELECT * FROM test_numeric_upd ORDER BY id;
 ----
-1 55.00
-2 75.00
+1 55
+2 75
 
 statement ok
 DROP TABLE test_numeric_upd;

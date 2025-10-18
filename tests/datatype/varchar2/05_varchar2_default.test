@@ -17,7 +17,7 @@ INSERT INTO test_varchar2_default VALUES (2, 'ACTIVE', 'Some notes');
 query ITT
 SELECT * FROM test_varchar2_default ORDER BY id;
 ----
-1 PENDING (empty)
+1 PENDING 
 2 ACTIVE Some notes
 
 statement ok

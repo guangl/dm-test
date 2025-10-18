@@ -24,7 +24,7 @@ SELECT value1 - value2 FROM test_numeric_arithmetic WHERE id = 1;
 query R
 SELECT value1 * value2 FROM test_numeric_arithmetic WHERE id = 1;
 ----
-5050.1250
+5050.125
 
 statement ok
 DROP TABLE test_numeric_arithmetic;

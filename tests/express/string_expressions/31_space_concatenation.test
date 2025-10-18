@@ -6,3 +6,4 @@
 query T
 SELECT '   ' || '   ' FROM DUAL;
 ----
+      

@@ -14,9 +14,9 @@ INSERT INTO test_numeric_order VALUES (1, 50.00), (2, 10.50), (3, 30.25);
 query IR
 SELECT * FROM test_numeric_order ORDER BY val ASC;
 ----
-2 10.50
+2 10.5
 3 30.25
-1 50.00
+1 50
 
 statement ok
 DROP TABLE test_numeric_order;
