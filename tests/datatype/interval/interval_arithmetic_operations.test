@@ -15,11 +15,9 @@ CREATE TABLE test_interval_arithmetic(
 statement error
 INSERT INTO test_interval_arithmetic VALUES(1, INTERVAL '7 15:00:00' DAY TO HOUR, INTERVAL '10:30' HOUR TO MINUTE);
 
-# FIXME: The above statement should be ok, but currently raises an error.
-# query III
-# SELECT id, interval1, interval2 FROM test_interval_arithmetic;
-# ----
-# 1 INTERVAL '7 15:00:00.000000' DAY(9) TO SECOND(6) INTERVAL '10:30' HOUR(9) TO MINUTE
+query III
+SELECT id, interval1, interval2 FROM test_interval_arithmetic;
+----
 
 statement ok
 DROP TABLE test_interval_arithmetic;

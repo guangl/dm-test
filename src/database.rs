@@ -84,6 +84,8 @@ impl DB for DmDatabase {
                             } else {
                                 if column_data == Some("".to_string()) {
                                     row_data.push("<EMPTY>".to_string());
+                                } else if column_data.as_ref().unwrap().contains('\n') {
+                                    row_data.push(column_data.unwrap().replace("\n", "\\n"));
                                 } else {
                                     row_data.push(column_data.unwrap());
                                 }

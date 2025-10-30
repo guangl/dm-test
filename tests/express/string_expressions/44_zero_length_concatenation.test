@@ -3,7 +3,5 @@
 # Category: express/string_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
 
-statement error
+query error -6143[\s\S]*精度必须大于0
 SELECT CAST('' AS VARCHAR(0)) || 'Test' FROM DUAL;
-----
-Test

@@ -2,7 +2,7 @@ use dameng::Connection;
 use dameng::Result;
 
 fn main() -> Result<()> {
-    let query = "SELECT '' || NULL;";
+    let query = "SELECT '' || A FROM TEST_LG1;";
 
     let conn = Connection::connect("SYSDBA", "DMDBA_hust4400", "localhost")?;
     println!("Connected to the database.");

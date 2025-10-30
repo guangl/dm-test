@@ -23,9 +23,9 @@ INSERT INTO test_interval_day_second VALUES(3, INTERVAL '01 06:15:20.9' DAY(2) T
 query II
 SELECT * FROM test_interval_day_second ORDER BY id;
 ----
-1 +9 23:45:30.5
-2 +5 12:30:45.0
-3 +1 06:15:20.9
+1 +09 23:45:30.5
+2 +05 12:30:45.0
+3 +01 06:15:20.9
 
 statement ok
 DROP TABLE test_interval_day_second;

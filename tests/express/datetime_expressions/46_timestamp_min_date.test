@@ -3,7 +3,7 @@
 # Category: express/datetime_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.3
 
-# FIXME dm rust bug
+# FIXME maybe dm rust bug
 # query T
 # SELECT TIMESTAMP '-4712-01-01 00:00:00' + INTERVAL '1' DAY FROM DUAL;
 # ----

@@ -6,5 +6,4 @@
 query T
 SELECT 'Line1' || CHR(10) || 'Line2' FROM DUAL;
 ----
-Line1
-Line2
+Line1\nLine2

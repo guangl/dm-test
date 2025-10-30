@@ -23,9 +23,9 @@ INSERT INTO test_interval_hour_second VALUES(3, INTERVAL '06:15:20.9' HOUR(2) TO
 query II
 SELECT * FROM test_interval_hour_second ORDER BY id;
 ----
-1 +0 23:45:30.5
-2 +0 12:30:45.0
-3 +0 06:15:20.9
+1 +00 23:45:30.5
+2 +00 12:30:45.0
+3 +00 06:15:20.9
 
 statement ok
 DROP TABLE test_interval_hour_second;

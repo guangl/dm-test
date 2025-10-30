@@ -21,7 +21,7 @@ INSERT INTO test_timestamp_boundary VALUES(2, TIMESTAMP '9999-12-31 23:59:59.999
 statement ok
 INSERT INTO test_timestamp_boundary VALUES(3, TIMESTAMP '2000-01-01 00:00:00.000000000', '千禧年时刻');
 
-# FIXME: dmrust bug
+# FIXME: maybe dmrust bug
 # query IIT
 # SELECT * FROM test_timestamp_boundary ORDER BY id;
 # ----

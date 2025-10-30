@@ -1,10 +1,8 @@
-# Test Case Name: INTEGER类型边界值加法测试
-# Description: 测试INTEGER类型最大值2147483647的加法
+# Test Case Name: INTEGER类型溢出测试
+# Description: 测试INTEGER类型最大值2147483647加1会触发溢出错误
 # Category: express/numeric_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
 
-# TODO: 数据库的特性
-# query I
-# SELECT CAST(2147483647 AS INTEGER) + CAST(1 AS INTEGER) FROM DUAL;
-# ----
-# 2147483648
+# 期望错误码 -6102，错误信息包含"数据溢出"
+query error -6102.*数据溢出
+SELECT CAST(2147483647 AS INTEGER) + CAST(1 AS INTEGER) FROM DUAL;

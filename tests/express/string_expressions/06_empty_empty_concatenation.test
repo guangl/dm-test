@@ -3,8 +3,21 @@
 # Category: express/string_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
 
-# TODO: 为什么突然挂了
+# 为什么突然挂了 - 可能是环境因素
+
+statement ok
+DROP TABLE IF EXISTS EMPTY_STRING_TEST;
+
+statement ok
+CREATE TABLE EMPTY_STRING_TEST (
+    ID INT PRIMARY KEY,
+    NAME VARCHAR(100)
+);
+
+statement ok
+INSERT INTO EMPTY_STRING_TEST (ID, NAME) VALUES (1, '');
+
 query T
-SELECT '' || '' FROM DUAL;
+SELECT NAME || '' AS CONCATENATED_NAME FROM EMPTY_STRING_TEST WHERE ID = 1;
 ----
 <EMPTY>

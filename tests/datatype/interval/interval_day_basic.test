@@ -23,9 +23,9 @@ INSERT INTO test_interval_day VALUES(3, INTERVAL '007' DAY(3));
 query II
 SELECT * FROM test_interval_day ORDER BY id;
 ----
-1 +000150 00:00:00.000000
-2 +000030 00:00:00.000000
-3 +000007 00:00:00.000000
+1 +150 00:00:00
+2 +030 00:00:00
+3 +007 00:00:00
 
 statement ok
 DROP TABLE test_interval_day;

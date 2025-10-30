@@ -23,9 +23,9 @@ INSERT INTO test_interval_minute VALUES(3, INTERVAL '015' MINUTE(3));
 query II
 SELECT * FROM test_interval_minute ORDER BY id;
 ----
-1 +000000 02:30:00.000000
-2 +000000 01:00:00.000000
-3 +000000 00:15:00.000000
+1 +000 02:30:00
+2 +000 01:00:00
+3 +000 00:15:00
 
 statement ok
 DROP TABLE test_interval_minute;

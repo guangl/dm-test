@@ -23,9 +23,9 @@ INSERT INTO test_interval_second VALUES(3, INTERVAL '15.9' SECOND(2, 1));
 query II
 SELECT * FROM test_interval_second ORDER BY id;
 ----
-1 +0 00:00:59.5
-2 +0 00:00:30.0
-3 +0 00:00:15.9
+1 +00 00:00:59.5
+2 +00 00:00:30.0
+3 +00 00:00:15.9
 
 statement ok
 DROP TABLE test_interval_second;
