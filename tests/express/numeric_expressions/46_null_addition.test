@@ -6,3 +6,4 @@
 query I
 SELECT NULL + 5 FROM DUAL;
 ----
+<NULL>

@@ -14,8 +14,8 @@ INSERT INTO test_bit_null VALUES (1, NULL), (2, 1);
 query II
 SELECT * FROM test_bit_null ORDER BY id;
 ----
-1
-2 1
+1 <NULL>
+2 TRUE
 
 statement ok
 DROP TABLE test_bit_null;

@@ -14,7 +14,7 @@ INSERT INTO test_varchar_null VALUES (1, NULL, 'Required'), (2, 'Optional', 'Req
 query ITT
 SELECT * FROM test_varchar_null ORDER BY id;
 ----
-1 NULL Required
+1 <NULL> Required
 2 Optional Required
 
 statement error

@@ -23,9 +23,9 @@ INSERT INTO test_interval_year VALUES(3, INTERVAL '0005' YEAR(4));
 query II
 SELECT * FROM test_interval_year ORDER BY id;
 ----
-1 INTERVAL '2023' YEAR(4)
-2 INTERVAL '100' YEAR(4)
-3 INTERVAL '5' YEAR(4)
+1 +2023-00
+2 +0100-00
+3 +0005-00
 
 statement ok
 DROP TABLE test_interval_year;

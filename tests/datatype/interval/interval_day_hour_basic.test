@@ -23,9 +23,9 @@ INSERT INTO test_interval_day_hour VALUES(3, INTERVAL '01 06' DAY(2) TO HOUR);
 query II
 SELECT * FROM test_interval_day_hour ORDER BY id;
 ----
-1 INTERVAL '9 23' DAY(2) TO HOUR
-2 INTERVAL '5 12' DAY(2) TO HOUR
-3 INTERVAL '1 6' DAY(2) TO HOUR
+1 +000009 23:00:00.000000
+2 +000005 12:00:00.000000
+3 +000001 06:00:00.000000
 
 statement ok
 DROP TABLE test_interval_day_hour;

@@ -14,8 +14,8 @@ INSERT INTO test_bit_basic VALUES (1, 0), (2, 1);
 query II
 SELECT * FROM test_bit_basic ORDER BY id;
 ----
-1 0
-2 1
+1 FALSE
+2 TRUE
 
 statement ok
 DROP TABLE test_bit_basic;

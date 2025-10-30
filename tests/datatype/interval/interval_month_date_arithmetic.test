@@ -17,12 +17,12 @@ INSERT INTO test_interval_month_date VALUES(1, DATE '2023-10-15');
 query II
 SELECT id, base_date + INTERVAL '18' MONTH(2) FROM test_interval_month_date;
 ----
-1 2025-04-15
+1 2025-04-15 00:00:00
 
 query II
 SELECT id, base_date - INTERVAL '6' MONTH(2) FROM test_interval_month_date;
 ----
-1 2023-04-15
+1 2023-04-15 00:00:00
 
 statement ok
 DROP TABLE test_interval_month_date;

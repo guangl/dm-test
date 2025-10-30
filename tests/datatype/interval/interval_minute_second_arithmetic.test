@@ -18,12 +18,12 @@ INSERT INTO test_interval_minute_second_arithmetic VALUES(1, TIME '10:00:00', TI
 query III
 SELECT id, base_time + INTERVAL '30:45.5' MINUTE(2) TO SECOND(1), base_timestamp + INTERVAL '30:45.5' MINUTE(2) TO SECOND(1) FROM test_interval_minute_second_arithmetic;
 ----
-1 10:30:46 2023-10-15 10:30:45.500000
+1 0-00-00 10:30:46 2023-10-15 10:30:45.500000
 
 query III
 SELECT id, base_time - INTERVAL '15:30.0' MINUTE(2) TO SECOND(1), base_timestamp - INTERVAL '15:30.0' MINUTE(2) TO SECOND(1) FROM test_interval_minute_second_arithmetic;
 ----
-1 09:44:30 2023-10-15 09:44:30.000000
+1 0-00-00 09:44:30 2023-10-15 09:44:30.000000
 
 statement ok
 DROP TABLE test_interval_minute_second_arithmetic;

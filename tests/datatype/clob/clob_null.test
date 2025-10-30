@@ -20,8 +20,8 @@ INSERT INTO test_clob_null VALUES(3, 'Not NULL CLOB');
 query IT
 SELECT * FROM test_clob_null ORDER BY id;
 ----
-1
-2
+1 <NULL>
+2 <EMPTY>
 3 Not NULL CLOB
 
 query I

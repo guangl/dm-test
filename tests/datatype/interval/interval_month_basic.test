@@ -23,9 +23,9 @@ INSERT INTO test_interval_month VALUES(3, INTERVAL '0001' MONTH(4));
 query II
 SELECT * FROM test_interval_month ORDER BY id;
 ----
-1 INTERVAL '24' MONTH(4)
-2 INTERVAL '6' MONTH(4)
-3 INTERVAL '1' MONTH(4)
+1 +0002-00
+2 +0000-06
+3 +0000-01
 
 statement ok
 DROP TABLE test_interval_month;

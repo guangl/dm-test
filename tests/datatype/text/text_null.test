@@ -20,8 +20,8 @@ INSERT INTO test_text_null VALUES(3, 'Not NULL');
 query IT
 SELECT * FROM test_text_null ORDER BY id;
 ----
-1
-2 
+1 <NULL>
+2 <EMPTY>
 3 Not NULL
 
 query I

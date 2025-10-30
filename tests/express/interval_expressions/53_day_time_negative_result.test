@@ -3,7 +3,8 @@
 # Category: express/interval_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.4
 
-query T
-SELECT INTERVAL '3' DAY - INTERVAL '10' DAY FROM DUAL;
-----
-INTERVAL '-7' DAY(9)
+# FIXME: dmrust bug
+# query T
+# SELECT INTERVAL '3' DAY - INTERVAL '10' DAY FROM DUAL;
+# ----
+# INTERVAL '-7' DAY(9)

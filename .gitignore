@@ -1,4 +1,5 @@
 /target
+dmRust/*
 
 # 自动生成的测试结果文件
 test-results.json

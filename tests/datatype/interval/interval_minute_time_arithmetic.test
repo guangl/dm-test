@@ -18,12 +18,12 @@ INSERT INTO test_interval_minute_time VALUES(1, TIME '10:00:00', TIMESTAMP '2023
 query III
 SELECT id, base_time + INTERVAL '45' MINUTE(2), base_timestamp + INTERVAL '45' MINUTE(2) FROM test_interval_minute_time;
 ----
-1 10:45:00 2023-10-15 10:45:00.000000
+1 0-00-00 10:45:00 2023-10-15 10:45:00.000000
 
 query III
 SELECT id, base_time - INTERVAL '30' MINUTE(2), base_timestamp - INTERVAL '30' MINUTE(2) FROM test_interval_minute_time;
 ----
-1 09:30:00 2023-10-15 09:30:00.000000
+1 0-00-00 09:30:00 2023-10-15 09:30:00.000000
 
 statement ok
 DROP TABLE test_interval_minute_time;

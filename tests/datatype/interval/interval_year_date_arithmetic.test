@@ -17,12 +17,12 @@ INSERT INTO test_interval_year_date VALUES(1, DATE '2023-10-15');
 query II
 SELECT id, base_date + INTERVAL '5' YEAR(2) FROM test_interval_year_date;
 ----
-1 2028-10-15
+1 2028-10-15 00:00:00
 
 query II
 SELECT id, base_date - INTERVAL '10' YEAR(2) FROM test_interval_year_date;
 ----
-1 2013-10-15
+1 2013-10-15 00:00:00
 
 statement ok
 DROP TABLE test_interval_year_date;

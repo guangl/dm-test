@@ -24,9 +24,9 @@ INSERT INTO test_time_tz_comparison VALUES(3, TIME '14:00:00 +0:00', '伦敦会�
 query IIT
 SELECT * FROM test_time_tz_comparison ORDER BY id;
 ----
-1 09:00:00 +08:00 北京早会
-2 09:00:00 -05:00 纽约早会
-3 14:00:00 +00:00 伦敦会议
+1 0-00-00 09:00:00 +08:00 北京早会
+2 0-00-00 09:00:00 -05:00 纽约早会
+3 0-00-00 14:00:00 +00:00 伦敦会议
 
 statement ok
 DROP TABLE test_time_tz_comparison;

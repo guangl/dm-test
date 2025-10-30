@@ -3,6 +3,8 @@
 # Category: express/string_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.2
 
+# TODO: 为什么突然挂了
 query T
 SELECT '' || '' FROM DUAL;
 ----
+<EMPTY>

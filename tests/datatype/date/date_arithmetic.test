@@ -17,27 +17,27 @@ INSERT INTO test_date_arithmetic VALUES(1, DATE '2023-10-15');
 query II
 SELECT id, base_date + 10 FROM test_date_arithmetic;
 ----
-1 2023-10-25
+1 2023-10-25 00:00:00
 
 query II
 SELECT id, base_date - 10 FROM test_date_arithmetic;
 ----
-1 2023-10-05
+1 2023-10-05 00:00:00
 
 query II
 SELECT id, base_date + INTERVAL '1' YEAR FROM test_date_arithmetic;
 ----
-1 2024-10-15
+1 2024-10-15 00:00:00
 
 query II
 SELECT id, base_date - INTERVAL '3' MONTH FROM test_date_arithmetic;
 ----
-1 2023-07-15
+1 2023-07-15 00:00:00
 
 query II
 SELECT id, base_date + INTERVAL '15' DAY FROM test_date_arithmetic;
 ----
-1 2023-10-30
+1 2023-10-30 00:00:00
 
 statement ok
 DROP TABLE test_date_arithmetic;

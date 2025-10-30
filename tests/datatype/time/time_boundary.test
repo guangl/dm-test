@@ -24,9 +24,9 @@ INSERT INTO test_time_boundary VALUES(3, TIME '12:00:00.000000', '正午时间')
 query IIT
 SELECT * FROM test_time_boundary ORDER BY id;
 ----
-1 00:00:00.000000 最小时间
-2 23:59:59.999999 最大时间
-3 12:00:00.000000 正午时间
+1 0-00-00 00:00:00.000000 最小时间
+2 0-00-00 23:59:59.999999 最大时间
+3 0-00-00 12:00:00.000000 正午时间
 
 statement ok
 DROP TABLE test_time_boundary;

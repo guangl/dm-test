@@ -13,16 +13,16 @@ CREATE TABLE test_date_null(
 );
 
 statement ok
-INSERT INTO test_date_null VALUES(1, NULL, DATE '2023-10-15');
+INSERT INTO test_date_null VALUES(1, NULL, TO_DATE('2023-10-15'));
 
 statement ok
-INSERT INTO test_date_null VALUES(2, DATE '2023-01-01', DATE '2023-12-31');
+INSERT INTO test_date_null VALUES(2, TO_DATE('2023-01-01'), TO_DATE('2023-12-31'));
 
 query III
 SELECT * FROM test_date_null ORDER BY id;
 ----
-1 NULL 2023-10-15
-2 2023-01-01 2023-12-31
+1 <NULL> 2023-10-15 00:00:00
+2 2023-01-01 00:00:00 2023-12-31 00:00:00
 
 query I
 SELECT COUNT(*) FROM test_date_null WHERE nullable_date IS NULL;

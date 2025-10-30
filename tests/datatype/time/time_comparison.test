@@ -24,13 +24,13 @@ INSERT INTO test_time_comparison VALUES(3, TIME '22:00:00', '晚班');
 query IIT
 SELECT * FROM test_time_comparison WHERE check_time >= TIME '14:00:00' ORDER BY id;
 ----
-2 14:30:00 中班
-3 22:00:00 晚班
+2 0-00-00 14:30:00 中班
+3 0-00-00 22:00:00 晚班
 
 query IIT
 SELECT * FROM test_time_comparison WHERE check_time < TIME '10:00:00' ORDER BY id;
 ----
-1 08:00:00 早班
+1 0-00-00 08:00:00 早班
 
 statement ok
 DROP TABLE test_time_comparison;

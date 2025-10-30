@@ -23,9 +23,9 @@ INSERT INTO test_interval_day_minute VALUES(3, INTERVAL '01 06:15' DAY(2) TO MIN
 query II
 SELECT * FROM test_interval_day_minute ORDER BY id;
 ----
-1 INTERVAL '9 23:45' DAY(2) TO MINUTE
-2 INTERVAL '5 12:30' DAY(2) TO MINUTE
-3 INTERVAL '1 6:15' DAY(2) TO MINUTE
+1 +000009 23:45:00.000000
+2 +000005 12:30:00.000000
+3 +000001 06:15:00.000000
 
 statement ok
 DROP TABLE test_interval_day_minute;

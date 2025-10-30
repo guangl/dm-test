@@ -18,12 +18,12 @@ INSERT INTO test_interval_hour_minute_arithmetic VALUES(1, TIME '10:00:00', TIME
 query III
 SELECT id, base_time + INTERVAL '05:30' HOUR(2) TO MINUTE, base_timestamp + INTERVAL '05:30' HOUR(2) TO MINUTE FROM test_interval_hour_minute_arithmetic;
 ----
-1 15:30:00 2023-10-15 15:30:00.000000
+1 0-00-00 15:30:00 2023-10-15 15:30:00.000000
 
 query III
 SELECT id, base_time - INTERVAL '02:15' HOUR(2) TO MINUTE, base_timestamp - INTERVAL '02:15' HOUR(2) TO MINUTE FROM test_interval_hour_minute_arithmetic;
 ----
-1 07:45:00 2023-10-15 07:45:00.000000
+1 0-00-00 07:45:00 2023-10-15 07:45:00.000000
 
 statement ok
 DROP TABLE test_interval_hour_minute_arithmetic;

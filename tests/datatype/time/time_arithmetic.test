@@ -17,17 +17,17 @@ INSERT INTO test_time_arithmetic VALUES(1, TIME '10:00:00');
 query II
 SELECT id, base_time + INTERVAL '2' HOUR FROM test_time_arithmetic;
 ----
-1 12:00:00
+1 0-00-00 12:00:00
 
 query II
 SELECT id, base_time - INTERVAL '30' MINUTE FROM test_time_arithmetic;
 ----
-1 09:30:00
+1 0-00-00 09:30:00
 
 query II
 SELECT id, base_time + INTERVAL '45' SECOND FROM test_time_arithmetic;
 ----
-1 10:00:45
+1 0-00-00 10:00:45
 
 statement ok
 DROP TABLE test_time_arithmetic;

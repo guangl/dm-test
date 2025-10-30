@@ -24,19 +24,19 @@ INSERT INTO test_date_comparison VALUES(3, DATE '2023-12-31', '事件C');
 query IIT
 SELECT * FROM test_date_comparison WHERE event_date > DATE '2023-05-01' ORDER BY id;
 ----
-2 2023-06-20 事件B
-3 2023-12-31 事件C
+2 2023-06-20 00:00:00 事件B
+3 2023-12-31 00:00:00 事件C
 
 query IIT
 SELECT * FROM test_date_comparison WHERE event_date BETWEEN DATE '2023-01-01' AND DATE '2023-06-30' ORDER BY id;
 ----
-1 2023-01-15 事件A
-2 2023-06-20 事件B
+1 2023-01-15 00:00:00 事件A
+2 2023-06-20 00:00:00 事件B
 
 query IIT
 SELECT * FROM test_date_comparison WHERE event_date = DATE '2023-01-15';
 ----
-1 2023-01-15 事件A
+1 2023-01-15 00:00:00 事件A
 
 statement ok
 DROP TABLE test_date_comparison;

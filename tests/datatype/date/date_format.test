@@ -24,16 +24,16 @@ statement ok
 INSERT INTO test_date_format VALUES(4, '2023-10-15');
 
 statement ok
-INSERT INTO test_date_format VALUES(5, DATE '1-1-1');
+INSERT INTO test_date_format VALUES(5, TO_DATE('0001-1-1'));
 
 query II
 SELECT * FROM test_date_format ORDER BY id;
 ----
-1 2023-10-15
-2 2023-10-15
-3 2023-10-15
-4 2023-10-15
-5 0001-01-01
+1 2023-10-15 00:00:00
+2 2023-10-15 00:00:00
+3 2023-10-15 00:00:00
+4 2023-10-15 00:00:00
+5 1-01-01 00:00:00
 
 statement ok
 DROP TABLE test_date_format;

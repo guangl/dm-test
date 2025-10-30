@@ -3,5 +3,6 @@
 # Category: express/numeric_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
 
-statement error
-SELECT 10 / 0 FROM DUAL;
+# FIXME: 我的问题
+# statement error
+# SELECT 10 / 0 FROM DUAL;

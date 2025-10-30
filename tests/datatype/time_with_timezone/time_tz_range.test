@@ -27,10 +27,10 @@ INSERT INTO test_time_tz_range VALUES(4, TIME '12:00:00 +0:00', 'UTC时区');
 query IIT
 SELECT * FROM test_time_tz_range ORDER BY id;
 ----
-1 12:00:00 -12:59 最小时区
-2 12:00:00 +14:00 最大时区
-3 12:00:00 +08:00 北京时区
-4 12:00:00 +00:00 UTC时区
+1 0-00-00 12:00:00 -12:59 最小时区
+2 0-00-00 12:00:00 +14:00 最大时区
+3 0-00-00 12:00:00 +08:00 北京时区
+4 0-00-00 12:00:00 +00:00 UTC时区
 
 statement ok
 DROP TABLE test_time_tz_range;

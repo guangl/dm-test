@@ -21,8 +21,8 @@ INSERT INTO test_time_tz_null VALUES(2, TIME '09:30:00 -5:00', TIME '17:30:00 +0
 query III
 SELECT * FROM test_time_tz_null ORDER BY id;
 ----
-1 NULL 12:00:00 +08:00
-2 09:30:00 -05:00 17:30:00 +00:00
+1 <NULL> 0-00-00 12:00:00 +08:00
+2 0-00-00 09:30:00 -05:00 0-00-00 17:30:00 +00:00
 
 query I
 SELECT COUNT(*) FROM test_time_tz_null WHERE nullable_time IS NULL;

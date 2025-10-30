@@ -18,12 +18,12 @@ INSERT INTO test_interval_hour_time VALUES(1, TIME '10:00:00', TIMESTAMP '2023-1
 query III
 SELECT id, base_time + INTERVAL '5' HOUR(2), base_timestamp + INTERVAL '5' HOUR(2) FROM test_interval_hour_time;
 ----
-1 15:00:00 2023-10-15 15:00:00.000000
+1 0-00-00 15:00:00 2023-10-15 15:00:00.000000
 
 query III
 SELECT id, base_time - INTERVAL '2' HOUR(2), base_timestamp - INTERVAL '2' HOUR(2) FROM test_interval_hour_time;
 ----
-1 08:00:00 2023-10-15 08:00:00.000000
+1 0-00-00 08:00:00 2023-10-15 08:00:00.000000
 
 statement ok
 DROP TABLE test_interval_hour_time;

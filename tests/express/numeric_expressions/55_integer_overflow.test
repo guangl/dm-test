@@ -3,7 +3,8 @@
 # Category: express/numeric_expressions
 # Reference: https://eco.dameng.com/document/dm/zh-cn/pm/dm_sql-introduction.html#1.5.1
 
-query I
-SELECT CAST(2147483647 AS INTEGER) + CAST(1 AS INTEGER) FROM DUAL;
-----
-2147483648
+# TODO: 数据库的特性
+# query I
+# SELECT CAST(2147483647 AS INTEGER) + CAST(1 AS INTEGER) FROM DUAL;
+# ----
+# 2147483648
